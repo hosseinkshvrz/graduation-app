@@ -1,90 +1,51 @@
 package datalayer;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DB_Student
 {
-    //JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/graduation";
+    DB_Connector connectionToDB;
+    public DB_Student() {
+        connectionToDB = DB_Connector.getInstance();
+    }
 
-    //Database credentials
-    static final String USER ="graduationuser";
-    static final String PASS = "12345621";
-
-    public boolean isValidUserLogin(String studentID, String password) throws ClassNotFoundException, SQLException
-    {
+    public boolean isValidUserLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
         boolean isValidUser = false;
-        java.sql.Connection connection = null;
-        java.sql.Statement statement = null;
-        String sql = "";
-
-        try
-        {
-
-            Class.forName("com.mysql.jdbc.Driver");
-
-            System.out.println("Connection to database");
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            System.out.println("Creating statement...");
-            statement = connection.createStatement();
-
-            sql = "SELECT * FROM students WHERE studentID =\"" + studentID + "\"AND password = \"" + password + "\"";
-            System.out.println(sql);
-
-            ResultSet rs = statement.executeQuery(sql);
-
-            if (rs.next()) {
-                isValidUser = true;
-            }
-
-            rs.close();
-            statement.close();
-            connection.close();
+        String sql;
+        sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+        System.out.println(sql);
+        ResultSet rs = connectionToDB.executeQuery(sql);
+        if (rs.next()) {
+            isValidUser = true;
         }
-        catch (SQLException se)
-        {
-            se.printStackTrace();
-        }
-        catch (Exception e)
-        {
+//        rs.close();
+//        System.out.println("Closing DB Connection - Goodbye!");
+        return isValidUser;
+    }
+
+    public String getStudentName(String studentID, String password) {
+        String sql;
+        sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+        System.out.println(sql);
+        ResultSet rs = connectionToDB.executeQuery(sql);
+        try {
+            rs.next();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
-                if(connection != null)
-                {
-                    statement.close();
-                }
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-            }
-            try
-            {
-                if(connection != null)
-                {
-                    connection.close();
-                }
-            }
-            catch (SQLException se)
-            {
-                se.printStackTrace();
-            }
+        String name = "";
+        try {
+            name = rs.getString("name");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        System.out.println("Closing DB Connection - Goodbye!");
-
-
-
-        return isValidUser;
+//        try {
+//            rs.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("Closing DB Connection - Goodbye!");
+        return name;
     }
 }

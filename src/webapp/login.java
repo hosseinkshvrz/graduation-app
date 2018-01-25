@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        request.setAttribute("username", request.getParameter("username"));
+        request.setAttribute("name", user.getName(request.getParameter("username"), request.getParameter("password")));
 
         try {
             if (user.isValidUser(request.getParameter("username"), request.getParameter("password"))) {

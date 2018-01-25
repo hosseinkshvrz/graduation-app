@@ -11,7 +11,7 @@
     <title>Login</title>
 </head>
 <body>
-    <h1>سلام</h1>
+    <h1>Please login to your account</h1>
     <form action="/login" method="post">
         username: <input type="text" name = "username" width="30"/>
         password: <input type="password" name="password" width="22"/>
