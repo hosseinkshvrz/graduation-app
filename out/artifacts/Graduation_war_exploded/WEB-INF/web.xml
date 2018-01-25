@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>login</servlet-name>
-        <servlet-class>com.graduation.login</servlet-class>
+        <servlet-class>webapp.login</servlet-class>
     </servlet>
     
     <servlet-mapping>

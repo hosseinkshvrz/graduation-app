@@ -1,5 +1,7 @@
 package webapp;
 
+import appLayer.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +13,16 @@ import java.io.PrintWriter;
 @WebServlet(name = "login")
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User();
         request.setAttribute("username", request.getParameter("username"));
-        request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+
+        if (user.isValidUser(request.getParameter("username"), request.getParameter("password"))) {
+            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+        }
+        else {
+            request.setAttribute("errorMessage", "invalid username or password");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
