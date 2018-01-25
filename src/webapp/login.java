@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
@@ -16,12 +17,18 @@ public class login extends HttpServlet {
         User user = new User();
         request.setAttribute("username", request.getParameter("username"));
 
-        if (user.isValidUser(request.getParameter("username"), request.getParameter("password"))) {
-            request.getRequestDispatcher("/welcome.jsp").forward(request, response);
-        }
-        else {
-            request.setAttribute("errorMessage", "invalid username or password");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        try {
+            if (user.isValidUser(request.getParameter("username"), request.getParameter("password"))) {
+                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+            }
+            else {
+                request.setAttribute("errorMessage", "invalid username or password");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
