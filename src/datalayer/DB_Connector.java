@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DB_Connector {
-    private static DB_Connector instance = new DB_Connector();
+
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/graduation";
@@ -15,7 +15,10 @@ public class DB_Connector {
     java.sql.Connection connection = null;
     java.sql.Statement statement = null;
 
-    private DB_Connector() {
+    public DB_Connector() {
+    }
+
+    public void makeConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -33,6 +36,10 @@ public class DB_Connector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void closeConnection() {
+        System.out.println("Closing DB Connection - Goodbye!");
         try {
             statement.close();
         } catch (SQLException e) {
@@ -43,10 +50,6 @@ public class DB_Connector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public static DB_Connector getInstance() {
-        return instance;
     }
 
     public ResultSet executeQuery(String sql) {

@@ -5,9 +5,8 @@ import java.sql.SQLException;
 
 public class DB_Student
 {
-    DB_Connector connectionToDB;
     public DB_Student() {
-        connectionToDB = DB_Connector.getInstance();
+
     }
 
     public boolean isValidUserLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
@@ -15,12 +14,14 @@ public class DB_Student
         String sql;
         sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
+        DB_Connector connectionToDB = new DB_Connector();
+        connectionToDB.makeConnection();
         ResultSet rs = connectionToDB.executeQuery(sql);
         if (rs.next()) {
             isValidUser = true;
         }
-//        rs.close();
-//        System.out.println("Closing DB Connection - Goodbye!");
+        rs.close();
+        connectionToDB.closeConnection();
         return isValidUser;
     }
 
@@ -28,6 +29,8 @@ public class DB_Student
         String sql;
         sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
+        DB_Connector connectionToDB = new DB_Connector();
+        connectionToDB.makeConnection();
         ResultSet rs = connectionToDB.executeQuery(sql);
         try {
             rs.next();
@@ -40,12 +43,12 @@ public class DB_Student
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        try {
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("Closing DB Connection - Goodbye!");
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        connectionToDB.closeConnection();
         return name;
     }
 }
