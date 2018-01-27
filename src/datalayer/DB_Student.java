@@ -11,8 +11,7 @@ public class DB_Student
 
     public boolean isValidUserLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
         boolean isValidUser = false;
-        String sql;
-        sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
@@ -26,8 +25,7 @@ public class DB_Student
     }
 
     public String getStudentName(String studentID, String password) {
-        String sql;
-        sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
@@ -54,12 +52,11 @@ public class DB_Student
 
     public boolean addNewStudentToDB(String studentID, String password, String name, String email) {
         boolean addIsDone = false;
-        String sql;
-        sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
+        String sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        connectionToDB.executeUpdateQuery(sql);
 //        try {
 //            addIsDone = rs.next();
 //        } catch (SQLException e) {
