@@ -21,6 +21,9 @@
 
     <input type="submit" value="Register"/>
 </form>
-<p style="color: red;">${errorMessage}</p>
+<p style="color: red;">${errorMessage1}</p>
+<p style="color: red;">${errorMessage2}</p>
+<p style="color: red;">${errorMessage3}</p>
+<p style="color: red;">${errorMessage4}</p>
 </body>
 </html>
