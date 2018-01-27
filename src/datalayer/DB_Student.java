@@ -51,4 +51,26 @@ public class DB_Student
         connectionToDB.closeConnection();
         return name;
     }
+
+    public boolean addNewStudentToDB(String studentID, String password, String name, String email) {
+        boolean addIsDone = false;
+        String sql;
+        sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
+        System.out.println(sql);
+        DB_Connector connectionToDB = new DB_Connector();
+        connectionToDB.makeConnection();
+        ResultSet rs = connectionToDB.executeQuery(sql);
+//        try {
+//            addIsDone = rs.next();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            rs.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        connectionToDB.closeConnection();
+        return true;
+    }
 }

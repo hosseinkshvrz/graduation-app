@@ -13,10 +13,11 @@
 <body>
     <h1>Please login to your account</h1>
     <form action="/login" method="post">
-        username: <input type="text" name = "username" width="30"/>
+        studentID: <input type="text" name = "studentID" width="30"/>
         password: <input type="password" name="password" width="22"/>
         <input type="submit" value="Login"/>
     </form>
     <p style="color: red;">${errorMessage}</p>
+    <p style="color: green;">${successfulRegister}</p>
 </body>
 </html>

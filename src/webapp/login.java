@@ -15,14 +15,14 @@ import java.sql.SQLException;
 public class login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        request.setAttribute("name", user.getName(request.getParameter("username"), request.getParameter("password")));
+        request.setAttribute("name", user.getName(request.getParameter("studentID"), request.getParameter("password")));
 
         try {
-            if (user.isValidUser(request.getParameter("username"), request.getParameter("password"))) {
+            if (user.isValidUser(request.getParameter("studentID"), request.getParameter("password"))) {
                 request.getRequestDispatcher("/welcome.jsp").forward(request, response);
             }
             else {
-                request.setAttribute("errorMessage", "invalid username or password");
+                request.setAttribute("errorMessage", "invalid student ID or password");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         } catch (SQLException e) {
@@ -33,7 +33,6 @@ public class login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
 
     }
 }
