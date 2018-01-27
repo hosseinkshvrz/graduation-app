@@ -18,14 +18,18 @@ public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
         boolean userAdded = user.addStudent(request.getParameter("studentID"), request.getParameter("password"), request.getParameter("name"), request.getParameter("email"));
-
-        if (userAdded) {
-            request.setAttribute("successfulRegister", "You have successfully registered");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        if (request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+            if (userAdded) {
+                request.setAttribute("successfulRegister", "You have successfully registered");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            } else {
+                request.setAttribute("errorMessage", "Register was unsuccessful");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
         }
         else {
+            request.setAttribute("errorMessage", "passwords don't match");
             request.getRequestDispatcher("/register.jsp").forward(request, response);
-            request.setAttribute("errorMessage", "Register was unsuccessful");
         }
     }
 

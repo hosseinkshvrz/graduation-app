@@ -56,7 +56,12 @@ public class DB_Student
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
-        connectionToDB.executeUpdateQuery(sql);
+        if (connectionToDB.executeUpdateQuery(sql) > 0) {
+            addIsDone = true;
+        }
+        else {
+            addIsDone = false;
+        }
 //        try {
 //            addIsDone = rs.next();
 //        } catch (SQLException e) {
@@ -68,6 +73,6 @@ public class DB_Student
 //            e.printStackTrace();
 //        }
         connectionToDB.closeConnection();
-        return true;
+        return addIsDone;
     }
 }
