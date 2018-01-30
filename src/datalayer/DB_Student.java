@@ -39,20 +39,23 @@ public class DB_Student
             e.printStackTrace();
         }
         String id = rs.getString("studentID");
-        String name = rs.getString("name");
+        String firstName = rs.getString("firstname");
+        String lastName = rs.getString("lastname");
         String pass = rs.getString("password");
         String mail = rs.getString("email");
-
+        int day = Integer.parseInt(rs.getString("birthday").substring(8, 10));
+        int month = Integer.parseInt(rs.getString("birthday").substring(5, 7));
+        int year = Integer.parseInt(rs.getString("birthday").substring(0, 4));
         rs.close();
         connectionToDB.closeConnection();
-        return new StudentUser(id, name, pass, mail);
+        return new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
     }
 
     public boolean addNewStudentToDB(StudentUser student) {
         boolean addIsDone;
         String studentID = student.getStudentID();
         String password = student.getPassword();
-        String name = student.getName();
+        String name = student.getFirstName();
         String email = student.getEmail();
         String sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
         System.out.println(sql);
@@ -71,17 +74,21 @@ public class DB_Student
     public ArrayList<StudentUser> getListOfAllStudents() throws SQLException {
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
-        String sql = "SELECT name FROM students";
+        String sql = "SELECT * FROM students";
         ResultSet rs = connectionToDB.executeQuery(sql);
 
         ArrayList<StudentUser> students = new ArrayList<>();
         while(rs.next())
         {
-            String studentID = rs.getString(0);
-            String name = rs.getString(1);
-            String password = rs.getString(2);
-            String email = rs.getString(3);
-            StudentUser s = new StudentUser(studentID, name, password, email);
+            String studentID = rs.getString("studentID");
+            String firstName = rs.getString("firstname");
+            String lastName = rs.getString("lastname");
+            String password = rs.getString("password");
+            String email = rs.getString("email");
+            int day = Integer.parseInt(rs.getString("birthday").substring(8, 10));
+            int month = Integer.parseInt(rs.getString("birthday").substring(5, 7));
+            int year = Integer.parseInt(rs.getString("birthday").substring(0, 4));
+            StudentUser s = new StudentUser(studentID, firstName, lastName, password, email, day, month, year);
             students.add(s);
         }
         rs.close();

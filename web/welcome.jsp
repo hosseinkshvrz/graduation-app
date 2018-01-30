@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1>Welcome</h1>
-<p>Dear ${name}</p>
+<p>Dear ${firstName}</p>
 </body>
 </html>

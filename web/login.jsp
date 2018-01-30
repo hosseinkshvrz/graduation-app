@@ -13,8 +13,8 @@
 <body>
     <h1>Please login to your account</h1>
     <form action="/login" method="post">
-        studentID: <input type="text" name = "studentID" width="30"/>
-        password: <input type="password" name="password" width="22"/>
+        studentID: <input type="text" firstName = "studentID" width="30"/>
+        password: <input type="password" firstName="password" width="22"/>
         <input type="submit" value="Login"/>
     </form>
     <p style="color: red;">${errorMessage}</p>

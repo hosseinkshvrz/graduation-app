@@ -13,11 +13,11 @@
 <body>
 <h1>Please register</h1>
 <form action="/register" method="post">
-    studentID: <input type="text" name = "studentID" width="30"/>
-    password: <input type="password" name="password" width="22"/>
-    confirmPassword: <input type="password" name="confirmPassword" width="22"/>
-    name: <input type="text" name="name" width="22"/>
-    email: <input type="text" name="email" width="22"/>
+    studentID: <input type="text" firstName = "studentID" width="30"/>
+    password: <input type="password" firstName="password" width="22"/>
+    confirmPassword: <input type="password" firstName="confirmPassword" width="22"/>
+    firstName: <input type="text" firstName="firstName" width="22"/>
+    email: <input type="text" firstName="email" width="22"/>
 
     <input type="submit" value="Register"/>
 </form>
