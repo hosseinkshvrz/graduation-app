@@ -27,7 +27,7 @@ public class DB_Student
         return isValidUser;
     }
 
-    public String getStudentName(String studentID, String password) {
+    public String getStudent(String studentID, String password) {
         String sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
@@ -54,7 +54,7 @@ public class DB_Student
     }
 
     public boolean addNewStudentToDB(String studentID, String password, String name, String email) {
-        boolean addIsDone = false;
+        boolean addIsDone;
         String sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
@@ -65,16 +65,6 @@ public class DB_Student
         else {
             addIsDone = false;
         }
-//        try {
-//            addIsDone = rs.next();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         connectionToDB.closeConnection();
         return addIsDone;
     }
@@ -95,6 +85,8 @@ public class DB_Student
             StudentUser s = new StudentUser(studentID, name, password, email);
             students.add(s);
         }
+        rs.close();
+        connectionToDB.closeConnection();
         return students;
     }
 }
