@@ -1,6 +1,5 @@
 package webapp;
 
-import appLayer.StudentUser;
 import datalayer.DB_Student;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 public class login extends HttpServlet {
     DB_Student studentTable = new DB_Student();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("name", studentTable.getStudentName(request.getParameter("studentID"), request.getParameter("password")));
+        request.setAttribute("name", studentTable.getStudent(request.getParameter("studentID"), request.getParameter("password")));
 
         try {
             if (studentTable.isValidUserLogin(request.getParameter("studentID"), request.getParameter("password"))) {
