@@ -27,8 +27,8 @@ public class DB_Student
         return isValidUser;
     }
 
-    public String getStudent(String studentID, String password) {
-        String sql = "SELECT name FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+    public StudentUser getStudent(String studentID, String password) throws SQLException {
+        String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
@@ -38,23 +38,22 @@ public class DB_Student
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String name = "";
-        try {
-            name = rs.getString("name");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String id = rs.getString("studentID");
+        String name = rs.getString("name");
+        String pass = rs.getString("password");
+        String mail = rs.getString("email");
+
+        rs.close();
         connectionToDB.closeConnection();
-        return name;
+        return new StudentUser(id, name, pass, mail);
     }
 
-    public boolean addNewStudentToDB(String studentID, String password, String name, String email) {
+    public boolean addNewStudentToDB(StudentUser student) {
         boolean addIsDone;
+        String studentID = student.getStudentID();
+        String password = student.getPassword();
+        String name = student.getName();
+        String email = student.getEmail();
         String sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();

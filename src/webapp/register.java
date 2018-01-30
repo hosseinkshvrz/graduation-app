@@ -1,5 +1,6 @@
 package webapp;
 
+import appLayer.StudentUser;
 import com.google.gson.Gson;
 import datalayer.DB_Student;
 
@@ -38,8 +39,11 @@ public class register extends HttpServlet {
         }
 
         if(!hasError) {
-            boolean userAdded = studentTable.addNewStudentToDB(request.getParameter("studentID"),
-                    request.getParameter("password"), request.getParameter("name"), request.getParameter("email"));
+            StudentUser student = new StudentUser(request.getParameter("studentID"),
+                                                    request.getParameter("password"),
+                                                        request.getParameter("name"),
+                                                            request.getParameter("email"));
+            boolean userAdded = studentTable.addNewStudentToDB(student);
             if (userAdded) {
                 request.setAttribute("successfulRegister", "You have successfully registered");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);

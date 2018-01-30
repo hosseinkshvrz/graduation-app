@@ -1,5 +1,6 @@
 package webapp;
 
+import appLayer.StudentUser;
 import datalayer.DB_Student;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,13 @@ import java.sql.SQLException;
 public class login extends HttpServlet {
     DB_Student studentTable = new DB_Student();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("name", studentTable.getStudent(request.getParameter("studentID"), request.getParameter("password")));
+        StudentUser std = null;
+        try {
+            std = studentTable.getStudent(request.getParameter("studentID"), request.getParameter("password"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("name", std.getName());
 
         try {
             if (studentTable.isValidUserLogin(request.getParameter("studentID"), request.getParameter("password"))) {
@@ -24,9 +31,11 @@ public class login extends HttpServlet {
                 request.setAttribute("errorMessage", "invalid student ID or password");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
