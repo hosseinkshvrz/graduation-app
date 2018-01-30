@@ -1,6 +1,7 @@
 package webapp;
 
-import appLayer.StudentUser;
+import com.google.gson.Gson;
+import datalayer.DB_Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,12 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Hossein on 27/01/2018.
  */
 @WebServlet(name = "register")
 public class register extends HttpServlet {
+    DB_Student studentTable = new DB_Student();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean hasError = false;
 
@@ -35,8 +38,7 @@ public class register extends HttpServlet {
         }
 
         if(!hasError) {
-            StudentUser studentUser = new StudentUser();
-            boolean userAdded = studentUser.addStudent(request.getParameter("studentID"),
+            boolean userAdded = studentTable.addNewStudentToDB(request.getParameter("studentID"),
                     request.getParameter("password"), request.getParameter("name"), request.getParameter("email"));
             if (userAdded) {
                 request.setAttribute("successfulRegister", "You have successfully registered");
@@ -52,8 +54,15 @@ public class register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String studentsJson = "";
+        try {
+            studentsJson = new Gson().toJson(studentTable.getListOfAllStudents());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("");
+        response.getWriter().write(studentsJson);
     }
 }

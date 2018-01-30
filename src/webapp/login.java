@@ -1,6 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
+import datalayer.DB_Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,12 +13,12 @@ import java.sql.SQLException;
 
 @WebServlet(name = "login")
 public class login extends HttpServlet {
+    DB_Student studentTable = new DB_Student();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StudentUser studentUser = new StudentUser();
-        request.setAttribute("name", studentUser.getName(request.getParameter("studentID"), request.getParameter("password")));
+        request.setAttribute("name", studentTable.getStudentName(request.getParameter("studentID"), request.getParameter("password")));
 
         try {
-            if (studentUser.isValidUser(request.getParameter("studentID"), request.getParameter("password"))) {
+            if (studentTable.isValidUserLogin(request.getParameter("studentID"), request.getParameter("password"))) {
                 request.getRequestDispatcher("/welcome.jsp").forward(request, response);
             }
             else {

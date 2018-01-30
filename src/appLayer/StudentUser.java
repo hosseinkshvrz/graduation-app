@@ -1,27 +1,47 @@
 package appLayer;
 
-import datalayer.DB_Student;
-
-import java.sql.SQLException;
-
 public class StudentUser {
-    public StudentUser() {
+    private String studentID;
+    private String name;
+    private String password;
+    private String email;
 
+    public StudentUser(String studentID, String name, String password, String email) {
+        this.studentID = studentID;
+        this.name = name;
+        this.password = password;
+        this.email = email;
     }
 
-    public boolean isValidUser (String username, String password) throws SQLException, ClassNotFoundException
-    {
-        DB_Student student = new DB_Student();
-        return student.isValidUserLogin(username, password);
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
     }
 
-    public String getName(String username, String password) {
-        DB_Student student = new DB_Student();
-        return student.getStudentName(username, password);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean addStudent(String studentID, String password, String name, String email) {
-        DB_Student student = new DB_Student();
-        return student.addNewStudentToDB(studentID, password, name, email);
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

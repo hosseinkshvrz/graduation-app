@@ -1,7 +1,10 @@
 package datalayer;
 
+import appLayer.StudentUser;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DB_Student
 {
@@ -74,5 +77,24 @@ public class DB_Student
 //        }
         connectionToDB.closeConnection();
         return addIsDone;
+    }
+
+    public ArrayList<StudentUser> getListOfAllStudents() throws SQLException {
+        DB_Connector connectionToDB = new DB_Connector();
+        connectionToDB.makeConnection();
+        String sql = "SELECT name FROM students";
+        ResultSet rs = connectionToDB.executeQuery(sql);
+
+        ArrayList<StudentUser> students = new ArrayList<>();
+        while(rs.next())
+        {
+            String studentID = rs.getString(0);
+            String name = rs.getString(1);
+            String password = rs.getString(2);
+            String email = rs.getString(3);
+            StudentUser s = new StudentUser(studentID, name, password, email);
+            students.add(s);
+        }
+        return students;
     }
 }
