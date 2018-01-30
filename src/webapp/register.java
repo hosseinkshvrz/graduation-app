@@ -38,27 +38,27 @@ public class register extends HttpServlet {
             hasError = true;
         }
 
-//        if(!hasError) {
-//            StudentUser student = new StudentUser(request.getParameter("studentID"),
-//                                                    request.getParameter("password"),
-//                                                        request.getParameter("firstname"),
-//                                                            request.getParameter("lastname"),
-//                                                                request.getParameter("email"));
-//                                                                    request.getParameter("email"));
-//                                                                        request.getParameter("email"));
-//                                                                            request.getParameter("email"));
-//            boolean userAdded = studentTable.addNewStudentToDB(student);
-//            if (userAdded) {
-//                request.setAttribute("successfulRegister", "You have successfully registered");
-//                request.getRequestDispatcher("/login.jsp").forward(request, response);
-//            } else {
-//                request.setAttribute("errorMessage", "Register was unsuccessful");
-//                request.getRequestDispatcher("/register.jsp").forward(request, response);
-//            }
-//        } else {
-//            request.getRequestDispatcher("/register.jsp").forward(request, response);
-//
-//        }
+        if(!hasError) {
+            StudentUser student = new StudentUser(request.getParameter("studentID"),
+                                                    request.getParameter("password"),
+                                                        request.getParameter("firstname"),
+                                                            request.getParameter("lastname"),
+                                                                request.getParameter("email"),
+                                                                    Integer.parseInt(request.getParameter("birthDate").split("-")[0]),
+                                                                        Integer.parseInt(request.getParameter("birthDate").split("-")[1]),
+                                                                            Integer.parseInt(request.getParameter("birthDate").split("-")[2]));
+            boolean userAdded = studentTable.addNewStudentToDB(student);
+            if (userAdded) {
+                request.setAttribute("successfulRegister", "You have successfully registered");
+                request.getRequestDispatcher("/login.jsp").forward(request, response);
+            } else {
+                request.setAttribute("errorMessage", "Register was unsuccessful");
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
+        } else {
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
