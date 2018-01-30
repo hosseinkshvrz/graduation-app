@@ -62,13 +62,15 @@ public class DB_Connector {
         return rs;
     }
     public int executeUpdateQuery(String sql) {
+        int updateResult = 0;
         try {
-            return statement.executeUpdate(sql);
+            updateResult = statement.executeUpdate(sql);
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 
-        return 0;
+        return updateResult;
     }
 }
 

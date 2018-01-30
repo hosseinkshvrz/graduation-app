@@ -1,6 +1,6 @@
 package webapp;
 
-import appLayer.User;
+import appLayer.StudentUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * Created by Hossein on 27/01/2018.
@@ -18,7 +17,7 @@ public class register extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean hasError = false;
 
-        if(!request.getParameter("email").matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$")) {
+        if(!request.getParameter("email").matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
             request.setAttribute("errorMessage1", "*Incorrect email format.");
             hasError = true;
         }
@@ -35,10 +34,10 @@ public class register extends HttpServlet {
             hasError = true;
         }
 
-        User user = new User();
-        boolean userAdded = user.addStudent(request.getParameter("studentID"),
-                request.getParameter("password"), request.getParameter("name"), request.getParameter("email"));
-        if(hasError) {
+        if(!hasError) {
+            StudentUser studentUser = new StudentUser();
+            boolean userAdded = studentUser.addStudent(request.getParameter("studentID"),
+                    request.getParameter("password"), request.getParameter("name"), request.getParameter("email"));
             if (userAdded) {
                 request.setAttribute("successfulRegister", "You have successfully registered");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);

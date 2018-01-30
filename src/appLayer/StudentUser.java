@@ -4,8 +4,8 @@ import datalayer.DB_Student;
 
 import java.sql.SQLException;
 
-public class User {
-    public User() {
+public class StudentUser {
+    public StudentUser() {
 
     }
 
