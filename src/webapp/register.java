@@ -58,15 +58,6 @@ public class register extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String studentsJson = "";
-        try {
-            studentsJson = new Gson().toJson(studentTable.getListOfAllStudents());
-            System.out.println(studentsJson);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(studentsJson);
+
     }
 }

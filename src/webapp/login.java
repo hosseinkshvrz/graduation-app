@@ -1,6 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
+import com.google.gson.Gson;
 import datalayer.DB_Student;
 
 import javax.servlet.ServletException;
@@ -41,6 +42,15 @@ public class login extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String studentsJson = "salam";
+        try {
+            studentsJson = new Gson().toJson(studentTable.getListOfAllStudents());
+            System.out.println(studentsJson);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(studentsJson);
     }
 }
