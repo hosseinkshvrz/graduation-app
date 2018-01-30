@@ -47,10 +47,13 @@ public class register extends HttpServlet {
             }
         } else {
             request.getRequestDispatcher("/register.jsp").forward(request, response);
+
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("");
     }
 }
