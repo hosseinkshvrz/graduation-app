@@ -57,7 +57,7 @@ public class register extends HttpServlet {
         String studentsJson = "";
         try {
             studentsJson = new Gson().toJson(studentTable.getListOfAllStudents());
-
+            System.out.println(studentsJson);
         } catch (SQLException e) {
             e.printStackTrace();
         }
