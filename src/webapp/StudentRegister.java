@@ -1,9 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
-import com.google.gson.Gson;
-import datalayer.DB_Student;
-import org.json.JSONArray;
+import datalayer.StudentDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,23 +10,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
-import java.sql.SQLException;
 import java.util.Scanner;
 
-@WebServlet(name = "register")
-public class register extends HttpServlet {
+@WebServlet(name = "StudentRegister")
+public class StudentRegister extends HttpServlet {
     private final int MINIMUM_BIRTH_YEAR = 1300;
     private final int MAXIMUM_BIRTH_YEAR = 1390;
-    DB_Student studentTable = new DB_Student();
+    StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean hasError = false;
         String responseMessage = "";
         String json = "";
-//        request.setCharacterEncoding("UTF-8");
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
         while (scanner.hasNextLine()) {
             json += scanner.nextLine();
@@ -42,10 +36,6 @@ public class register extends HttpServlet {
         }
         //parameter name should be checked
         //order of errors should be checked
-        /*
-        URLDecoder.decode(jsonObject.get("Project").toString(),"UTF-8")
-        readingJSONObject.getString("email")
-         */
         try {
             if(readingJSONObject.getString("email").isEmpty()) {
                 responseMessage = "empty email field";
@@ -133,12 +123,14 @@ public class register extends HttpServlet {
                                                     Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
                                                     Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
                                                     Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
-            } catch (JSONException e) {
+
+
+            }
+            catch (JSONException e) {
                 e.printStackTrace();
             }
 
             boolean userAdded = studentTable.addNewStudentToDB(student);
-
             if (userAdded) {
                 responseMessage = "successfully registered";
             }

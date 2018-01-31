@@ -1,8 +1,9 @@
 package webapp;
 
 import appLayer.StudentUser;
-import datalayer.DB_Student;
+import datalayer.StudentDatabase;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -11,34 +12,53 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
-@WebServlet(name = "login")
-public class login extends HttpServlet {
-    DB_Student studentTable = new DB_Student();
+@WebServlet(name = "StudentLogin")
+public class StudentLogin extends HttpServlet {
+    StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StudentUser std = null;
+        String responseMessage;
+        String json = "";
+        Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
+        while (scanner.hasNextLine()) {
+            json += scanner.nextLine();
+        }
+        System.out.println(json);
+        JSONObject readingJSONObject = new JSONObject();
         try {
-            std = studentTable.getStudent(request.getParameter("studentID"), request.getParameter("password"));
-        } catch (SQLException e) {
+            readingJSONObject = new JSONObject(json);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
-
         try {
-            if (studentTable.isValidUserLogin(request.getParameter("studentID"), request.getParameter("password"))) {
-                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+            if (studentTable.isValidUserLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
+//                std = studentTable.getStudent(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"));
+//                request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
+//                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
+                responseMessage = "student exists";
             }
             else {
-                request.setAttribute("errorMessage", "invalid student ID or password");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+//                request.setAttribute("errorMessage", "invalid student ID or password");
+//                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                responseMessage = "student not found";
             }
+            JSONObject sendingJSONObject = new JSONObject();
+            sendingJSONObject.put("responseMessage", responseMessage);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(sendingJSONObject.toString());
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
         catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
     }

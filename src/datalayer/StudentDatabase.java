@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DB_Student
+public class StudentDatabase
 {
-    public DB_Student() {
+    public StudentDatabase() {
 
     }
 
@@ -16,7 +16,7 @@ public class DB_Student
         boolean isValidUser = false;
         String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
-        DB_Connector connectionToDB = new DB_Connector();
+        DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
         ResultSet rs = connectionToDB.executeQuery(sql);
         if (rs.next()) {
@@ -30,7 +30,7 @@ public class DB_Student
     public StudentUser getStudent(String studentID, String password) throws SQLException {
         String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
-        DB_Connector connectionToDB = new DB_Connector();
+        DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
         ResultSet rs = connectionToDB.executeQuery(sql);
         try {
@@ -69,7 +69,7 @@ public class DB_Student
                 + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
                 + year + "-" + month + "-" + day + "')";
         System.out.println(sql);
-        DB_Connector connectionToDB = new DB_Connector();
+        DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
         if (connectionToDB.executeUpdateQuery(sql) > 0) {
             addIsDone = true;
@@ -82,7 +82,7 @@ public class DB_Student
     }
 
     public ArrayList<StudentUser> getListOfAllStudents() throws SQLException {
-        DB_Connector connectionToDB = new DB_Connector();
+        DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
         String sql = "SELECT * FROM students";
         ResultSet rs = connectionToDB.executeQuery(sql);

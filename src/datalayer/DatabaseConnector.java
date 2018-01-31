@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DB_Connector {
+public class DatabaseConnector {
 
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -15,7 +15,7 @@ public class DB_Connector {
     java.sql.Connection connection = null;
     java.sql.Statement statement = null;
 
-    public DB_Connector() {
+    public DatabaseConnector() {
     }
 
     public void makeConnection() {
