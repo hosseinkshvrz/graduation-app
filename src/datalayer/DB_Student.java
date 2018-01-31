@@ -55,9 +55,19 @@ public class DB_Student
         boolean addIsDone;
         String studentID = student.getStudentID();
         String password = student.getPassword();
-        String name = student.getFirstName();
+        String firstName = student.getFirstName();
+        String lastName = student.getLastName();
         String email = student.getEmail();
-        String sql = "INSERT INTO students (studentID, name, password, email) VALUES ('" + studentID + "', '" + name + "', '" + password + "', '" + email + "')";
+        int day = student.getDayOfBirth();
+        int month = student.getMonthOfBirth();
+        int year = student.getYearOfBirth();
+        /*
+        INSERT INTO `graduation`.`students` (`studentID`, `firstname`, `lastname`, `password`, `email`, `birthday`) VALUES ('94102156', 'afa', 'daa', '1234', 'dada@ada.com', '1400-10-10');
+
+         */
+        String sql = "INSERT INTO students (studentID, firstname, lastname, password, email, birthday) VALUES ('"
+                + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
+                + year + "-" + month + "-" + day + "')";
         System.out.println(sql);
         DB_Connector connectionToDB = new DB_Connector();
         connectionToDB.makeConnection();
