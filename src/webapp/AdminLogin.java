@@ -1,6 +1,7 @@
 package webapp;
 
-import datalayer.tables.AdminDatabase;
+import appLayer.AdminUser;
+import datalayer.tables.users.AdminDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,7 +20,6 @@ import java.util.Scanner;
 public class AdminLogin extends HttpServlet {
     AdminDatabase adminTable = new AdminDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String responseMessage;
         String json = "";
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
         while (scanner.hasNextLine()) {
@@ -33,18 +33,25 @@ public class AdminLogin extends HttpServlet {
             e.printStackTrace();
         }
         try {
-            if (adminTable.isValidAdminLogin(readingJSONObject.getString("id"),
-                                            readingJSONObject.getString("password"))) {
-                responseMessage = "admin exists";
+            if (adminTable.isValidAdminLogin(readingJSONObject.getString("id"), readingJSONObject.getString("password"))) {
+                AdminUser admin = adminTable.getUser(readingJSONObject.getString("id"));
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "success");
+                sendingJSONObject.put("id", admin.getId());
+                sendingJSONObject.put("firstName", admin.getFirstName());
+                sendingJSONObject.put("lastName", admin.getLastName());
+                sendingJSONObject.put("email", admin.getEmail());
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
-                responseMessage = "admin not found";
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "failed");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
-            JSONObject sendingJSONObject = new JSONObject();
-            sendingJSONObject.put("responseMessage", responseMessage);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(sendingJSONObject.toString());
         }
         catch (SQLException e) {
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
-import datalayer.tables.StudentDatabase;
+import datalayer.tables.users.StudentDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,6 +55,10 @@ public class StudentRegister extends HttpServlet {
             }
             else if (!readingJSONObject.getString("password").equals(readingJSONObject.getString("confirmPassword"))) {
                 responseMessage = "passwords don't match";
+                hasError = true;
+            }
+            else if (readingJSONObject.getString("password").length() < 8) {
+                responseMessage = "password is short";
                 hasError = true;
             }
             else if (readingJSONObject.getString("firstName").isEmpty()) {
@@ -116,13 +120,13 @@ public class StudentRegister extends HttpServlet {
             StudentUser student = null;
             try {
                 student = new StudentUser(readingJSONObject.getString("studentID"),
-                                                    readingJSONObject.getString("firstName"),
-                                                    readingJSONObject.getString("lastName"),
-                                                    readingJSONObject.getString("password"),
-                                                    readingJSONObject.getString("email"),
-                                                    Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
-                                                    Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
-                                                    Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
+                                            readingJSONObject.getString("firstName"),
+                                            readingJSONObject.getString("lastName"),
+                                            readingJSONObject.getString("password"),
+                                            readingJSONObject.getString("email"),
+                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
+                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
+                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
 
 
             }

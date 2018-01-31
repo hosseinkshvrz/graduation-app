@@ -1,4 +1,4 @@
-package datalayer.tables;
+package datalayer.tables.users;
 
 import appLayer.StudentUser;
 import datalayer.DatabaseConnector;
@@ -11,7 +11,7 @@ public class StudentDatabase extends UserDatabase {
     private final String tableName = "students";
 
     public boolean isValidStudentLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + studentID + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
@@ -23,8 +23,8 @@ public class StudentDatabase extends UserDatabase {
         return false;
     }
 
-    public StudentUser getStudent(String studentID, String password) throws SQLException {
-        String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+    public StudentUser getUser(String userID) throws SQLException {
+        String sql = "SELECT * FROM students WHERE studentID = \"" + userID + "\"";
         System.out.println(sql);
         DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
@@ -57,10 +57,7 @@ public class StudentDatabase extends UserDatabase {
         int day = student.getDayOfBirth();
         int month = student.getMonthOfBirth();
         int year = student.getYearOfBirth();
-        /*
-        INSERT INTO `graduation`.`students` (`studentID`, `firstname`, `lastname`, `password`, `email`, `birthday`) VALUES ('94102156', 'afa', 'daa', '1234', 'dada@ada.com', '1400-10-10');
 
-         */
         String sql = "INSERT INTO students (studentID, firstname, lastname, password, email, birthday) VALUES ('"
                 + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
                 + year + "-" + month + "-" + day + "')";

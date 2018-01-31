@@ -1,6 +1,7 @@
 package webapp;
 
-import datalayer.tables.PostDatabase;
+import appLayer.PostUser;
+import datalayer.tables.users.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -18,7 +20,6 @@ import java.util.Scanner;
 public class PostLogin extends HttpServlet {
     PostDatabase postTable = new PostDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String responseMessage;
         String json = "";
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
         while (scanner.hasNextLine()) {
@@ -33,17 +34,28 @@ public class PostLogin extends HttpServlet {
         }
         try {
             if (postTable.isValidPostLogin(readingJSONObject.getString("personnelID"), readingJSONObject.getString("password"))) {
-                responseMessage = "post exists";
+                PostUser post = postTable.getUser(readingJSONObject.getString("personnelID"));
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "success");
+                sendingJSONObject.put("personnelID", post.getPersonnelID());
+                sendingJSONObject.put("firstName", post.getFirstName());
+                sendingJSONObject.put("lastName", post.getLastName());
+                sendingJSONObject.put("email", post.getEmail());
+                sendingJSONObject.put("departmentID", post.getDepartmentID());
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
-                responseMessage = "post not found";
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "fail");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
-            JSONObject sendingJSONObject = new JSONObject();
-            sendingJSONObject.put("responseMessage", responseMessage);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(sendingJSONObject.toString());
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

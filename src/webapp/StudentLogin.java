@@ -1,7 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
-import datalayer.tables.StudentDatabase;
+import datalayer.tables.users.StudentDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +21,6 @@ import java.util.Scanner;
 public class StudentLogin extends HttpServlet {
     StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String responseMessage;
         String json = "";
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
         while (scanner.hasNextLine()) {
@@ -36,21 +35,32 @@ public class StudentLogin extends HttpServlet {
         }
         try {
             if (studentTable.isValidStudentLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
-//                std = studentTable.getStudent(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"));
+                StudentUser std = studentTable.getUser(readingJSONObject.getString("studentID"));
 //                request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
 //                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
-                responseMessage = "student exists";
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "student found");
+                sendingJSONObject.put("studentID", std.getStudentID());
+                sendingJSONObject.put("firstName", std.getFirstName());
+                sendingJSONObject.put("lastName", std.getLastName());
+                sendingJSONObject.put("email", std.getEmail());
+                sendingJSONObject.put("birthDate",
+                        (std.getYearOfBirth() + "-"
+                                + std.getMonthOfBirth() + "-"
+                                + std.getDayOfBirth()));
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
 //                request.setAttribute("errorMessage", "invalid student ID or password");
 //                request.getRequestDispatcher("/login.jsp").forward(request, response);
-                responseMessage = "student not found";
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", "student not found");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(sendingJSONObject.toString());
             }
-            JSONObject sendingJSONObject = new JSONObject();
-            sendingJSONObject.put("responseMessage", responseMessage);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(sendingJSONObject.toString());
         }
         catch (SQLException e) {
             e.printStackTrace();
