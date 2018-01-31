@@ -1,6 +1,6 @@
 package webapp;
 
-import appLayer.PostUser;
+import appLayer.users.PostUser;
 import datalayer.tables.users.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package appLayer;
+package appLayer.users;
 
 
 public abstract class User {

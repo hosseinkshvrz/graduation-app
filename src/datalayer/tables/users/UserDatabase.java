@@ -1,7 +1,7 @@
 package datalayer.tables.users;
 
 
-import appLayer.User;
+import appLayer.users.User;
 import datalayer.DatabaseConnector;
 
 import java.sql.ResultSet;

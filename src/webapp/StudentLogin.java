@@ -1,6 +1,6 @@
 package webapp;
 
-import appLayer.StudentUser;
+import appLayer.users.StudentUser;
 import datalayer.tables.users.StudentDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;

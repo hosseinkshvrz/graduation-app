@@ -1,6 +1,6 @@
 package webapp;
 
-import appLayer.StudentUser;
+import appLayer.users.StudentUser;
 import datalayer.tables.users.StudentDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,12 +37,62 @@ public class StudentRegister extends HttpServlet {
         //parameter name should be checked
         //order of errors should be checked
         try {
-            if(readingJSONObject.getString("email").isEmpty()) {
+            if (readingJSONObject.getString("firstName").isEmpty()) {
+                responseMessage = "empty first name field";
+                hasError = true;
+            }
+            else if (readingJSONObject.getString("firstName").matches("\"^[\\u0600-\\u06FF\\uFB8A\\u067E\\u0686\\u06AF\\u200C\\u200F ]+$\"")) {
+                responseMessage = "نام باید به حروف فارسی باشد";
+                hasError = true;
+            }
+            else if (readingJSONObject.getString("lastName").isEmpty()) {
+                responseMessage = "empty last name field";
+                hasError = true;
+            }
+            else if (readingJSONObject.getString("lastName").matches("\"^[\\u0600-\\u06FF\\uFB8A\\u067E\\u0686\\u06AF\\u200C\\u200F ]+$\"")) {
+                responseMessage = "نام خانوادگی باید به حروف فارسی باشد";
+                hasError = true;
+            }
+            else if (readingJSONObject.getString("studentID").isEmpty()) {
+                responseMessage = "empty student id field";
+                hasError = true;
+            }
+            else if (!readingJSONObject.getString("studentID").matches("[0-9]{8}")) {
+                responseMessage = "شماره دانشجویی وارد شده صحیح نیست";
+                hasError = true;
+            }
+            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]) < MINIMUM_BIRTH_YEAR
+                    || Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]) > MAXIMUM_BIRTH_YEAR) {
+                responseMessage = "سال تولد نامعتبر است";
+                hasError = true;
+            }
+            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) < 1
+                    || Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 12) {
+                responseMessage = "ماه تولد نامعتبر است";
+                hasError = true;
+            }
+            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) < 1) {
+                responseMessage = "روز تولد نامعتبر است";
+                hasError = true;
+            }
+            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) == 31) {
+                if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 6) {
+                    responseMessage = "روز تولد نامعتبر است";
+                    hasError = true;
+                }
+            }
+            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) > 30) {
+                if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 6) {
+                    responseMessage = "روز تولد نامعتبر است";
+                    hasError = true;
+                }
+            }
+            else if(readingJSONObject.getString("email").isEmpty()) {
                 responseMessage = "empty email field";
                 hasError = true;
             }
             else if(!readingJSONObject.getString("email").matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
-                responseMessage = "invalid email format";
+                responseMessage = "فرمت ایمیل صحیح نیست";
                 hasError = true;
             }
             else if (readingJSONObject.getString("password").isEmpty()) {
@@ -54,62 +104,12 @@ public class StudentRegister extends HttpServlet {
                 hasError = true;
             }
             else if (!readingJSONObject.getString("password").equals(readingJSONObject.getString("confirmPassword"))) {
-                responseMessage = "passwords don't match";
+                responseMessage = "کلمه عبور باید عیناً تکرار شود";
                 hasError = true;
             }
-            else if (readingJSONObject.getString("password").length() < 8) {
-                responseMessage = "password is short";
+            else if (readingJSONObject.getString("password").length() < 8 || readingJSONObject.getString("password").length() > 22) {
+                responseMessage = "طول کلمه عبور باید حداقل ۸ و حداکثر ۲۲ حرف باشد";
                 hasError = true;
-            }
-            else if (readingJSONObject.getString("firstName").isEmpty()) {
-                responseMessage = "empty first name field";
-                hasError = true;
-            }
-            else if (!readingJSONObject.getString("firstName").matches("\"^[\\\\u0600-\\\\u06FF\\\\uFB8A\\\\u067E\\\\u0686\\\\u06AF\\\\u200C\\\\u200F ]+$\"")) {
-                responseMessage = "invalid fist name format";
-                hasError = true;
-            }
-            else if (readingJSONObject.getString("lastName").isEmpty()) {
-                responseMessage = "empty last name field";
-                hasError = true;
-            }
-            else if (!readingJSONObject.getString("lastName").matches("\"^[\\\\u0600-\\\\u06FF\\\\uFB8A\\\\u067E\\\\u0686\\\\u06AF\\\\u200C\\\\u200F ]+$\"")) {
-                responseMessage = "invalid last name format";
-                hasError = true;
-            }
-            else if (readingJSONObject.getString("studentID").isEmpty()) {
-                responseMessage = "empty student id field";
-                hasError = true;
-            }
-            else if (!readingJSONObject.getString("studentID").matches("[0-9]{8}")) {
-                responseMessage = "invalid student id format";
-                hasError = true;
-            }
-            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]) < MINIMUM_BIRTH_YEAR
-                    || Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]) > MAXIMUM_BIRTH_YEAR) {
-                responseMessage = "invalid year of birth";
-                hasError = true;
-            }
-            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) < 1
-                    || Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 12) {
-                responseMessage = "invalid month of birth";
-                hasError = true;
-            }
-            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) < 1) {
-                responseMessage = "invalid day of birth";
-                hasError = true;
-            }
-            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) == 31) {
-                if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 6) {
-                    responseMessage = "invalid day of birth";
-                    hasError = true;
-                }
-            }
-            else if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]) > 30) {
-                if (Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]) > 6) {
-                    responseMessage = "invalid day of birth";
-                    hasError = true;
-                }
             }
         }
         catch (JSONException e) {
@@ -136,10 +136,10 @@ public class StudentRegister extends HttpServlet {
 
             boolean userAdded = studentTable.addNewStudentToDB(student);
             if (userAdded) {
-                responseMessage = "successfully registered";
+                responseMessage = "ثبت نام با موفقیت انجام شد";
             }
             else {
-                responseMessage = "server is busy. try later";
+                responseMessage = "این شماره دانشجویی از قبل در سامانه ثبت شده‌است";
             }
         }
         JSONObject sendingJSONObject = new JSONObject();

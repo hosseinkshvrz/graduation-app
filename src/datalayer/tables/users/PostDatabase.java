@@ -1,6 +1,6 @@
 package datalayer.tables.users;
 
-import appLayer.PostUser;
+import appLayer.users.PostUser;
 import datalayer.DatabaseConnector;
 
 import java.sql.ResultSet;

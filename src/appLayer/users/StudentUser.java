@@ -1,4 +1,4 @@
-package appLayer;
+package appLayer.users;
 
 public class StudentUser extends User {
     private String studentID;

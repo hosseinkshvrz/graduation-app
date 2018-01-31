@@ -1,6 +1,6 @@
 package webapp;
 
-import appLayer.AdminUser;
+import appLayer.users.AdminUser;
 import datalayer.tables.users.AdminDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;

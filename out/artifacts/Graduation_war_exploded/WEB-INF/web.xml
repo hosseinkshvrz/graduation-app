@@ -45,5 +45,15 @@
         <url-pattern>/student-register</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>createProcess</servlet-name>
+        <servlet-class>webapp.CreateProcess</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createProcess</servlet-name>
+        <url-pattern>/create-process</url-pattern>
+    </servlet-mapping>
+
     
 </web-app>

@@ -1,6 +1,6 @@
 package datalayer.tables.users;
 
-import appLayer.StudentUser;
+import appLayer.users.StudentUser;
 import datalayer.DatabaseConnector;
 
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ public class StudentDatabase extends UserDatabase {
     }
 
     public StudentUser getUser(String userID) throws SQLException {
-        String sql = "SELECT * FROM students WHERE studentID = \"" + userID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + userID + "\"";
         System.out.println(sql);
         DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
@@ -39,9 +39,9 @@ public class StudentDatabase extends UserDatabase {
         String lastName = rs.getString("lastname");
         String pass = rs.getString("password");
         String mail = rs.getString("email");
-        int day = Integer.parseInt(rs.getString("birthday").substring(8, 10));
-        int month = Integer.parseInt(rs.getString("birthday").substring(5, 7));
-        int year = Integer.parseInt(rs.getString("birthday").substring(0, 4));
+        int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
+        int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
+        int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
         rs.close();
         connectionToDB.closeConnection();
         return new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
@@ -58,7 +58,7 @@ public class StudentDatabase extends UserDatabase {
         int month = student.getMonthOfBirth();
         int year = student.getYearOfBirth();
 
-        String sql = "INSERT INTO students (studentID, firstname, lastname, password, email, birthday) VALUES ('"
+        String sql = "INSERT " + tableName + " (studentID, firstname, lastname, password, email, birthday) VALUES ('"
                 + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
                 + year + "-" + month + "-" + day + "')";
         System.out.println(sql);
@@ -77,7 +77,7 @@ public class StudentDatabase extends UserDatabase {
     public ArrayList<StudentUser> getListOfAllStudents() throws SQLException {
         DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
-        String sql = "SELECT * FROM students";
+        String sql = "SELECT * FROM " + tableName;
         ResultSet rs = connectionToDB.executeQuery(sql);
 
         ArrayList<StudentUser> students = new ArrayList<>();
@@ -88,9 +88,9 @@ public class StudentDatabase extends UserDatabase {
             String lastName = rs.getString("lastname");
             String password = rs.getString("password");
             String email = rs.getString("email");
-            int day = Integer.parseInt(rs.getString("birthday").substring(8, 10));
-            int month = Integer.parseInt(rs.getString("birthday").substring(5, 7));
-            int year = Integer.parseInt(rs.getString("birthday").substring(0, 4));
+            int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
+            int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
+            int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
             StudentUser s = new StudentUser(studentID, firstName, lastName, password, email, day, month, year);
             students.add(s);
         }
