@@ -1,21 +1,14 @@
-package datalayer;
+package datalayer.tables;
 
-import appLayer.StudentUser;
+
+import datalayer.DatabaseConnector;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class AdminDatabase
-{
-    public AdminDatabase() {
-
-    }
-
-    public boolean isValidUserLogin(String id, String password) throws ClassNotFoundException, SQLException {
+public abstract class UserDatabase {
+    protected boolean checkUserExistenceWithDatabase(String sql) throws ClassNotFoundException, SQLException {
         boolean isValidUser = false;
-        String sql = "SELECT * FROM admins WHERE id = \"" + id + "\" AND password = \"" + password + "\"";
-        System.out.println(sql);
         DatabaseConnector connectionToDB = new DatabaseConnector();
         connectionToDB.makeConnection();
         ResultSet rs = connectionToDB.executeQuery(sql);
@@ -26,5 +19,4 @@ public class AdminDatabase
         connectionToDB.closeConnection();
         return isValidUser;
     }
-
 }

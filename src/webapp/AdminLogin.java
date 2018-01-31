@@ -1,6 +1,6 @@
 package webapp;
 
-import datalayer.AdminDatabase;
+import datalayer.tables.AdminDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,7 +33,8 @@ public class AdminLogin extends HttpServlet {
             e.printStackTrace();
         }
         try {
-            if (adminTable.isValidUserLogin(readingJSONObject.getString("id"), readingJSONObject.getString("password"))) {
+            if (adminTable.isValidAdminLogin(readingJSONObject.getString("id"),
+                                            readingJSONObject.getString("password"))) {
                 responseMessage = "admin exists";
             }
             else {

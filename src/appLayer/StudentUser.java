@@ -1,7 +1,5 @@
 package appLayer;
 
-import java.util.Date;
-
 public class StudentUser {
     private String studentID;
     private String firstName;

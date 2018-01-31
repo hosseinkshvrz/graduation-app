@@ -1,7 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
-import datalayer.StudentDatabase;
+import datalayer.tables.StudentDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 

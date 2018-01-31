@@ -1,7 +1,7 @@
 package webapp;
 
 import appLayer.StudentUser;
-import datalayer.StudentDatabase;
+import datalayer.tables.StudentDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ public class StudentLogin extends HttpServlet {
             e.printStackTrace();
         }
         try {
-            if (studentTable.isValidUserLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
+            if (studentTable.isValidStudentLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
 //                std = studentTable.getStudent(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"));
 //                request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
 //                request.getRequestDispatcher("/welcome.jsp").forward(request, response);

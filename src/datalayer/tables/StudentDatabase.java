@@ -1,30 +1,26 @@
-package datalayer;
+package datalayer.tables;
 
 import appLayer.StudentUser;
+import datalayer.DatabaseConnector;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class StudentDatabase
-{
-    public StudentDatabase() {
+public class StudentDatabase extends UserDatabase {
+    private final String tableName = "students";
 
-    }
-
-    public boolean isValidUserLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
-        boolean isValidUser = false;
-        String sql = "SELECT * FROM students WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+    public boolean isValidStudentLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
-        if (rs.next()) {
-            isValidUser = true;
+        try {
+            return checkUserExistenceWithDatabase(sql);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        rs.close();
-        connectionToDB.closeConnection();
-        return isValidUser;
+        return false;
     }
 
     public StudentUser getStudent(String studentID, String password) throws SQLException {

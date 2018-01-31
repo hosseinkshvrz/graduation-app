@@ -1,7 +1,6 @@
 package webapp;
 
-import datalayer.AdminDatabase;
-import datalayer.PostDatabase;
+import datalayer.tables.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -34,7 +32,7 @@ public class PostLogin extends HttpServlet {
             e.printStackTrace();
         }
         try {
-            if (postTable.isValidUserLogin(readingJSONObject.getString("personnelID"), readingJSONObject.getString("password"))) {
+            if (postTable.isValidPostLogin(readingJSONObject.getString("personnelID"), readingJSONObject.getString("password"))) {
                 responseMessage = "post exists";
             }
             else {
@@ -45,14 +43,7 @@ public class PostLogin extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(sendingJSONObject.toString());
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
