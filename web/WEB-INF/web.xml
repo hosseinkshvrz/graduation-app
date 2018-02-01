@@ -55,5 +55,14 @@
         <url-pattern>/create-process</url-pattern>
     </servlet-mapping>
 
-    
+    <servlet>
+        <servlet-name>getProcesses</servlet-name>
+        <servlet-class>webapp.ProcessesGetter</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getProcesses</servlet-name>
+        <url-pattern>/processes</url-pattern>
+    </servlet-mapping>
+
 </web-app>

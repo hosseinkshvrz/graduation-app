@@ -13,11 +13,7 @@ public class Process {
     }
 
     public void addStep(Step newStep) {
-
         processSteps.add(newStep);
-    }
-    public void addStep(int stepID) {
-        //first find step then add to array list
     }
 
     public void setProcessID(int processID) {
@@ -34,5 +30,9 @@ public class Process {
 
     public ArrayList<Step> getProcessSteps() {
         return processSteps;
+    }
+
+    public void addStep(int stepID) {
+
     }
 }

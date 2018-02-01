@@ -45,10 +45,11 @@ public class DatabaseExecutor {
     }
 
     public int executeAutoIncrementUpdateQuery(String sql) {
-        executeUpdateQuery(sql);
+        statement = connectionToDB.makeConnection();
         ResultSet rs;
         int primaryKey = -1;
         try {
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
             rs = statement.getGeneratedKeys();
             if (rs.next()) {
                 primaryKey = rs.getInt(1);

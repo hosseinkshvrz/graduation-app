@@ -3,6 +3,7 @@ package webapp;
 import appLayer.Process;
 import appLayer.Step;
 import datalayer.tables.ProcessDatabase;
+import datalayer.tables.StepDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -19,6 +20,7 @@ import java.util.Scanner;
 @WebServlet(name = "CreateProcess")
 public class CreateProcess extends HttpServlet {
     private ProcessDatabase processTable = new ProcessDatabase();
+    private StepDatabase stepTable = new StepDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String json = "";
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
@@ -29,18 +31,20 @@ public class CreateProcess extends HttpServlet {
         JSONArray readingJSONArray = new JSONArray();
         try {
             readingJSONArray = new JSONArray(json);
-            Process newProcess = null;
+            Process process = null;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");
-            newProcess = new Process(processName);
+            process = new Process(processName);
+            processTable.addNewProcessToDB(process);
             for (int i = 1; i < readingJSONArray.length(); i++) {
-                int stepID = readingJSONArray.getJSONObject(i).getInt("stepID");
+                String stepName = readingJSONArray.getJSONObject(i).getString("stepName");
                 int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
                 int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
                 int departmentID = readingJSONArray.getJSONObject(i).getInt("departmentID");
-                Step step = new Step(stepID, acceptStepID, rejectStepID, departmentID);
-                newProcess.addStep(step);
+                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getProcessID(), departmentID);
+                stepTable.addNewStepToDB(step);
+                process.addStep(step);
             }
-            processTable.addNewProcessToDB(newProcess);
+            processTable.addStepsToProcess(process);
         }
         catch (JSONException e) {
                 e.printStackTrace();
