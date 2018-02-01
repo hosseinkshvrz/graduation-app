@@ -1,7 +1,7 @@
 package datalayer.tables.users;
 
 import appLayer.users.PostUser;
-import datalayer.DatabaseConnector;
+import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,9 +26,8 @@ public class PostDatabase extends UserDatabase {
     public PostUser getUser(String userID) throws SQLException {
         String sql = "SELECT * FROM " + tableName + " WHERE personnelID = \"" + userID + "\"";
         System.out.println(sql);
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
         try {
             rs.next();
         } catch (SQLException e) {
@@ -41,7 +40,7 @@ public class PostDatabase extends UserDatabase {
         String depID = rs.getString("departmentID");
         String mail = rs.getString("email");
         rs.close();
-        connectionToDB.closeConnection();
+        de.closeConnection();
         return new PostUser(id, firstName, lastName, pass, depID, mail);
     }
 }

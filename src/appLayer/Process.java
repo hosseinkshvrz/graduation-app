@@ -7,7 +7,6 @@ public class Process {
     private int processID;
     private String processName;
     private ArrayList<Step> processSteps = new ArrayList<>();
-    private String name;
 
     public Process(String processName) {
         this.processName = processName;
@@ -21,12 +20,16 @@ public class Process {
         //first find step then add to array list
     }
 
+    public void setProcessID(int processID) {
+        this.processID = processID;
+    }
+
     public int getProcessID() {
         return processID;
     }
 
     public String getName() {
-        return name;
+        return processName;
     }
 
     public ArrayList<Step> getProcessSteps() {

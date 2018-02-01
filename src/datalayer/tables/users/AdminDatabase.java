@@ -1,7 +1,7 @@
 package datalayer.tables.users;
 
 import appLayer.users.AdminUser;
-import datalayer.DatabaseConnector;
+import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,9 +25,8 @@ public class AdminDatabase extends UserDatabase{
     public AdminUser getUser(String userID) throws SQLException {
         String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + userID + "\"";
         System.out.println(sql);
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
         try {
             rs.next();
         } catch (SQLException e) {
@@ -39,7 +38,7 @@ public class AdminDatabase extends UserDatabase{
         String pass = rs.getString("password");
         String mail = rs.getString("email");
         rs.close();
-        connectionToDB.closeConnection();
+        de.closeConnection();
         return new AdminUser(adminID, firstName, lastName, pass, mail);
     }
 }

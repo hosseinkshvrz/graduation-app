@@ -1,7 +1,7 @@
 package datalayer.tables.users;
 
 import appLayer.users.StudentUser;
-import datalayer.DatabaseConnector;
+import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +15,11 @@ public class StudentDatabase extends UserDatabase {
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -26,9 +28,8 @@ public class StudentDatabase extends UserDatabase {
     public StudentUser getUser(String userID) throws SQLException {
         String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + userID + "\"";
         System.out.println(sql);
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
         try {
             rs.next();
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class StudentDatabase extends UserDatabase {
         int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
         int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
         rs.close();
-        connectionToDB.closeConnection();
+        de.closeConnection();
         return new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
     }
 
@@ -62,23 +63,17 @@ public class StudentDatabase extends UserDatabase {
                 + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
                 + year + "-" + month + "-" + day + "')";
         System.out.println(sql);
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        if (connectionToDB.executeUpdateQuery(sql) > 0) {
-            addIsDone = true;
-        }
-        else {
-            addIsDone = false;
-        }
-        connectionToDB.closeConnection();
+        DatabaseExecutor de = new DatabaseExecutor();
+        addIsDone = de.executeUpdateQuery(sql);
+
+        de.closeConnection();
         return addIsDone;
     }
 
     public ArrayList<StudentUser> getListOfAllStudents() throws SQLException {
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
         String sql = "SELECT * FROM " + tableName;
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
 
         ArrayList<StudentUser> students = new ArrayList<>();
         while(rs.next())
@@ -95,7 +90,7 @@ public class StudentDatabase extends UserDatabase {
             students.add(s);
         }
         rs.close();
-        connectionToDB.closeConnection();
+        de.closeConnection();
         return students;
     }
 }

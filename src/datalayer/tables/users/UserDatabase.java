@@ -2,7 +2,7 @@ package datalayer.tables.users;
 
 
 import appLayer.users.User;
-import datalayer.DatabaseConnector;
+import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,14 +10,13 @@ import java.sql.SQLException;
 public abstract class UserDatabase {
     boolean checkUserExistenceWithDatabase(String sql) throws ClassNotFoundException, SQLException {
         boolean isValidUser = false;
-        DatabaseConnector connectionToDB = new DatabaseConnector();
-        connectionToDB.makeConnection();
-        ResultSet rs = connectionToDB.executeQuery(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
         if (rs.next()) {
             isValidUser = true;
         }
         rs.close();
-        connectionToDB.closeConnection();
+        de.closeConnection();
         return isValidUser;
     }
     abstract User getUser(String userID) throws SQLException;

@@ -2,6 +2,7 @@ package webapp;
 
 import appLayer.Process;
 import appLayer.Step;
+import datalayer.tables.ProcessDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -17,6 +18,7 @@ import java.util.Scanner;
 
 @WebServlet(name = "CreateProcess")
 public class CreateProcess extends HttpServlet {
+    private ProcessDatabase processTable = new ProcessDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String json = "";
         Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
@@ -27,11 +29,7 @@ public class CreateProcess extends HttpServlet {
         JSONArray readingJSONArray = new JSONArray();
         try {
             readingJSONArray = new JSONArray(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Process newProcess = null;
-        try {
+            Process newProcess = null;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");
             newProcess = new Process(processName);
             for (int i = 1; i < readingJSONArray.length(); i++) {
@@ -42,6 +40,7 @@ public class CreateProcess extends HttpServlet {
                 Step step = new Step(stepID, acceptStepID, rejectStepID, departmentID);
                 newProcess.addStep(step);
             }
+            processTable.addNewProcessToDB(newProcess);
         }
         catch (JSONException e) {
                 e.printStackTrace();
