@@ -47,7 +47,7 @@
 
     <servlet>
         <servlet-name>createProcess</servlet-name>
-        <servlet-class>webapp.CreateProcess</servlet-class>
+        <servlet-class>webapp.ProcessCreator</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -63,6 +63,26 @@
     <servlet-mapping>
         <servlet-name>getProcesses</servlet-name>
         <url-pattern>/processes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>processRequestRegister</servlet-name>
+        <servlet-class>webapp.ProcessRequestRegister</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>processRequestRegister</servlet-name>
+        <url-pattern>/register-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>processStarter</servlet-name>
+        <servlet-class>webapp.ProcessStarter</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>processStarter</servlet-name>
+        <url-pattern>/start</url-pattern>
     </servlet-mapping>
 
 </web-app>

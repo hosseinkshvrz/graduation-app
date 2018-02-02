@@ -5,11 +5,18 @@ import java.util.ArrayList;
 
 public class Process {
     private int processID;
+    private String status;
     private String processName;
     private ArrayList<Step> processSteps = new ArrayList<>();
 
     public Process(String processName) {
         this.processName = processName;
+    }
+
+    public Process(int processID, String processName, String status) {
+        this.processID = processID;
+        this.processName = processName;
+        this.status = status;
     }
 
     public void addStep(Step newStep) {
@@ -32,7 +39,7 @@ public class Process {
         return processSteps;
     }
 
-    public void addStep(int stepID) {
-
+    public String getStatus() {
+        return status;
     }
 }

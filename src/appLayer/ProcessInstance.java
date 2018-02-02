@@ -8,21 +8,27 @@ public class ProcessInstance {
     private int processID;
     private ArrayList<StepInstance> stepInstances;
 
-    ProcessInstance(int processID) {
+    public ProcessInstance(int processID) {
         this.processID = processID;
     }
 
-    public void addStepInstance(StepInstance stepInstance) {
-        //Add to DB
-        stepInstances.add(stepInstance);
-
+    public void setProcessInstanceID(int processInstanceID) {
+        this.processInstanceID = processInstanceID;
     }
 
-    public int getProcessInstanceID() {
-        return processInstanceID;
+    public void addStepInstance(StepInstance newStepInstance) {
+        stepInstances.add(newStepInstance);
+    }
+
+    public ArrayList<StepInstance> getStepInstances() {
+        return stepInstances;
     }
 
     public int getProcessID() {
         return processID;
+    }
+
+    public int getProcessInstanceID() {
+        return processInstanceID;
     }
 }

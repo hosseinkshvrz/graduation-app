@@ -2,8 +2,6 @@ package webapp;
 
 import appLayer.Process;
 import appLayer.Step;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import datalayer.tables.ProcessDatabase;
 import datalayer.tables.StepDatabase;
 import org.json.JSONArray;
@@ -16,17 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 @WebServlet(name = "ProcessesGetter")
 public class ProcessesGetter extends HttpServlet {
-    private ProcessDatabase processTable;
+    private ProcessDatabase processTable = new ProcessDatabase();
     private StepDatabase stepTable = new StepDatabase();
-    public ProcessesGetter() {
-        processTable = new ProcessDatabase();
-    }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -34,35 +28,34 @@ public class ProcessesGetter extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONArray processesJsonArray = new JSONArray();
 
-        try {
-            ArrayList<Process> allProcesses = processTable.getProcesses();
-            for (int i = 0; i < allProcesses.size(); i++) {
-                JSONObject processJsonObject = new JSONObject();
-                JSONArray steps = new JSONArray();
-                Process process = allProcesses.get(i);
-                try {
-                    processJsonObject.put("processName", process.getName());
+        ArrayList<Process> allProcesses = processTable.getProcesses();
+        for (int i = 0; i < allProcesses.size(); i++) {
+            JSONObject processJSONObject = new JSONObject();
+            JSONArray stepsJSONArray = new JSONArray();
+            Process process = allProcesses.get(i);
+            try {
+                processJSONObject.put("processName", process.getName());
 
-                    for (int j = 0; j < process.getProcessSteps().size(); j++) {
-                        JSONObject stepObject = new JSONObject();
-                        Step step = process.getProcessSteps().get(j);
-                        stepObject.put("stepName", step.getStepName());
-                        stepObject.put("departmentID", step.getDepartmentID());
-                        //Accept Step Name
-                        stepObject.put("afterAcceptStepName", stepTable.getStep(step.getAcceptStepID()).getStepName());
-                        //Reject Step Name
-                        stepObject.put("afterRejectStepName", stepTable.getStep(step.getRejectStepID()).getStepName());
-                        steps.put(step);
-                    }
-                    processJsonObject.put("steps", steps);
-                    processesJsonArray.put(processJsonObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                for (int j = 0; j < process.getProcessSteps().size(); j++) {
+                    JSONObject stepObject = new JSONObject();
+                    Step step = process.getProcessSteps().get(j);
+                    stepObject.put("stepName", step.getStepName());
+                    stepObject.put("departmentID", step.getDepartmentID());
+                    //Accept Step Name
+                    stepObject.put("afterAcceptStepName", stepTable.getStep(step.getAcceptStepID()).getStepName());
+                    //Reject Step Name
+                    stepObject.put("afterRejectStepName", stepTable.getStep(step.getRejectStepID()).getStepName());
+                    stepsJSONArray.put(stepObject);
                 }
-
+                processJSONObject.put("steps", stepsJSONArray);
+                processesJsonArray.put(processJSONObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
         }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(processesJsonArray.toString());
     }
 }

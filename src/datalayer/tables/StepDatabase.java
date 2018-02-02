@@ -10,7 +10,7 @@ public class StepDatabase {
     private final String tableName = "steps";
 
     public Step getStep(int stepID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + stepID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE stepID = \"" + stepID + "\"";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -23,6 +23,8 @@ public class StepDatabase {
             int processID = rs.getInt("processID");
             int departmentID = rs.getInt("departmentID");
             step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID);
+            rs.close();
+            de.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

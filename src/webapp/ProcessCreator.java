@@ -6,6 +6,7 @@ import datalayer.tables.ProcessDatabase;
 import datalayer.tables.StepDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,8 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 
-@WebServlet(name = "CreateProcess")
-public class CreateProcess extends HttpServlet {
+@WebServlet(name = "ProcessCreator")
+public class ProcessCreator extends HttpServlet {
     private ProcessDatabase processTable = new ProcessDatabase();
     private StepDatabase stepTable = new StepDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,10 +29,10 @@ public class CreateProcess extends HttpServlet {
             json += scanner.nextLine();
         }
         System.out.println(json);
-        JSONArray readingJSONArray = new JSONArray();
+        JSONArray readingJSONArray;
         try {
             readingJSONArray = new JSONArray(json);
-            Process process = null;
+            Process process;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");
             process = new Process(processName);
             processTable.addNewProcessToDB(process);
@@ -49,8 +50,17 @@ public class CreateProcess extends HttpServlet {
         catch (JSONException e) {
                 e.printStackTrace();
         }
-
-        //send message to android device
+        String responseMessage = "success";
+        //handle graph
+        JSONObject sendingJSONObject = new JSONObject();
+        try {
+            sendingJSONObject.put("responseMessage", responseMessage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(sendingJSONObject.toString());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

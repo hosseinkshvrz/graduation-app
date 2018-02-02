@@ -25,27 +25,30 @@ public class StudentDatabase extends UserDatabase {
         return false;
     }
 
-    public StudentUser getUser(String userID) throws SQLException {
+    public StudentUser getUser(String userID) {
         String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + userID + "\"";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
+        StudentUser student = null;
         try {
             rs.next();
+            String id = rs.getString("studentID");
+            String firstName = rs.getString("firstname");
+            String lastName = rs.getString("lastname");
+            String pass = rs.getString("password");
+            String mail = rs.getString("email");
+            String status = rs.getString("status");
+            int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
+            int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
+            int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
+            student = new StudentUser(id, firstName, lastName, pass, mail, day, month, year, status);
+            rs.close();
+            de.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String id = rs.getString("studentID");
-        String firstName = rs.getString("firstname");
-        String lastName = rs.getString("lastname");
-        String pass = rs.getString("password");
-        String mail = rs.getString("email");
-        int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
-        int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
-        int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
-        rs.close();
-        de.closeConnection();
-        return new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
+        return student;
     }
 
     public boolean addNewStudentToDB(StudentUser student) {
@@ -83,10 +86,11 @@ public class StudentDatabase extends UserDatabase {
             String lastName = rs.getString("lastname");
             String password = rs.getString("password");
             String email = rs.getString("email");
+            String status = rs.getString("status");
             int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
             int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
             int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
-            StudentUser s = new StudentUser(studentID, firstName, lastName, password, email, day, month, year);
+            StudentUser s = new StudentUser(studentID, firstName, lastName, password, email, day, month, year, status);
             students.add(s);
         }
         rs.close();

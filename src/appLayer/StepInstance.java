@@ -3,6 +3,7 @@ package appLayer;
 
 public class StepInstance {
     private int stepInstanceID;
+    private int stepID;
     private int acceptStepInstanceID;
     private int rejectStepInstanceID;
     private int processInstanceID;
@@ -10,9 +11,9 @@ public class StepInstance {
     private String start;
     private String end;
 
-    StepInstance(int stepInstanceID, int acceptStepInstanceID, int rejectStepInstanceID, int processInstanceID,
-                 String personnelID, String start) {
-        this.stepInstanceID = stepInstanceID;
+    public StepInstance(int stepID, int acceptStepInstanceID, int rejectStepInstanceID, int processInstanceID,
+                        String personnelID, String start) {
+        this.stepID = stepID;
         this.acceptStepInstanceID = acceptStepInstanceID;
         this.rejectStepInstanceID = rejectStepInstanceID;
         this.processInstanceID = processInstanceID;
@@ -74,5 +75,13 @@ public class StepInstance {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public int getStepID() {
+        return stepID;
+    }
+
+    public void setStepID(int stepID) {
+        this.stepID = stepID;
     }
 }

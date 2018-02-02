@@ -43,4 +43,21 @@ public class PostDatabase extends UserDatabase {
         de.closeConnection();
         return new PostUser(id, firstName, lastName, pass, depID, mail);
     }
+
+    public String getAvailablePostID() {
+        String sql = "SELECT personnelID FROM " + tableName;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        String id = "";
+        try {
+            rs.next();
+            id = rs.getString("personnelID");
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }

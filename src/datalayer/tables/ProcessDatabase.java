@@ -1,5 +1,6 @@
 package datalayer.tables;
 import appLayer.Process;
+import appLayer.Step;
 import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
@@ -8,46 +9,55 @@ import java.util.ArrayList;
 
 public class ProcessDatabase {
     private final String tableName = "processes";
+    private StepDatabase stepTable = new StepDatabase();
 
-    public Process getProcess (int processID) throws SQLException {
-        String sql = "SELECT * FROM " + tableName + " WHERE processID = \"" + processID + "\"";
+    public Process getProcess (String processName) {
+        int numberOfColumns = getNumberOfTableColumns();
+        String sql = "SELECT * FROM " + tableName + " WHERE name = \"" + processName + "\"";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
+        Process process = null;
         try {
             rs.next();
+            int processID = rs.getInt("processID");
+            String status = rs.getString("status");
+            process = new Process(processID, processName, status);
+            int stepID;
+            for (int i = 0; i < numberOfColumns - 2; i++) {
+                stepID = rs.getInt("step" + (i+1));
+                if (stepID != 0) {      //for processes which doesn't have that step.
+                    Step step = stepTable.getStep(stepID);
+                    process.addStep(step);
+                }
+            }
+            rs.close();
+            de.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String processName = rs.getString("name");
-        int index = 2;
-        Process process = new Process(processName);
-        while (rs.next()) {
-            int stepID = rs.getInt(index);
-            process.addStep(stepID);
-            index++;
-        }
-        rs.close();
-        de.closeConnection();
         return process;
     }
 
-    public ArrayList<Process> getProcesses() throws SQLException {
-        String sql = "SELECT * FROM" + tableName;
+    public ArrayList<Process> getProcesses() {
         DatabaseExecutor de = new DatabaseExecutor();
-        ResultSet rs = de.executeGetQuery(sql);
-
+        ArrayList<String> processNames = new ArrayList<>();
         ArrayList<Process> resultProcesses = new ArrayList<>();
-
-        while(rs.next()) {
-            int index = 1;
-            String processName = rs.getString("name");
-            Process process = new Process(processName);
-            int stepID;
-            while((stepID = rs.getInt("step" + index)) > 0) {
-                process.addStep(stepID);
-                index++;
+        ResultSet rs;
+        try {
+            String sql = "SELECT * FROM " + tableName;
+            rs = de.executeGetQuery(sql);
+            while(rs.next()) {
+                processNames.add(rs.getString("name"));
             }
+            rs.close();
+            de.closeConnection();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < processNames.size(); i++) {
+            Process process = getProcess(processNames.get(i));
             resultProcesses.add(process);
         }
         return resultProcesses;
@@ -62,16 +72,11 @@ public class ProcessDatabase {
         de.closeConnection();
     }
      public void addStepsToProcess (Process process) {
-         int numberOfColumns;
-         String sql = "SELECT count(*)\n" +
-                 "FROM information_schema.columns\n" +
-                 "WHERE table_name = '" + tableName + "'";
-         System.out.println(sql);
+         int numberOfColumns = getNumberOfTableColumns();
+         String sql;
          DatabaseExecutor de = new DatabaseExecutor();
-         ResultSet rs = de.executeGetQuery(sql);
+         ResultSet rs = null;
          try {
-             rs.next();
-             numberOfColumns = rs.getInt(1);
              /*
              ALTER TABLE `graduation`.`processes`
              ADD COLUMN `step1` INT NULL AFTER `name`,
@@ -114,5 +119,21 @@ public class ProcessDatabase {
          catch (SQLException e) {
              e.printStackTrace();
          }
+     }
+
+     private int getNumberOfTableColumns() {
+         String sql = "SELECT count(*)\n" +
+                 "FROM information_schema.columns\n" +
+                 "WHERE table_name = '" + tableName + "'";
+         DatabaseExecutor de = new DatabaseExecutor();
+         ResultSet rs = de.executeGetQuery(sql);
+         int numberOfColumns = 0;
+         try {
+             rs.next();
+             numberOfColumns = rs.getInt(1);
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return numberOfColumns;
      }
 }

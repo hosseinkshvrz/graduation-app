@@ -5,13 +5,19 @@ public class StudentUser extends User {
     private int dayOfBirth;
     private int monthOfBirth;
     private int yearOfBirth;
+    private String status;
+    private int startedProcessInstanceID;
+    private int currentStepInstanceID;
 
-    public StudentUser(String studentID, String firstName, String lastName, String password, String email, int dayOfBirth, int monthOfBirth, int yearOfBirth) {
+    public StudentUser(String firstName, String lastName, String password, String email, String studentID, int dayOfBirth, int monthOfBirth, int yearOfBirth, String status) {
         super(firstName, lastName, password, email);
         this.studentID = studentID;
         this.dayOfBirth = dayOfBirth;
         this.monthOfBirth = monthOfBirth;
         this.yearOfBirth = yearOfBirth;
+        this.status = status;
+        startedProcessInstanceID = -1;
+        currentStepInstanceID = -1;
     }
 
     public String getStudentID() {
@@ -44,5 +50,17 @@ public class StudentUser extends User {
 
     public int getYearOfBirth() {
         return yearOfBirth;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStartedProcessInstanceID(int startedProcessInstanceID) {
+        this.startedProcessInstanceID = startedProcessInstanceID;
+    }
+
+    public void setCurrentStepInstanceID(int currentStepInstanceID) {
+        this.currentStepInstanceID = currentStepInstanceID;
     }
 }
