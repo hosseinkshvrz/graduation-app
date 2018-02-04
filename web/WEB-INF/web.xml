@@ -85,4 +85,14 @@
         <url-pattern>/start</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>stepFinisher</servlet-name>
+        <servlet-class>webapp.StepFinisher</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>stepFinisher</servlet-name>
+        <url-pattern>/finish-step</url-pattern>
+    </servlet-mapping>
+
 </web-app>

@@ -43,22 +43,19 @@ public class ProcessStarter extends HttpServlet {
         }
         ProcessInstance processInstance = new ProcessInstance(process.getProcessID());
         processInstanceTable.addNewProcessInstanceToDB(processInstance);
-        for (Step s :
-                process.getProcessSteps()) {
-            int stepID = s.getStepID();
-            int acceptStepInstanceID = s.getAcceptStepID();
-            int rejectStepInstanceID = s.getRejectStepID();
-            int pInstanceID = processInstance.getProcessInstanceID();
-            String personnelID = postTable.getAvailablePostID();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            String startTime = dtf.format(now);
-            StepInstance stepInstance = new StepInstance(stepID, acceptStepInstanceID, rejectStepInstanceID, pInstanceID, personnelID, startTime);
-            stepInstanceTable.addNewStepInstanceToDB(stepInstance);
-            processInstance.addStepInstance(stepInstance);
-        }
-        processInstanceTable.addStepInstancesToProcess(process);
+        Step firstStep = process.getFirstStep();
+        int stepID = firstStep.getStepID();
+        int pInstanceID = processInstance.getProcessInstanceID();
+        String personnelID = postTable.getAvailablePostID();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String startTime = dtf.format(now);
+        StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
+        stepInstanceTable.addNewStepInstanceToDB(stepInstance);
+        processInstance.addStepInstance(stepInstance);
+        processInstanceTable.addSingleStepInstanceToProcessInstance(processInstance); //what?
         String responseMessage = "فرآیند با موفقیت آغاز شد";
+        //send step instance id to android device and name
         JSONObject sendingJSONObject = new JSONObject();
         try {
             sendingJSONObject.put("responseMessage", responseMessage);

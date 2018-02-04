@@ -41,9 +41,13 @@ public class ProcessCreator extends HttpServlet {
                 int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
                 int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
                 int departmentID = readingJSONArray.getJSONObject(i).getInt("departmentID");
-                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getProcessID(), departmentID);
+                boolean isFirstStep = readingJSONArray.getJSONObject(i).getBoolean("isFirstStep");
+                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getProcessID(), departmentID, isFirstStep);
                 stepTable.addNewStepToDB(step);
                 process.addStep(step);
+                if (isFirstStep) {
+                    process.setFirstStep(step);
+                }
             }
             processTable.addStepsToProcess(process);
         }

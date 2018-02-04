@@ -2,6 +2,7 @@ package datalayer.tables;
 import appLayer.Process;
 import appLayer.Step;
 import datalayer.DatabaseExecutor;
+import datalayer.TablesInformation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ public class ProcessDatabase {
     private StepDatabase stepTable = new StepDatabase();
 
     public Process getProcess (String processName) {
-        int numberOfColumns = getNumberOfTableColumns();
+        int numberOfColumns = TablesInformation.getNumberOfTableColumns(tableName);
         String sql = "SELECT * FROM " + tableName + " WHERE name = \"" + processName + "\"";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
@@ -72,7 +73,7 @@ public class ProcessDatabase {
         de.closeConnection();
     }
      public void addStepsToProcess (Process process) {
-         int numberOfColumns = getNumberOfTableColumns();
+         int numberOfColumns = TablesInformation.getNumberOfTableColumns(tableName);
          String sql;
          DatabaseExecutor de = new DatabaseExecutor();
          ResultSet rs = null;
@@ -91,7 +92,7 @@ public class ProcessDatabase {
              /* add column to table */
              for (int i = 0; i < process.getProcessSteps().size(); i++) {
                  if (i >= numberOfColumns - 2) {
-                     sql = "ALTER TABLE " + tableName + "\nADD COLUMN step" + (i+1) + " INT NULL AFTER name," +
+                     sql = "ALTER TABLE " + tableName + "\nADD COLUMN step" + (i+1) + " INT NULL," +
                              "\nADD INDEX fk_process_step" + (i+1) + "_idx (step" + (i+1) + " ASC);";
                      System.out.println(sql);
                      de.executeUpdateQuery(sql);
@@ -104,7 +105,6 @@ public class ProcessDatabase {
                      de.executeUpdateQuery(sql);
                  }
              }
-             /* create sql query */
              sql = "UPDATE " + tableName + "\nSET name = '" + process.getName() + "'";
              for (int i = 0; i < process.getProcessSteps().size(); i++) {
                  sql += ", step" + (i+1) + " = " + process.getProcessSteps().get(i).getStepID();
@@ -119,21 +119,5 @@ public class ProcessDatabase {
          catch (SQLException e) {
              e.printStackTrace();
          }
-     }
-
-     private int getNumberOfTableColumns() {
-         String sql = "SELECT count(*)\n" +
-                 "FROM information_schema.columns\n" +
-                 "WHERE table_name = '" + tableName + "'";
-         DatabaseExecutor de = new DatabaseExecutor();
-         ResultSet rs = de.executeGetQuery(sql);
-         int numberOfColumns = 0;
-         try {
-             rs.next();
-             numberOfColumns = rs.getInt(1);
-         } catch (SQLException e) {
-             e.printStackTrace();
-         }
-         return numberOfColumns;
      }
 }

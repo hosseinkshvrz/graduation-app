@@ -22,7 +22,8 @@ public class StepDatabase {
             int rejectStepID = rs.getInt("stepIDreject");
             int processID = rs.getInt("processID");
             int departmentID = rs.getInt("departmentID");
-            step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID);
+            int isFirstStep = rs.getInt("isFirstStep");
+            step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID, (isFirstStep == 1));
             rs.close();
             de.closeConnection();
         } catch (SQLException e) {
@@ -32,11 +33,14 @@ public class StepDatabase {
     }
 
     public void addNewStepToDB(Step step) {
-        String name = step.getStepName();
+        int firstStep = 0;
+        if (step.isFirstStep()) {
+            firstStep = 1;
+        }
         DatabaseExecutor de = new DatabaseExecutor();
-        String sql = "INSERT INTO " + tableName + " (name, stepIDaccept, stepIDReject, processID, departmentID)" +
-                " VALUE ('" + name + "', " + step.getAcceptStepID() + ", " + step.getRejectStepID() + ", " +
-                step.getProcessID() + ", " + step.getDepartmentID() + ");";
+        String sql = "INSERT INTO " + tableName + " (name, stepIDaccept, stepIDReject, processID, departmentID, firstStep)" +
+                " VALUE ('" + step.getStepName() + "', " + step.getAcceptStepID() + ", " + step.getRejectStepID() + ", " +
+                step.getProcessID() + ", " + step.getDepartmentID() + ", " + firstStep + ");";
         System.out.println(sql);
         int stepID = de.executeAutoIncrementUpdateQuery(sql);
         step.setStepID(stepID);
