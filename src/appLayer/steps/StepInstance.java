@@ -1,7 +1,7 @@
-package appLayer;
+package appLayer.steps;
 
 
-public class StepInstance {
+public class StepInstance implements IStep {
     private int stepInstanceID;
     private int stepID;
     private int processInstanceID;
@@ -20,8 +20,9 @@ public class StepInstance {
         return stepInstanceID;
     }
 
-    public void setStepInstanceID(int stepInstanceID) {
-        this.stepInstanceID = stepInstanceID;
+    @Override
+    public void setStepID(int id) {
+        this.stepInstanceID = id;
     }
 
     public int getProcessInstanceID() {
@@ -42,5 +43,9 @@ public class StepInstance {
 
     public int getStepID() {
         return stepID;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

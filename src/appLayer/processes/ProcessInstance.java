@@ -1,19 +1,17 @@
-package appLayer;
+package appLayer.processes;
 
+
+import appLayer.steps.StepInstance;
 
 import java.util.ArrayList;
 
-public class ProcessInstance {
+public class ProcessInstance implements IProcess {
     private int processInstanceID;
     private int processID;
     private ArrayList<StepInstance> stepInstances;
 
     public ProcessInstance(int processID) {
         this.processID = processID;
-    }
-
-    public void setProcessInstanceID(int processInstanceID) {
-        this.processInstanceID = processInstanceID;
     }
 
     public void addStepInstance(StepInstance newStepInstance) {
@@ -28,7 +26,13 @@ public class ProcessInstance {
         return processID;
     }
 
-    public int getProcessInstanceID() {
+    @Override
+    public void setProcessID(int id) {
+        this.processInstanceID = id;
+    }
+
+    @Override
+    public int getID() {
         return processInstanceID;
     }
 }

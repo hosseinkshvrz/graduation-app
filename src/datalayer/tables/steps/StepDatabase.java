@@ -1,12 +1,13 @@
-package datalayer.tables;
+package datalayer.tables.steps;
 
-import appLayer.Step;
+import appLayer.steps.Step;
 import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
-public class StepDatabase {
+public class StepDatabase extends AbstractStepDatabase{
     private final String tableName = "steps";
 
     public Step getStep(int stepID) {
@@ -37,14 +38,14 @@ public class StepDatabase {
         if (step.isFirstStep()) {
             firstStep = 1;
         }
-        DatabaseExecutor de = new DatabaseExecutor();
-        String sql = "INSERT INTO " + tableName + " (name, stepIDaccept, stepIDReject, processID, departmentID, firstStep)" +
-                " VALUE ('" + step.getStepName() + "', " + step.getAcceptStepID() + ", " + step.getRejectStepID() + ", " +
-                step.getProcessID() + ", " + step.getDepartmentID() + ", " + firstStep + ");";
-        System.out.println(sql);
-        int stepID = de.executeAutoIncrementUpdateQuery(sql);
-        step.setStepID(stepID);
-        de.closeConnection();
+        HashMap<String, String> parameters = new HashMap<>();
+        parameters.put("name", step.getStepName());
+        parameters.put("stepIDaccept", String.valueOf(step.getAcceptStepID()));
+        parameters.put("stepIDreject", String.valueOf(step.getRejectStepID()));
+        parameters.put("processID", String.valueOf(step.getProcessID()));
+        parameters.put("departmentID", String.valueOf(step.getDepartmentID()));
+        parameters.put("firstStep", String.valueOf(firstStep));
+        super.addStepToDB(step, tableName, parameters);
     }
 
 }

@@ -1,7 +1,7 @@
-package appLayer;
+package appLayer.steps;
 
 
-public class Step {
+public class Step implements IStep {
     private int stepID;
     private String stepName;
     private int acceptStepID;
@@ -19,7 +19,8 @@ public class Step {
         this.isFirstStep = isFirstStep;
     }
 
-    public void setStepID(int stepID) {
+    @Override
+    public void setStepID(int id) {
         this.stepID = stepID;
     }
 
@@ -50,4 +51,5 @@ public class Step {
     public boolean isFirstStep() {
         return isFirstStep;
     }
+
 }

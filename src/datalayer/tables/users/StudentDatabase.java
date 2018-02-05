@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class StudentDatabase extends UserDatabase {
+public class StudentDatabase extends AbstractUserDatabase {
     private final String tableName = "students";
 
     public boolean isValidStudentLogin(String studentID, String password) throws ClassNotFoundException, SQLException {

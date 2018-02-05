@@ -1,9 +1,9 @@
 package webapp;
 
-import appLayer.Process;
-import appLayer.Step;
-import datalayer.tables.ProcessDatabase;
-import datalayer.tables.StepDatabase;
+import appLayer.processes.Process;
+import appLayer.steps.Step;
+import datalayer.tables.processes.ProcessDatabase;
+import datalayer.tables.steps.StepDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +42,7 @@ public class ProcessCreator extends HttpServlet {
                 int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
                 int departmentID = readingJSONArray.getJSONObject(i).getInt("departmentID");
                 boolean isFirstStep = readingJSONArray.getJSONObject(i).getBoolean("isFirstStep");
-                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getProcessID(), departmentID, isFirstStep);
+                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getID(), departmentID, isFirstStep);
                 stepTable.addNewStepToDB(step);
                 process.addStep(step);
                 if (isFirstStep) {

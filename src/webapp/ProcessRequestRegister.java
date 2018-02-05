@@ -1,7 +1,8 @@
 package webapp;
 
-import appLayer.Process;
+import appLayer.processes.Process;
 import datalayer.tables.*;
+import datalayer.tables.processes.ProcessDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,7 +37,7 @@ public class ProcessRequestRegister extends HttpServlet {
         }
         Process process = processTable.getProcess(processName);
         String responseMessage;
-        boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getProcessID());
+        boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID());
         if (notDuplicateRequest) {
             responseMessage = "درخواست شما با موفقیت در سیستم ثبت شد. تا تایید مسئول مربوط منتظر بمانید";
         }

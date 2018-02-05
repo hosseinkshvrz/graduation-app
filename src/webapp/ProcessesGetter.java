@@ -1,9 +1,9 @@
 package webapp;
 
-import appLayer.Process;
-import appLayer.Step;
-import datalayer.tables.ProcessDatabase;
-import datalayer.tables.StepDatabase;
+import appLayer.processes.Process;
+import appLayer.steps.Step;
+import datalayer.tables.processes.ProcessDatabase;
+import datalayer.tables.steps.StepDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

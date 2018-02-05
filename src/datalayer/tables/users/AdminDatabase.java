@@ -6,7 +6,7 @@ import datalayer.DatabaseExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AdminDatabase extends UserDatabase{
+public class AdminDatabase extends AbstractUserDatabase {
     private final String tableName = "admins";
 
     public boolean isValidAdminLogin(String id, String password) throws ClassNotFoundException, SQLException {

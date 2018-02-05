@@ -7,7 +7,7 @@ import datalayer.DatabaseExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class UserDatabase {
+public abstract class AbstractUserDatabase {
     boolean checkUserExistenceWithDatabase(String sql) throws ClassNotFoundException, SQLException {
         boolean isValidUser = false;
         DatabaseExecutor de = new DatabaseExecutor();

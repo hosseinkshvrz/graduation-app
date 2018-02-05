@@ -6,7 +6,7 @@ import datalayer.DatabaseExecutor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PostDatabase extends UserDatabase {
+public class PostDatabase extends AbstractUserDatabase {
     private final String tableName = "posts";
 
 

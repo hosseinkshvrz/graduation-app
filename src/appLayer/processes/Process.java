@@ -1,11 +1,12 @@
-package appLayer;
+package appLayer.processes;
 
+
+import appLayer.steps.Step;
 
 import java.util.ArrayList;
 
-public class Process {
+public class Process implements IProcess {
     private int processID;
-    private String status;
     private String processName;
     private ArrayList<Step> processSteps = new ArrayList<>();
     private Step firstStep;
@@ -14,10 +15,9 @@ public class Process {
         this.processName = processName;
     }
 
-    public Process(int processID, String processName, String status) {
+    public Process(int processID, String processName) {
         this.processID = processID;
         this.processName = processName;
-        this.status = status;
     }
 
     public void addStep(Step newStep) {
@@ -28,14 +28,6 @@ public class Process {
         this.firstStep = firstStep;
     }
 
-    public void setProcessID(int processID) {
-        this.processID = processID;
-    }
-
-    public int getProcessID() {
-        return processID;
-    }
-
     public String getName() {
         return processName;
     }
@@ -44,11 +36,18 @@ public class Process {
         return processSteps;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
     public Step getFirstStep() {
         return firstStep;
+    }
+
+    @Override
+    public void setProcessID(int id) {
+        this.processID = id;
+    }
+
+    @Override
+    public int getID() {
+        return processID;
     }
 }

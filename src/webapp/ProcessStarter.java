@@ -1,12 +1,12 @@
 package webapp;
 
-import appLayer.Process;
-import appLayer.ProcessInstance;
-import appLayer.Step;
-import appLayer.StepInstance;
-import datalayer.tables.ProcessDatabase;
-import datalayer.tables.ProcessInstanceDatabase;
-import datalayer.tables.StepInstanceDatabase;
+import appLayer.processes.Process;
+import appLayer.processes.ProcessInstance;
+import appLayer.steps.Step;
+import appLayer.steps.StepInstance;
+import datalayer.tables.processes.ProcessDatabase;
+import datalayer.tables.processes.ProcessInstanceDatabase;
+import datalayer.tables.steps.StepInstanceDatabase;
 import datalayer.tables.users.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,11 +41,11 @@ public class ProcessStarter extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ProcessInstance processInstance = new ProcessInstance(process.getProcessID());
+        ProcessInstance processInstance = new ProcessInstance(process.getID());
         processInstanceTable.addNewProcessInstanceToDB(processInstance);
         Step firstStep = process.getFirstStep();
         int stepID = firstStep.getStepID();
-        int pInstanceID = processInstance.getProcessInstanceID();
+        int pInstanceID = processInstance.getID();
         String personnelID = postTable.getAvailablePostID();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -53,7 +53,7 @@ public class ProcessStarter extends HttpServlet {
         StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
         stepInstanceTable.addNewStepInstanceToDB(stepInstance);
         processInstance.addStepInstance(stepInstance);
-        processInstanceTable.addSingleStepInstanceToProcessInstance(processInstance); //what?
+        processInstanceTable.addStepInstancesToProcessInstance(processInstance); //what?
         String responseMessage = "فرآیند با موفقیت آغاز شد";
         //send step instance id to android device and name
         JSONObject sendingJSONObject = new JSONObject();
