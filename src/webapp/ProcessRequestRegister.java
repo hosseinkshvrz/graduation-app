@@ -25,32 +25,25 @@ public class ProcessRequestRegister extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
-        JSONObject readingJSONObject = io.getJSONString(request);
+        JSONObject readingJSONObject = io.getJSONObject(request);
 
-        String processName = "";
-        String studentID = "";
         try {
-            processName = readingJSONObject.getString("processName");
-            studentID = readingJSONObject.getString("studentID");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Process process = processTable.getProcess(processName);
-        String responseMessage;
-        boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID());
-        if (notDuplicateRequest) {
-            responseMessage = "درخواست شما با موفقیت در سیستم ثبت شد. تا تایید مسئول مربوط منتظر بمانید";
-        }
-        else {
-            responseMessage = "شما در حال حاضر یک درخواست در سامانه ثبت کرده‌اید";
-        }
-        JSONObject sendingJSONObject = new JSONObject();
-        try {
+            String processName = readingJSONObject.getString("processName");
+            String studentID = readingJSONObject.getString("studentID");
+            Process process = processTable.getProcess(processName);
+            String responseMessage;
+            boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID());
+            if (notDuplicateRequest) {
+                responseMessage = "درخواست شما با موفقیت در سیستم ثبت شد. تا تایید مسئول مربوط منتظر بمانید";
+            }
+            else {
+                responseMessage = "شما در حال حاضر یک درخواست در سامانه ثبت کرده‌اید";
+            }
+            JSONObject sendingJSONObject = new JSONObject();
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 }

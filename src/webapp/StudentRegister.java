@@ -20,22 +20,10 @@ public class StudentRegister extends HttpServlet {
     private final int MAXIMUM_BIRTH_YEAR = 1390;
     StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean hasError = false;
+        InputOutputHandler io = new InputOutputHandler();
+        JSONObject readingJSONObject = io.getJSONObject(request);
         String responseMessage = "";
-        String json = "";
-        Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        while (scanner.hasNextLine()) {
-            json += scanner.nextLine();
-        }
-        System.out.println(json);
-        JSONObject readingJSONObject = new JSONObject();
-        try {
-            readingJSONObject = new JSONObject(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //parameter name should be checked
-        //order of errors should be checked
+        boolean hasError = false;
         try {
             if (readingJSONObject.getString("firstName").isEmpty()) {
                 responseMessage = "empty first name field";
@@ -129,29 +117,21 @@ public class StudentRegister extends HttpServlet {
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]),
                                             readingJSONObject.getString("status"));
 
-
+                boolean userAdded = studentTable.addNewStudentToDB(student);
+                if (userAdded) {
+                    responseMessage = "ثبت نام با موفقیت انجام شد";
+                }
+                else {
+                    responseMessage = "این شماره دانشجویی از قبل در سامانه ثبت شده‌است";
+                }
+                JSONObject sendingJSONObject = new JSONObject();
+                sendingJSONObject.put("responseMessage", responseMessage);
+                io.sendJSONObject(sendingJSONObject, response);
             }
             catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            boolean userAdded = studentTable.addNewStudentToDB(student);
-            if (userAdded) {
-                responseMessage = "ثبت نام با موفقیت انجام شد";
-            }
-            else {
-                responseMessage = "این شماره دانشجویی از قبل در سامانه ثبت شده‌است";
-            }
         }
-        JSONObject sendingJSONObject = new JSONObject();
-        try {
-            sendingJSONObject.put("responseMessage", responseMessage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(sendingJSONObject.toString());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

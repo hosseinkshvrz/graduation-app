@@ -29,7 +29,7 @@ public class AbstractStepDatabase {
         sql += ");";
         System.out.println(sql);
         int stepInstanceID = de.executeAutoIncrementUpdateQuery(sql);
-        step.setStepID(stepInstanceID);
+        step.setID(stepInstanceID);
         de.closeConnection();
     }
 }

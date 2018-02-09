@@ -21,7 +21,7 @@ public class StepInstance implements IStep {
     }
 
     @Override
-    public void setStepID(int id) {
+    public void setID(int id) {
         this.stepInstanceID = id;
     }
 

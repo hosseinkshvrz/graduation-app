@@ -11,27 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 
 @WebServlet(name = "AdminLogin")
 public class AdminLogin extends HttpServlet {
     AdminDatabase adminTable = new AdminDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String json = "";
-        Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        while (scanner.hasNextLine()) {
-            json += scanner.nextLine();
-        }
-        System.out.println(json);
-        JSONObject readingJSONObject = new JSONObject();
-        try {
-            readingJSONObject = new JSONObject(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        InputOutputHandler io = new InputOutputHandler();
+        JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             if (adminTable.isValidAdminLogin(readingJSONObject.getString("id"), readingJSONObject.getString("password"))) {
                 AdminUser admin = adminTable.getUser(readingJSONObject.getString("id"));
@@ -48,9 +36,7 @@ public class AdminLogin extends HttpServlet {
             else {
                 JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "failed");
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(sendingJSONObject.toString());
+                io.sendJSONObject(sendingJSONObject, response);
             }
         }
         catch (SQLException e) {

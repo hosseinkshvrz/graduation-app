@@ -2,6 +2,6 @@ package appLayer.processes;
 
 
 public interface IProcess {
-    void setProcessID(int id);
+    void setID(int id);
     int getID();
 }

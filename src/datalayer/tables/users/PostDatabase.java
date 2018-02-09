@@ -44,8 +44,8 @@ public class PostDatabase extends AbstractUserDatabase {
         return new PostUser(id, firstName, lastName, pass, depID, mail);
     }
 
-    public String getAvailablePostID() {
-        String sql = "SELECT personnelID FROM " + tableName;
+    public String getAvailablePostID(String departmentID) {
+        String sql = "SELECT personnelID FROM " + tableName + " WHERE departmentID = '" + departmentID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

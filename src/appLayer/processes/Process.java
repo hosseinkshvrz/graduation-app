@@ -42,7 +42,7 @@ public class Process implements IProcess {
     }
 
     @Override
-    public void setProcessID(int id) {
+    public void setID(int id) {
         this.processID = id;
     }
 

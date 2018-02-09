@@ -21,18 +21,8 @@ import java.util.Scanner;
 public class StudentLogin extends HttpServlet {
     StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String json = "";
-        Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        while (scanner.hasNextLine()) {
-            json += scanner.nextLine();
-        }
-        System.out.println(json);
-        JSONObject readingJSONObject = new JSONObject();
-        try {
-            readingJSONObject = new JSONObject(json);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        InputOutputHandler io = new InputOutputHandler();
+        JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             if (studentTable.isValidStudentLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
                 StudentUser std = studentTable.getUser(readingJSONObject.getString("studentID"));
@@ -57,16 +47,8 @@ public class StudentLogin extends HttpServlet {
 //                request.getRequestDispatcher("/login.jsp").forward(request, response);
                 JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "student not found");
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(sendingJSONObject.toString());
+                io.sendJSONObject(sendingJSONObject, response);
             }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
         catch (JSONException e) {
             e.printStackTrace();

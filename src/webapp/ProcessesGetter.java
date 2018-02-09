@@ -26,8 +26,7 @@ public class ProcessesGetter extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        JSONArray processesJsonArray = new JSONArray();
-
+        JSONArray sendingJsonArray = new JSONArray();
         ArrayList<Process> allProcesses = processTable.getProcesses();
         for (int i = 0; i < allProcesses.size(); i++) {
             JSONObject processJSONObject = new JSONObject();
@@ -35,27 +34,25 @@ public class ProcessesGetter extends HttpServlet {
             Process process = allProcesses.get(i);
             try {
                 processJSONObject.put("processName", process.getName());
-
                 for (int j = 0; j < process.getProcessSteps().size(); j++) {
-                    JSONObject stepObject = new JSONObject();
+                    JSONObject stepJSONObject = new JSONObject();
                     Step step = process.getProcessSteps().get(j);
-                    stepObject.put("stepName", step.getStepName());
-                    stepObject.put("departmentID", step.getDepartmentID());
+                    stepJSONObject.put("stepName", step.getStepName());
+                    stepJSONObject.put("departmentID", step.getDepartmentID());
                     //Accept Step Name
-                    stepObject.put("afterAcceptStepName", stepTable.getStep(step.getAcceptStepID()).getStepName());
+                    stepJSONObject.put("afterAcceptStepName", stepTable.getStep(step.getAcceptStepID()).getStepName());
                     //Reject Step Name
-                    stepObject.put("afterRejectStepName", stepTable.getStep(step.getRejectStepID()).getStepName());
-                    stepsJSONArray.put(stepObject);
+                    stepJSONObject.put("afterRejectStepName", stepTable.getStep(step.getRejectStepID()).getStepName());
+                    stepsJSONArray.put(stepJSONObject);
                 }
                 processJSONObject.put("steps", stepsJSONArray);
-                processesJsonArray.put(processJSONObject);
+                sendingJsonArray.put(processJSONObject);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(processesJsonArray.toString());
+        InputOutputHandler io = new InputOutputHandler();
+        io.sendJSONArray(sendingJsonArray, response);
     }
 }

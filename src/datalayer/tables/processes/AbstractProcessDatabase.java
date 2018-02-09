@@ -31,7 +31,7 @@ public abstract class AbstractProcessDatabase {
         sql += ");";
         System.out.println(sql);
         int processInstanceID = de.executeAutoIncrementUpdateQuery(sql);
-        proc.setProcessID(processInstanceID);
+        proc.setID(processInstanceID);
         de.closeConnection();
     }
 
@@ -97,7 +97,7 @@ public abstract class AbstractProcessDatabase {
         }
     }
 
-    public static int getNumberOfTableColumns(String tableName) {
+    public int getNumberOfTableColumns(String tableName) {
         String sql = "SELECT count(*)\n" +
                 "FROM information_schema.columns\n" +
                 "WHERE table_name = '" + tableName + "'";

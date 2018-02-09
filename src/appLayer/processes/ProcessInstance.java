@@ -27,7 +27,7 @@ public class ProcessInstance implements IProcess {
     }
 
     @Override
-    public void setProcessID(int id) {
+    public void setID(int id) {
         this.processInstanceID = id;
     }
 

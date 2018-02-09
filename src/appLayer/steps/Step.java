@@ -7,10 +7,10 @@ public class Step implements IStep {
     private int acceptStepID;
     private int rejectStepID;
     private int processID;
-    private int departmentID;
+    private String departmentID;
     private boolean isFirstStep;
 
-    public Step(String stepName, int acceptStepID, int rejectStepID, int processID, int departmentID, boolean isFirstStep) {
+    public Step(String stepName, int acceptStepID, int rejectStepID, int processID, String departmentID, boolean isFirstStep) {
         this.stepName = stepName;
         this.acceptStepID = acceptStepID;
         this.rejectStepID = rejectStepID;
@@ -20,7 +20,7 @@ public class Step implements IStep {
     }
 
     @Override
-    public void setStepID(int id) {
+    public void setID(int id) {
         this.stepID = stepID;
     }
 
@@ -40,7 +40,7 @@ public class Step implements IStep {
         return processID;
     }
 
-    public int getDepartmentID() {
+    public String getDepartmentID() {
         return departmentID;
     }
 

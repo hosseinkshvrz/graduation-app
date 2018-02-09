@@ -40,6 +40,22 @@ public class ProcessDatabase extends AbstractProcessDatabase {
         return process;
     }
 
+    public String getProcessName (int processID) {
+        String sql = "SELECT name FROM " + tableName + " WHERE processID = " + processID;
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        String processName = "";
+        try {
+            rs.next();
+            processName = rs.getString("name");
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return processName;
+    }
+
     public ArrayList<Process> getProcesses() {
         DatabaseExecutor de = new DatabaseExecutor();
         ArrayList<String> processNames = new ArrayList<>();

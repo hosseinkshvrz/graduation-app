@@ -10,16 +10,16 @@ import java.util.ArrayList;
 public class StudentDatabase extends AbstractUserDatabase {
     private final String tableName = "students";
 
-    public boolean isValidStudentLogin(String studentID, String password) throws ClassNotFoundException, SQLException {
+    public boolean isValidStudentLogin(String studentID, String password) {
         String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
         }
-        catch (ClassNotFoundException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
-        catch (SQLException e) {
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return false;
@@ -96,5 +96,14 @@ public class StudentDatabase extends AbstractUserDatabase {
         rs.close();
         de.closeConnection();
         return students;
+    }
+
+    public void changeCurrentState(String studentID, int pInstanceID, int stepInstanceID) {
+        String sql = "UPDATE " + tableName + " SET pInstanceID = " + pInstanceID
+                    + ", csInstanceID = " + stepInstanceID + " WHERE studentID = '" + studentID +"';";
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        de.executeUpdateQuery(sql);
+        de.closeConnection();
     }
 }

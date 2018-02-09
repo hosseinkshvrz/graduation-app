@@ -95,4 +95,34 @@
         <url-pattern>/finish-step</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>studentRequestsGetter</servlet-name>
+        <servlet-class>webapp.StudentRequestsGetter</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentRequestsGetter</servlet-name>
+        <url-pattern>/student-requests</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>transactionsGetter</servlet-name>
+        <servlet-class>webapp.TransactionsGetter</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>transactionsGetter</servlet-name>
+        <url-pattern>/transactions</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>payment</servlet-name>
+        <servlet-class>webapp.Payment</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>payment</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+
 </web-app>

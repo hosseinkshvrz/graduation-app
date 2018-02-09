@@ -23,15 +23,9 @@ public class ProcessCreator extends HttpServlet {
     private ProcessDatabase processTable = new ProcessDatabase();
     private StepDatabase stepTable = new StepDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String json = "";
-        Scanner scanner = new Scanner(new InputStreamReader(request.getInputStream(), "UTF-8"));
-        while (scanner.hasNextLine()) {
-            json += scanner.nextLine();
-        }
-        System.out.println(json);
-        JSONArray readingJSONArray;
+        InputOutputHandler io = new InputOutputHandler();
+        JSONArray readingJSONArray = io.getJSONArray(request);
         try {
-            readingJSONArray = new JSONArray(json);
             Process process;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");
             process = new Process(processName);
@@ -40,7 +34,8 @@ public class ProcessCreator extends HttpServlet {
                 String stepName = readingJSONArray.getJSONObject(i).getString("stepName");
                 int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
                 int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
-                int departmentID = readingJSONArray.getJSONObject(i).getInt("departmentID");
+                String departmentID = readingJSONArray.getJSONObject(i).getString("departmentID");
+                //isFirstStep must be sent as boolean
                 boolean isFirstStep = readingJSONArray.getJSONObject(i).getBoolean("isFirstStep");
                 Step step = new Step(stepName, acceptStepID, rejectStepID, process.getID(), departmentID, isFirstStep);
                 stepTable.addNewStepToDB(step);
@@ -49,22 +44,16 @@ public class ProcessCreator extends HttpServlet {
                     process.setFirstStep(step);
                 }
             }
+            //handle graph **IMPORTANT**
             processTable.addStepsToProcess(process);
+            String responseMessage = "success";
+            JSONObject sendingJSONObject = new JSONObject();
+            sendingJSONObject.put("responseMessage", responseMessage);
+            io.sendJSONObject(sendingJSONObject, response);
         }
         catch (JSONException e) {
                 e.printStackTrace();
         }
-        String responseMessage = "success";
-        //handle graph
-        JSONObject sendingJSONObject = new JSONObject();
-        try {
-            sendingJSONObject.put("responseMessage", responseMessage);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(sendingJSONObject.toString());
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -22,7 +22,7 @@ public class StepDatabase extends AbstractStepDatabase{
             int acceptStepID = rs.getInt("stepIDaccept");
             int rejectStepID = rs.getInt("stepIDreject");
             int processID = rs.getInt("processID");
-            int departmentID = rs.getInt("departmentID");
+            String departmentID = rs.getString("departmentID");
             int isFirstStep = rs.getInt("isFirstStep");
             step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID, (isFirstStep == 1));
             rs.close();
@@ -43,9 +43,18 @@ public class StepDatabase extends AbstractStepDatabase{
         parameters.put("stepIDaccept", String.valueOf(step.getAcceptStepID()));
         parameters.put("stepIDreject", String.valueOf(step.getRejectStepID()));
         parameters.put("processID", String.valueOf(step.getProcessID()));
-        parameters.put("departmentID", String.valueOf(step.getDepartmentID()));
+        parameters.put("departmentID", step.getDepartmentID());
         parameters.put("firstStep", String.valueOf(firstStep));
         super.addStepToDB(step, tableName, parameters);
     }
 
+//    public Step getAcceptStep(int currentStepID) {
+//        String sql = "SELECT stepIDaccept FROM " + tableName + " WHERE stepID = " + currentStepID;
+//        DatabaseExecutor de = new DatabaseExecutor();
+//        ResultSet rs = de.executeGetQuery(sql);
+//    }
+//
+//    public Step getRejectStep(int currentStepID) {
+//        return null;
+//    }
 }
