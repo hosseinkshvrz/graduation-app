@@ -1,8 +1,8 @@
 package webapp;
 
-import appLayer.PostRequest;
+import appLayer.Debt;
 import appLayer.users.StudentUser;
-import datalayer.tables.PostRequestsDatabase;
+import datalayer.tables.DebtDatabase;
 import datalayer.tables.users.StudentDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-@WebServlet(name = "SubmitPostRequest")
-public class SubmitPostRequest extends HttpServlet {
-    private PostRequestsDatabase postRequestsTable = new PostRequestsDatabase();
+@WebServlet(name = "SubmitDebt")
+public class SubmitDebt extends HttpServlet {
+    private DebtDatabase debtTable = new DebtDatabase();
     private StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
@@ -25,14 +24,14 @@ public class SubmitPostRequest extends HttpServlet {
         try {
             String personnelID = readingJSONObject.getString("personnelID");
             String studentID = readingJSONObject.getString("studentID");
-            String question = readingJSONObject.getString("question");
+            int amount = readingJSONObject.getInt("amount");
             StudentUser student = studentTable.getUser(studentID);
             int stepInstanceID = student.getCurrentStepInstanceID();
-            String time = Date.getCurrentTimeAndDate();
-            PostRequest postRequest = new PostRequest(question, personnelID, stepInstanceID, studentID, time);
-            postRequestsTable.addNewRequest(postRequest);
+            String status = "wait";
+            Debt debt = new Debt(studentID, amount, personnelID, stepInstanceID, status);
+            debtTable.addNewDebt(debt);
             JSONObject sendingJSONObject = new JSONObject();
-            String responseMessage = "پرسش شما با موفقیت برای دانشجو ثبت شد. تا دریافت پاسخ دانشجو منتظر بمانید";
+            String responseMessage = "مبلغ موردنظر در پرونده دانشجو ثبت شد. تا دریافت مبلغ از سوی دانشجو منتظر بمانید";
             sendingJSONObject.put("responseMessage", responseMessage);
         } catch (JSONException e) {
             e.printStackTrace();

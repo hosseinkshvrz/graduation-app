@@ -1,8 +1,8 @@
 package webapp;
 
-import appLayer.PostRequest;
+import appLayer.Debt;
 import appLayer.users.PostUser;
-import datalayer.tables.PostRequestsDatabase;
+import datalayer.tables.DebtDatabase;
 import datalayer.tables.users.PostDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,9 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "StudentInProgress")
-public class StudentInProgress extends HttpServlet {
-    private PostRequestsDatabase postRequestTable = new PostRequestsDatabase();
+
+@WebServlet(name = "StudentDebts")
+public class StudentDebts extends HttpServlet {
+    private DebtDatabase debtTable = new DebtDatabase();
     private PostDatabase postTable = new PostDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -29,16 +30,15 @@ public class StudentInProgress extends HttpServlet {
         JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             String studentID = readingJSONObject.getString("studentID");
-            ArrayList<PostRequest> allRequests = postRequestTable.getAllStudentRequests(studentID);
+            ArrayList<Debt> allDebts = debtTable.getAllStudentDebts(studentID);
             JSONArray sendingJSONArray = new JSONArray();
-            for (PostRequest pr :
-                    allRequests) {
+            for (Debt d :
+                    allDebts) {
                 JSONObject sendingJSONObject = new JSONObject();
-                PostUser post = postTable.getUser(pr.getPersonnelID());
-                sendingJSONObject.put("question", pr.getQuestion());
+                PostUser post = postTable.getUser(d.getPersonnelID());
+                sendingJSONObject.put("debt", d.getAmount());
                 sendingJSONObject.put("departmentID", post.getDepartmentID());
-                sendingJSONObject.put("time", pr.getQuestionTime());
-                sendingJSONObject.put("requestID", pr.getRequestID());
+                sendingJSONObject.put("debtID", d.getDebtID());
                 sendingJSONArray.put(sendingJSONObject);
             }
 

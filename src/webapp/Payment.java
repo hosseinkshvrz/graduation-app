@@ -1,7 +1,10 @@
 package webapp;
 
+import appLayer.Debt;
 import appLayer.Transaction;
+import datalayer.tables.DebtDatabase;
 import datalayer.tables.TransactionsDatabase;
+import datalayer.tables.users.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,17 +19,22 @@ import java.io.IOException;
 @WebServlet(name = "Payment")
 public class Payment extends HttpServlet {
     private TransactionsDatabase transactionsTable = new TransactionsDatabase();
+    private DebtDatabase debtTable = new DebtDatabase();
+    private PostDatabase postTable = new PostDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
         try {
-            String studentID = readingJSONObject.getString("studentID");
-            String departmentID = readingJSONObject.getString("departmentID");
-            int stepInstanceID = readingJSONObject.getInt("stepInstanceID");
-            int amount = readingJSONObject.getInt("amount");
+            int debtID = readingJSONObject.getInt("debtID");
+            debtTable.changeStatus(debtID);
+            Debt debt = debtTable.getDebt(debtID);
+            String studentID = debt.getStudentID();
+            String departmentID = postTable.getUser(debt.getPersonnelID()).getDepartmentID();
+            int stepInstanceID = debt.getStepInstanceID();
+            int amount = debt.getAmount();
             Transaction transaction = new Transaction(studentID, departmentID, stepInstanceID, amount);
             transactionsTable.addNewTransaction(transaction);
-            String responseMessage = "success";
+            String responseMessage = "پرداخت شما با موفقیت صورت گرفت. تا بررسی مجدد پرونده شما توسط اداره مربوط منتظر بمانید";
             JSONObject sendingJSONObject = new JSONObject();
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);

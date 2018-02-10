@@ -8,13 +8,11 @@
   <component name="ChangeListManager">
     <list default="true" id="00bf6384-af2f-42e4-bae7-a9a9ec3549ea" name="Default" comment="create login page">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/StepDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/StepDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/PostStepStatus.java" afterPath="$PROJECT_DIR$/src/webapp/PostStepStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentAnswer.java" afterPath="$PROJECT_DIR$/src/webapp/StudentAnswer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentLogin.java" afterPath="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentRegister.java" afterPath="$PROJECT_DIR$/src/webapp/StudentRegister.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/Payment.java" afterPath="$PROJECT_DIR$/src/webapp/Payment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/SubmitPostRequest.java" afterPath="$PROJECT_DIR$/src/webapp/SubmitPostRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/webapp/StudentAnswer.java" afterPath="$PROJECT_DIR$/src/webapp/SubmitStudentAnswer.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/webapp/StudentInProgress.java" afterPath="$PROJECT_DIR$/src/webapp/StudentQuestions.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,31 +28,45 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StudentDatabase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java">
+      <file leaf-file-name="Payment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/webapp/Payment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="78" column="44" lean-forward="true" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
+            <state relative-caret-position="345">
+              <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SubmitStudentAnswer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/webapp/SubmitStudentAnswer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebtDatabase.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="659">
+              <caret line="64" column="88" lean-forward="false" selection-start-line="64" selection-start-column="88" selection-end-line="64" selection-end-column="88" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StudentLogin.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webapp/StudentLogin.java">
+      <file leaf-file-name="PostRequestsDatabase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StudentsList.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/webapp/StudentsList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+            <state relative-caret-position="195">
+              <caret line="66" column="8" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="70" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,12 +121,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/datalayer/tables/StepInstanceDatabase.java" />
-        <option value="$PROJECT_DIR$/src/datalayer/tables/ProcessDatabase.java" />
-        <option value="$PROJECT_DIR$/src/datalayer/tables/ProcessInstanceDatabase.java" />
-        <option value="$PROJECT_DIR$/src/appLayer/processes/AbstractProcess.java" />
-        <option value="$PROJECT_DIR$/src/datalayer/TablesInformation.java" />
-        <option value="$PROJECT_DIR$/src/appLayer/processes/Process.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/steps/AbstractStepDatabase.java" />
         <option value="$PROJECT_DIR$/src/appLayer/steps/IStep.java" />
         <option value="$PROJECT_DIR$/src/appLayer/processes/IProcess.java" />
@@ -130,7 +136,6 @@
         <option value="$PROJECT_DIR$/src/appLayer/steps/StepInstance.java" />
         <option value="$PROJECT_DIR$/src/appLayer/steps/Step.java" />
         <option value="$PROJECT_DIR$/src/appLayer/Transaction.java" />
-        <option value="$PROJECT_DIR$/src/webapp/Payment.java" />
         <option value="$PROJECT_DIR$/src/webapp/TransactionsGetter.java" />
         <option value="$PROJECT_DIR$/src/appLayer/Node.java" />
         <option value="$PROJECT_DIR$/src/webapp/ProcessCreator.java" />
@@ -145,13 +150,11 @@
         <option value="$PROJECT_DIR$/src/appLayer/users/StudentUser.java" />
         <option value="$PROJECT_DIR$/src/webapp/PostFirstPage.java" />
         <option value="$PROJECT_DIR$/src/appLayer/PostRequest.java" />
-        <option value="$PROJECT_DIR$/src/webapp/SubmitPostRequest.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/ProcessRequestsDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentInProgress.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/webapp/StudentRegister.java" />
         <option value="$PROJECT_DIR$/src/webapp/PostStepStatus.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/steps/StepDatabase.java" />
@@ -160,6 +163,15 @@
         <option value="$PROJECT_DIR$/src/webapp/StudentAnswer.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentsList.java" />
+        <option value="$PROJECT_DIR$/src/webapp/SubmitPostRequest.java" />
+        <option value="$PROJECT_DIR$/src/appLayer/Debt.java" />
+        <option value="$PROJECT_DIR$/src/webapp/SubmitDebt.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/datalayer/DebtDatabase.java" />
+        <option value="$PROJECT_DIR$/src/webapp/StudentDebts.java" />
+        <option value="$PROJECT_DIR$/src/webapp/SubmitStudentAnswer.java" />
+        <option value="$PROJECT_DIR$/src/webapp/Payment.java" />
+        <option value="$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java" />
       </list>
     </option>
   </component>
@@ -339,6 +351,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="datalayer" />
       <recent name="appLayer" />
     </key>
   </component>
@@ -857,7 +870,7 @@
       <workItem from="1518082353172" duration="5821000" />
       <workItem from="1518117009630" duration="4325000" />
       <workItem from="1518162287073" duration="23314000" />
-      <workItem from="1518253612599" duration="19562000" />
+      <workItem from="1518253612599" duration="24939000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1516880845474</created>
@@ -884,7 +897,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216967000" />
+    <option name="totallyTimeSpent" value="222344000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -921,9 +934,9 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4372919" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32519424" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23101604" sideWeight="0.65460527" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23101604" sideWeight="0.34539473" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32519424" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23101604" sideWeight="0.6581576" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23101604" sideWeight="0.34184238" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -959,34 +972,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/datalayer/DatabaseExecutor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/welcome.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="14" column="14" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/datalayer/tables/users/AdminDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="15" lean-forward="false" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/appLayer/users/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/appLayer/processes/AbstractProcess.java" />
     <entry file="file://$PROJECT_DIR$/src/datalayer/TablesInformation.java" />
     <entry file="file://$PROJECT_DIR$/src/appLayer/processes/Process.java">
@@ -1079,14 +1064,6 @@
             <element signature="e#473#474#0" expanded="false" />
             <element signature="e#501#502#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webapp/Payment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="31" column="59" lean-forward="true" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1220,22 +1197,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="172" column="21" lean-forward="true" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webapp/SubmitPostRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="20" column="65" lean-forward="true" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/ProcessRequestRegister.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-23">
@@ -1304,38 +1265,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="84" column="26" lean-forward="false" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/PostStepStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webapp/StudentInProgress.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="36" column="15" lean-forward="true" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/webapp/StudentAnswer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1366,11 +1299,99 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/StudentsList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="57" column="51" lean-forward="false" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
+        <state relative-caret-position="227">
+          <caret line="54" column="32" lean-forward="true" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/SubmitPostRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="32" column="36" lean-forward="true" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/appLayer/Debt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="11" column="84" lean-forward="false" selection-start-line="11" selection-start-column="70" selection-end-line="11" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/SubmitDebt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="15" lean-forward="false" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/StudentQuestions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="46" column="9" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="46" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="204" column="35" lean-forward="false" selection-start-line="204" selection-start-column="35" selection-end-line="204" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/StudentDebts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/SubmitStudentAnswer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="26" column="57" lean-forward="false" selection-start-line="26" selection-start-column="57" selection-end-line="26" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/Payment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="66" column="8" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="70" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="64" column="88" lean-forward="false" selection-start-line="64" selection-start-column="88" selection-end-line="64" selection-end-column="88" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -156,18 +156,18 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>studentInProgress</servlet-name>
-        <servlet-class>webapp.StudentInProgress</servlet-class>
+        <servlet-name>studentQuestions</servlet-name>
+        <servlet-class>webapp.StudentQuestions</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>studentInProgress</servlet-name>
-        <url-pattern>/student-step</url-pattern>
+        <servlet-name>studentQuestions</servlet-name>
+        <url-pattern>/student-question</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>studentAnswer</servlet-name>
-        <servlet-class>webapp.StudentAnswer</servlet-class>
+        <servlet-class>webapp.SubmitStudentAnswer</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -183,6 +183,26 @@
     <servlet-mapping>
         <servlet-name>postStepStatus</servlet-name>
         <url-pattern>/step-status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>submitDebt</servlet-name>
+        <servlet-class>webapp.SubmitDebt</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>submitDebt</servlet-name>
+        <url-pattern>/add-debt</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentDebts</servlet-name>
+        <servlet-class>webapp.StudentDebts</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentDebts</servlet-name>
+        <url-pattern>/student-debts</url-pattern>
     </servlet-mapping>
 
 </web-app>
