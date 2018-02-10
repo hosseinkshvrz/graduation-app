@@ -7,20 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00bf6384-af2f-42e4-bae7-a9a9ec3549ea" name="Default" comment="create login page">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/appLayer/users/StudentUser.java" afterPath="$PROJECT_DIR$/src/appLayer/users/StudentUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/ProcessRequestsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/ProcessRequestsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/ProcessCreator.java" afterPath="$PROJECT_DIR$/src/webapp/ProcessCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/ProcessRequestRegister.java" afterPath="$PROJECT_DIR$/src/webapp/ProcessRequestRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StepFinisher.java" afterPath="$PROJECT_DIR$/src/webapp/StepFinisher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentRequestsGetter.java" afterPath="$PROJECT_DIR$/src/webapp/StudentRequestsGetter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/webapp/ProcessStarter.java" afterPath="$PROJECT_DIR$/src/webapp/RequestDecision.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,14 +34,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostFirstPage.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostFirstPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webapp/PostFirstPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="35" column="30" lean-forward="false" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="30" />
+            <state relative-caret-position="404">
+              <caret line="42" column="38" lean-forward="false" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostStepStatus.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/webapp/PostStepStatus.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="172" column="21" lean-forward="true" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,7 +113,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/appLayer/Step.java" />
         <option value="$PROJECT_DIR$/src/appLayer/StepInstance.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/StepInstanceDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/ProcessDatabase.java" />
@@ -153,9 +160,10 @@
         <option value="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentInProgress.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentAnswer.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/webapp/PostStepStatus.java" />
       </list>
     </option>
   </component>
@@ -853,7 +861,7 @@
       <workItem from="1518082353172" duration="5821000" />
       <workItem from="1518117009630" duration="4325000" />
       <workItem from="1518162287073" duration="23314000" />
-      <workItem from="1518253612599" duration="14553000" />
+      <workItem from="1518253612599" duration="15195000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1516880845474</created>
@@ -880,7 +888,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211958000" />
+    <option name="totallyTimeSpent" value="212600000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -969,13 +977,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/src.zip!/java/sql/ResultSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="299" column="8" lean-forward="false" selection-start-line="299" selection-start-column="8" selection-end-line="299" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/datalayer/DatabaseConnector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-366">
@@ -1314,14 +1315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="174" column="36" lean-forward="false" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1376,11 +1369,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/PostFirstPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="35" column="30" lean-forward="false" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="30" />
+        <state relative-caret-position="404">
+          <caret line="42" column="38" lean-forward="false" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="172" column="21" lean-forward="true" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/PostStepStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

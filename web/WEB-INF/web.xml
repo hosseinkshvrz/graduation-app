@@ -175,4 +175,14 @@
         <url-pattern>/student-answer</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>postStepStatus</servlet-name>
+        <servlet-class>webapp.PostStepStatus</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postStepStatus</servlet-name>
+        <url-pattern>/step-status</url-pattern>
+    </servlet-mapping>
+
 </web-app>
