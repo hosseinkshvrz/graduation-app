@@ -16,7 +16,7 @@ public class TransactionsDatabase {
         String departmentID = transaction.getDepartmentID();
         int stepInstanceID = transaction.getStepInstanceID();
         int amount = transaction.getAmount();
-        String sql = "INSERT " + tableName + " (studentID, departmentID, stepInstanceID, amount) VALUES ('"
+        String sql = "INSERT INTO " + tableName + " (studentID, departmentID, stepInstanceID, amount) VALUES ('"
                 + studentID + "', '" + departmentID + "', " + stepInstanceID + ", " + amount + ")";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();

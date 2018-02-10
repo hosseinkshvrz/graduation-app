@@ -38,11 +38,14 @@ public class StudentDatabase extends AbstractUserDatabase {
             String lastName = rs.getString("lastname");
             String pass = rs.getString("password");
             String mail = rs.getString("email");
-            String status = rs.getString("status");
+            int processInstanceID = rs.getInt("pInstanceID");
+            int stepInstanceID = rs.getInt("csInstanceID");
             int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
             int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
             int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
-            student = new StudentUser(id, firstName, lastName, pass, mail, day, month, year, status);
+            student = new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
+            student.setStartedProcessInstanceID(processInstanceID);
+            student.setCurrentStepInstanceID(stepInstanceID);
             rs.close();
             de.closeConnection();
         } catch (SQLException e) {
@@ -62,7 +65,7 @@ public class StudentDatabase extends AbstractUserDatabase {
         int month = student.getMonthOfBirth();
         int year = student.getYearOfBirth();
 
-        String sql = "INSERT " + tableName + " (studentID, firstname, lastname, password, email, birthday) VALUES ('"
+        String sql = "INSERT INTO " + tableName + " (studentID, firstname, lastname, password, email, birthday) VALUES ('"
                 + studentID + "', '" + firstName + "', '" + lastName + "', '" + password + "', '" + email + "', '"
                 + year + "-" + month + "-" + day + "')";
         System.out.println(sql);
@@ -81,17 +84,7 @@ public class StudentDatabase extends AbstractUserDatabase {
         ArrayList<StudentUser> students = new ArrayList<>();
         while(rs.next())
         {
-            String studentID = rs.getString("studentID");
-            String firstName = rs.getString("firstname");
-            String lastName = rs.getString("lastname");
-            String password = rs.getString("password");
-            String email = rs.getString("email");
-            String status = rs.getString("status");
-            int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
-            int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
-            int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
-            StudentUser s = new StudentUser(studentID, firstName, lastName, password, email, day, month, year, status);
-            students.add(s);
+            students.add(getUser(rs.getString("studentID")));
         }
         rs.close();
         de.closeConnection();
@@ -105,5 +98,20 @@ public class StudentDatabase extends AbstractUserDatabase {
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);
         de.closeConnection();
+    }
+
+    public StudentUser getStudentInStepInstance(int stepInstanceID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE csInstanceID = " + stepInstanceID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        StudentUser student = null;
+        try {
+            rs.next();
+            student = getUser(rs.getString("studentID"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return student;
     }
 }

@@ -1,5 +1,6 @@
 package webapp;
 
+import appLayer.ProcessRequest;
 import datalayer.tables.ProcessRequestsDatabase;
 import datalayer.tables.processes.ProcessDatabase;
 import org.json.JSONArray;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
 @WebServlet(name = "StudentRequestsGetter")
@@ -26,15 +27,15 @@ public class StudentRequestsGetter extends HttpServlet {
     //after decision admin make android send request to url processStarter
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONArray sendingJsonArray = new JSONArray();
-        HashMap<String, Integer> allRequests = requestsTable.getRequests();
-        for (String key :
-                allRequests.keySet()) {
+        ArrayList<ProcessRequest> allRequests = requestsTable.getRequests();
+        for (int i = 0; i < allRequests.size(); i++) {
             JSONObject requestJSONObject = new JSONObject();
-            int processID = allRequests.get(key);
+            int processID = allRequests.get(i).getProcessID();
             String processName = processTable.getProcessName(processID);
+            String studentID = allRequests.get(i).getStudentID();
             try {
                 requestJSONObject.put("processName", processName);
-                requestJSONObject.put("studentID", key);
+                requestJSONObject.put("studentID", studentID);
                 sendingJsonArray.put(requestJSONObject);
             } catch (JSONException e) {
                 e.printStackTrace();

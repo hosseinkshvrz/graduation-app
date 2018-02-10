@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 @WebServlet(name = "StepFinisher")
@@ -32,9 +30,7 @@ public class StepFinisher extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String endTime = dtf.format(now);
+        String endTime = Date.getCurrentTimeAndDate();
         //json must consists studentID, stepInstanceID,
         try {
             String studentID = readingJSONObject.getString("studentID");
@@ -55,8 +51,7 @@ public class StepFinisher extends HttpServlet {
             nextStep = stepTable.getStep(nextStepID);
             String personnelID = postTable.getAvailablePostID(nextStep.getDepartmentID());
 
-            now = LocalDateTime.now();
-            String startTime = dtf.format(now);
+            String startTime = Date.getCurrentTimeAndDate();
 
             StepInstance stepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime);
             stepInstanceTable.addNewStepInstanceToDB(stepInstance);

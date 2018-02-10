@@ -1,11 +1,13 @@
 package datalayer.tables.steps;
 
 
+import appLayer.steps.Step;
 import appLayer.steps.StepInstance;
 import datalayer.DatabaseExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StepInstanceDatabase extends AbstractStepDatabase {
@@ -78,5 +80,28 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);
         de.closeConnection();
+    }
+
+    public ArrayList<StepInstance> getPostRelatedStepInstances(String personnelID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = " + personnelID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        ArrayList<StepInstance> postStepInstances = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int stepInstanceID = rs.getInt("sInstanceID");
+                int stepID = rs.getInt("stepID");
+                int pInstanceID = rs.getInt("pInstanceID");
+                String start = rs.getString("start");
+                StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, start);
+                stepInstance.setID(stepInstanceID);
+                postStepInstances.add(stepInstance);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return postStepInstances;
     }
 }

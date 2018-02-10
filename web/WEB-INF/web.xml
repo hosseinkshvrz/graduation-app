@@ -76,13 +76,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>processStarter</servlet-name>
-        <servlet-class>webapp.ProcessStarter</servlet-class>
+        <servlet-name>requestDecision</servlet-name>
+        <servlet-class>webapp.RequestDecision</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>processStarter</servlet-name>
-        <url-pattern>/start</url-pattern>
+        <servlet-name>requestDecision</servlet-name>
+        <url-pattern>/decision</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -123,6 +123,56 @@
     <servlet-mapping>
         <servlet-name>payment</servlet-name>
         <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentFirstPage</servlet-name>
+        <servlet-class>webapp.StudentFirstPage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentFirstPage</servlet-name>
+        <url-pattern>/student-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postFirstPage</servlet-name>
+        <servlet-class>webapp.PostFirstPage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postFirstPage</servlet-name>
+        <url-pattern>/post-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postRequest</servlet-name>
+        <servlet-class>webapp.SubmitPostRequest</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postRequest</servlet-name>
+        <url-pattern>/post-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentInProgress</servlet-name>
+        <servlet-class>webapp.StudentInProgress</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentInProgress</servlet-name>
+        <url-pattern>/student-step</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentAnswer</servlet-name>
+        <servlet-class>webapp.StudentAnswer</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentAnswer</servlet-name>
+        <url-pattern>/student-answer</url-pattern>
     </servlet-mapping>
 
 </web-app>

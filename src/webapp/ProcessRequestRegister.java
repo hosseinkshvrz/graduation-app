@@ -32,12 +32,12 @@ public class ProcessRequestRegister extends HttpServlet {
             String studentID = readingJSONObject.getString("studentID");
             Process process = processTable.getProcess(processName);
             String responseMessage;
-            boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID());
+            boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID(), "stall");
             if (notDuplicateRequest) {
                 responseMessage = "درخواست شما با موفقیت در سیستم ثبت شد. تا تایید مسئول مربوط منتظر بمانید";
             }
             else {
-                responseMessage = "شما در حال حاضر یک درخواست در سامانه ثبت کرده‌اید";
+                responseMessage = "شما در حال حاضر یک درخواست برای این فرآیند در سامانه ثبت کرده‌اید";
             }
             JSONObject sendingJSONObject = new JSONObject();
             sendingJSONObject.put("responseMessage", responseMessage);

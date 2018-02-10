@@ -1,5 +1,6 @@
 package webapp;
 
+import appLayer.Node;
 import appLayer.processes.Process;
 import appLayer.steps.Step;
 import datalayer.tables.processes.ProcessDatabase;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -26,6 +28,12 @@ public class ProcessCreator extends HttpServlet {
         InputOutputHandler io = new InputOutputHandler();
         JSONArray readingJSONArray = io.getJSONArray(request);
         try {
+            //TODO get firstStepID and add to graph array list. then check the cycle of accept steps
+            ArrayList<Node> graph = new ArrayList<>();
+            for (int i = 1; i < readingJSONArray.length(); i++) {
+                int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
+            }
+
             Process process;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");
             process = new Process(processName);
@@ -35,7 +43,7 @@ public class ProcessCreator extends HttpServlet {
                 int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
                 int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
                 String departmentID = readingJSONArray.getJSONObject(i).getString("departmentID");
-                //isFirstStep must be sent as boolean
+                //isFirstStep must be sent as true or false
                 boolean isFirstStep = readingJSONArray.getJSONObject(i).getBoolean("isFirstStep");
                 Step step = new Step(stepName, acceptStepID, rejectStepID, process.getID(), departmentID, isFirstStep);
                 stepTable.addNewStepToDB(step);
@@ -44,7 +52,6 @@ public class ProcessCreator extends HttpServlet {
                     process.setFirstStep(step);
                 }
             }
-            //handle graph **IMPORTANT**
             processTable.addStepsToProcess(process);
             String responseMessage = "success";
             JSONObject sendingJSONObject = new JSONObject();

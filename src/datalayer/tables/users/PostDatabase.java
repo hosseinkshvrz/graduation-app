@@ -23,25 +23,28 @@ public class PostDatabase extends AbstractUserDatabase {
         return false;
     }
 
-    public PostUser getUser(String userID) throws SQLException {
+    public PostUser getUser(String userID) {
         String sql = "SELECT * FROM " + tableName + " WHERE personnelID = \"" + userID + "\"";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
+        PostUser post = null;
         try {
             rs.next();
+            String id = rs.getString("personnelID");
+            String firstName = rs.getString("firstname");
+            String lastName = rs.getString("lastname");
+            String pass = rs.getString("password");
+            String depID = rs.getString("departmentID");
+            String mail = rs.getString("email");
+            post = new PostUser(id, firstName, lastName, pass, depID, mail);
+            rs.close();
+            de.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String id = rs.getString("personnelID");
-        String firstName = rs.getString("firstname");
-        String lastName = rs.getString("lastname");
-        String pass = rs.getString("password");
-        String depID = rs.getString("departmentID");
-        String mail = rs.getString("email");
-        rs.close();
-        de.closeConnection();
-        return new PostUser(id, firstName, lastName, pass, depID, mail);
+
+        return post;
     }
 
     public String getAvailablePostID(String departmentID) {
