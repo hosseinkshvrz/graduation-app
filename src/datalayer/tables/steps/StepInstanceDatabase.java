@@ -66,6 +66,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             String startTime = rs.getString("start");
             stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
             stepInstance.setID(stepInstanceID);
+            stepInstance.setEnd(rs.getString("end"));
             rs.close();
             de.closeConnection();
         } catch (SQLException e) {
@@ -103,5 +104,27 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             e.printStackTrace();
         }
         return postStepInstances;
+    }
+
+    public StepInstance getStepInstance(int stepID, String personnelID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE stepID = '" + stepID + "' AND personnelID = " + personnelID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        StepInstance stepInstance = null;
+        try {
+            rs.next();
+            int stepInstanceID = rs.getInt("sInstanceID");
+            int pInstanceID = rs.getInt("pInstanceID");
+            String startTime = rs.getString("start");
+            stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
+            stepInstance.setID(stepInstanceID);
+            stepInstance.setEnd(rs.getString("end"));
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stepInstance;
     }
 }

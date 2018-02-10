@@ -70,4 +70,26 @@ public class PostRequestsDatabase {
         de.executeUpdateQuery(sql);
         de.closeConnection();
     }
+
+    public PostRequest getPostRequest(String personnelID, String studentID, int stepInstanceID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = " + personnelID
+                + " AND studentID = " + studentID + " stepInstanceID = " + stepInstanceID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        PostRequest postRequest = null;
+        try {
+            rs.next();
+            String question = rs.getString("question");
+            int requestID = rs.getInt("id");
+            String response = rs.getString("response");
+            String questionTime = rs.getString("questionTime");
+            postRequest = new PostRequest(question, personnelID, stepInstanceID, studentID, questionTime);
+            postRequest.setRequestID(requestID);
+            postRequest.setResponse(response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return postRequest;
+    }
 }

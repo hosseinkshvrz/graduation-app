@@ -25,6 +25,7 @@ public class StepDatabase extends AbstractStepDatabase{
             String departmentID = rs.getString("departmentID");
             int isFirstStep = rs.getInt("isFirstStep");
             step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID, (isFirstStep == 1));
+            step.setID(stepID);
             rs.close();
             de.closeConnection();
         } catch (SQLException e) {
@@ -48,13 +49,27 @@ public class StepDatabase extends AbstractStepDatabase{
         super.addStepToDB(step, tableName, parameters);
     }
 
-//    public Step getAcceptStep(int currentStepID) {
-//        String sql = "SELECT stepIDaccept FROM " + tableName + " WHERE stepID = " + currentStepID;
-//        DatabaseExecutor de = new DatabaseExecutor();
-//        ResultSet rs = de.executeGetQuery(sql);
-//    }
-//
-//    public Step getRejectStep(int currentStepID) {
-//        return null;
-//    }
+    public Step getStep(String stepName) {
+        String sql = "SELECT * FROM " + tableName + " WHERE stepName = \"" + stepName + "\"";
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        Step step = null;
+        try {
+            rs.next();
+            int stepID = rs.getInt("stepID");
+            int acceptStepID = rs.getInt("stepIDaccept");
+            int rejectStepID = rs.getInt("stepIDreject");
+            int processID = rs.getInt("processID");
+            String departmentID = rs.getString("departmentID");
+            int isFirstStep = rs.getInt("isFirstStep");
+            step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID, (isFirstStep == 1));
+            step.setID(stepID);
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return step;
+    }
 }

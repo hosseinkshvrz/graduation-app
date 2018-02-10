@@ -56,32 +56,6 @@ public class StudentLogin extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        JSONArray jsArr = new JSONArray();
-        JSONObject jsObject;
-        ArrayList<StudentUser> students = new ArrayList<>();
-        try {
-            students = studentTable.getListOfAllStudents();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        try {
-            for (int i = 0; i < students.size(); i++) {
-                jsObject = new JSONObject();
-                jsObject.put("studentID", students.get(i).getStudentID());
-                jsObject.put("firstName", students.get(i).getFirstName());
-                jsObject.put("lastName", students.get(i).getLastName());
-                jsObject.put("email", students.get(i).getEmail());
-                jsObject.put("birthDate",
-                        (students.get(i).getYearOfBirth() + "-"
-                                + students.get(i).getMonthOfBirth() + "-"
-                                + students.get(i).getDayOfBirth()));
-                jsArr.put(jsObject);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(jsArr.toString());
+
     }
 }

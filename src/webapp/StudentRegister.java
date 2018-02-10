@@ -114,8 +114,7 @@ public class StudentRegister extends HttpServlet {
                                             readingJSONObject.getString("email"),
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
-                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]),
-                                            readingJSONObject.getString("status"));
+                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
 
                 boolean userAdded = studentTable.addNewStudentToDB(student);
                 if (userAdded) {
