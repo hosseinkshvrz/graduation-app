@@ -44,6 +44,7 @@ public class PostFirstPage extends HttpServlet {
                 sendingJSONObject.put("studentID", student.getStudentID());
                 sendingJSONObject.put("studentName", student.getFirstName() + " " + student.getLastName());
                 sendingJSONObject.put("stepName", step.getStepName());
+                sendingJSONObject.put("startTime", si.getStart());
                 sendingJSONArray.put(sendingJSONObject);
             }
             io.sendJSONArray(sendingJSONArray, response);
