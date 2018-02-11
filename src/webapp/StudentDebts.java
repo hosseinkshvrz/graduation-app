@@ -34,15 +34,17 @@ public class StudentDebts extends HttpServlet {
             JSONArray sendingJSONArray = new JSONArray();
             for (Debt d :
                     allDebts) {
-                JSONObject sendingJSONObject = new JSONObject();
-                PostUser post = postTable.getUser(d.getPersonnelID());
-                sendingJSONObject.put("debt", d.getAmount());
-                sendingJSONObject.put("departmentID", post.getDepartmentID());
-                sendingJSONObject.put("debtID", d.getDebtID());
-                sendingJSONObject.put("status", d.getStatus());
-                sendingJSONObject.put("time", d.getDebtTime());
-                sendingJSONObject.put("reason", d.getDescription());
-                sendingJSONArray.put(sendingJSONObject);
+                if (d.getStatus().equals("wait")) {
+                    JSONObject sendingJSONObject = new JSONObject();
+                    PostUser post = postTable.getUser(d.getPersonnelID());
+                    sendingJSONObject.put("debt", d.getAmount());
+                    sendingJSONObject.put("departmentID", post.getDepartmentID());
+                    sendingJSONObject.put("debtID", d.getDebtID());
+                    sendingJSONObject.put("status", d.getStatus());
+                    sendingJSONObject.put("time", d.getDebtTime());
+                    sendingJSONObject.put("reason", d.getDescription());
+                    sendingJSONArray.put(sendingJSONObject);
+                }
             }
             io.sendJSONArray(sendingJSONArray, response);
         } catch (JSONException e) {
