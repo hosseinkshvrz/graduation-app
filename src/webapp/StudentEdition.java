@@ -6,17 +6,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
 
-@WebServlet(name = "StudentRegister")
-public class StudentRegister extends HttpServlet {
+
+public class StudentEdition extends HttpServlet {
+
     StudentDatabase studentTable = new StudentDatabase();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
@@ -26,26 +25,20 @@ public class StudentRegister extends HttpServlet {
         if (responseMessage.equals("")) {
             hasError = false;
         }
-
         if(!hasError) {
             StudentUser student;
             try {
                 student = new StudentUser(readingJSONObject.getString("studentID"),
-                                            readingJSONObject.getString("firstName"),
-                                            readingJSONObject.getString("lastName"),
-                                            readingJSONObject.getString("password"),
-                                            readingJSONObject.getString("email"),
-                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
-                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
-                                            Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
+                        readingJSONObject.getString("firstName"),
+                        readingJSONObject.getString("lastName"),
+                        readingJSONObject.getString("password"),
+                        readingJSONObject.getString("email"),
+                        Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
+                        Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
+                        Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
 
-                boolean userAdded = studentTable.addNewStudentToDB(student);
-                if (userAdded) {
-                    responseMessage = "ثبت نام با موفقیت انجام شد";
-                }
-                else {
-                    responseMessage = "این شماره دانشجویی از قبل در سامانه ثبت شده‌است";
-                }
+                studentTable.editStudent(student);
+                responseMessage = "ویرایش با موفقیت انجام شد";
             }
             catch (JSONException e) {
                 e.printStackTrace();

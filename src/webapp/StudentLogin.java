@@ -1,6 +1,12 @@
 package webapp;
 
+import appLayer.processes.ProcessInstance;
+import appLayer.steps.StepInstance;
 import appLayer.users.StudentUser;
+import datalayer.tables.processes.ProcessDatabase;
+import datalayer.tables.processes.ProcessInstanceDatabase;
+import datalayer.tables.steps.StepDatabase;
+import datalayer.tables.steps.StepInstanceDatabase;
 import datalayer.tables.users.StudentDatabase;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +25,9 @@ import java.util.Scanner;
 
 @WebServlet(name = "StudentLogin")
 public class StudentLogin extends HttpServlet {
-    StudentDatabase studentTable = new StudentDatabase();
+    private StudentDatabase studentTable = new StudentDatabase();
+    private ProcessInstanceDatabase processInstanceTable = new ProcessInstanceDatabase();
+    private ProcessDatabase processTable = new ProcessDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
@@ -29,12 +37,13 @@ public class StudentLogin extends HttpServlet {
 //                request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
 //                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
                 JSONObject sendingJSONObject = new JSONObject();
+                ProcessInstance processInstance = processInstanceTable.getProcessInstance(std.getStartedProcessInstanceID());
+                String processName = processTable.getProcessName(processInstance.getProcessID());
                 sendingJSONObject.put("responseMessage", "student found");
                 sendingJSONObject.put("studentID", std.getStudentID());
                 sendingJSONObject.put("firstName", std.getFirstName());
                 sendingJSONObject.put("lastName", std.getLastName());
-                sendingJSONObject.put("processInstanceID", std.getStartedProcessInstanceID());
-                sendingJSONObject.put("stepInstanceID", std.getCurrentStepInstanceID());
+                sendingJSONObject.put("processName", processName);
                 sendingJSONObject.put("email", std.getEmail());
                 sendingJSONObject.put("birthDate",
                         (std.getYearOfBirth() + "-"

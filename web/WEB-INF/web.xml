@@ -215,4 +215,24 @@
         <url-pattern>/procedure</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>studentTransactions</servlet-name>
+        <servlet-class>webapp.StudentTransactions</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentTransactions</servlet-name>
+        <url-pattern>/student-transactions</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentEdition</servlet-name>
+        <servlet-class>webapp.StudentEdition</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentEdition</servlet-name>
+        <url-pattern>/student-edit</url-pattern>
+    </servlet-mapping>
+
 </web-app>

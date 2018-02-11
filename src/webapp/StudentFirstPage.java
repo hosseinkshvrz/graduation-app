@@ -46,21 +46,21 @@ public class StudentFirstPage extends HttpServlet {
                         "\nلطفاً از لیست فرآیند‌ها یکی را برای شروع انتخاب کنید";
                 result = 0;
             }
-            else if (selectedRequest == null && studentRequests.size() != 0) {
-                responseMessage = "آخرین درخواست شروع فرآیند شما توسط مسئول مربوط رد شده‌است." +
-                        "\nلطفاً از لیست فرآیند‌ها یکی را برای شروع انتخاب کنید";
-                result = 1;
-            }
             else if (selectedRequest.getStatus().equals("stall")) {
                 responseMessage = "درخواست شروع فرآیند شما توسط مسئول مربوط در حال بررسی است." +
                         "\nلطفاً تا زمان تصمیم‌گیری راجع به درخواستتان صبور باشد";
+                result = 1;
+            }
+            else if (selectedRequest == null && studentRequests.size() != 0) {
+                responseMessage = "آخرین درخواست شروع فرآیند شما توسط مسئول مربوط رد شده‌است." +
+                        "\nلطفاً از لیست فرآیند‌ها یکی را برای شروع انتخاب کنید";
                 result = 2;
             }
             else if (selectedRequest.getStatus().equals("yes")) {
-                responseMessage = "درخواست شروع فرآیند شما توسط مسئول مربوط تایید گردید.";
+                responseMessage = "درخواست شروع فرآیند شما توسط مسئول مربوط تایید گردیده‌است.";
                 result = 3;
             }
-            sendingJSONObject.put("result", result);
+            sendingJSONObject.put("status", result);
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {

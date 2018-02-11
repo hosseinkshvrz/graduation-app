@@ -114,4 +114,16 @@ public class StudentDatabase extends AbstractUserDatabase {
         }
         return student;
     }
+
+    public void editStudent(StudentUser student) {
+        String sql = "UPDATE " + tableName + " SET firstname = " + student.getFirstName()
+                + ", lastname = " + student.getLastName() + ", password = " + student.getPassword()
+                + ", email = " + student.getPassword()
+                + ", birthday = '" + student.getYearOfBirth() + "-" + student.getMonthOfBirth() + "-" + student.getDayOfBirth() + "';"
+                + " WHERE studentID = '" + student.getStudentID() +"';";
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        de.executeUpdateQuery(sql);
+        de.closeConnection();
+    }
 }
