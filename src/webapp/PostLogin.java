@@ -30,9 +30,6 @@ public class PostLogin extends HttpServlet {
                 sendingJSONObject.put("lastName", post.getLastName());
                 sendingJSONObject.put("email", post.getEmail());
                 sendingJSONObject.put("departmentID", post.getDepartmentID());
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
                 JSONObject sendingJSONObject = new JSONObject();

@@ -49,9 +49,6 @@ public class StudentLogin extends HttpServlet {
                         (std.getYearOfBirth() + "-"
                                 + std.getMonthOfBirth() + "-"
                                 + std.getDayOfBirth()));
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
 //                request.setAttribute("errorMessage", "invalid student ID or password");

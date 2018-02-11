@@ -8,7 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="00bf6384-af2f-42e4-bae7-a9a9ec3549ea" name="Default" comment="create login page">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentDebts.java" afterPath="$PROJECT_DIR$/src/webapp/StudentDebts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/AdminLogin.java" afterPath="$PROJECT_DIR$/src/webapp/AdminLogin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/PostLogin.java" afterPath="$PROJECT_DIR$/src/webapp/PostLogin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentLogin.java" afterPath="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,11 +66,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostLogin.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostLogin.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/webapp/PostLogin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+            <state relative-caret-position="300">
+              <caret line="31" column="78" lean-forward="false" selection-start-line="31" selection-start-column="78" selection-end-line="31" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminLogin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/webapp/AdminLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="30" column="65" lean-forward="false" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StudentLogin.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/webapp/StudentLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="50" column="56" lean-forward="false" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -90,30 +112,6 @@
             <state relative-caret-position="425">
               <caret line="26" column="9" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="26" selection-end-column="9" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProfileFieldChecker.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webapp/ProfileFieldChecker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1875">
-              <caret line="75" column="30" lean-forward="false" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StudentFirstPage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/webapp/StudentFirstPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -181,7 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/datalayer/tables/processes/AbstractProcessDatabase.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/processes/ProcessInstanceDatabase.java" />
         <option value="$PROJECT_DIR$/src/appLayer/steps/Step.java" />
         <option value="$PROJECT_DIR$/src/appLayer/Transaction.java" />
@@ -210,7 +207,6 @@
         <option value="$PROJECT_DIR$/src/datalayer/DebtDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/SubmitStudentAnswer.java" />
         <option value="$PROJECT_DIR$/src/webapp/ProcessRequests.java" />
-        <option value="$PROJECT_DIR$/src/webapp/PostLogin.java" />
         <option value="$PROJECT_DIR$/src/webapp/DebtInsertion.java" />
         <option value="$PROJECT_DIR$/src/webapp/TransactionsInformation.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentTransactions.java" />
@@ -224,7 +220,6 @@
         <option value="$PROJECT_DIR$/src/appLayer/Debt.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentFirstPage.java" />
         <option value="$PROJECT_DIR$/src/webapp/ProfileFieldChecker.java" />
@@ -232,6 +227,9 @@
         <option value="$PROJECT_DIR$/src/webapp/StudentRegister.java" />
         <option value="$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java" />
         <option value="$PROJECT_DIR$/src/webapp/StudentDebts.java" />
+        <option value="$PROJECT_DIR$/src/webapp/PostLogin.java" />
+        <option value="$PROJECT_DIR$/src/webapp/AdminLogin.java" />
+        <option value="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
       </list>
     </option>
   </component>
@@ -900,7 +898,7 @@
       <workItem from="1518162287073" duration="23314000" />
       <workItem from="1518253612599" duration="26510000" />
       <workItem from="1518330412372" duration="10608000" />
-      <workItem from="1518346786614" duration="10223000" />
+      <workItem from="1518346786614" duration="11761000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1516880845474</created>
@@ -927,7 +925,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="244746000" />
+    <option name="totallyTimeSpent" value="246284000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1002,13 +1000,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/webapp/AdminLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="38" column="28" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/InputOutputHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -1332,14 +1323,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/webapp/StudentLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="40" column="95" lean-forward="false" selection-start-line="40" selection-start-column="95" selection-end-line="40" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1095">
@@ -1436,8 +1419,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/PostLogin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="20" column="48" lean-forward="false" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        <state relative-caret-position="300">
+          <caret line="31" column="78" lean-forward="false" selection-start-line="31" selection-start-column="78" selection-end-line="31" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/AdminLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="30" column="65" lean-forward="false" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/webapp/StudentLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="50" column="56" lean-forward="false" selection-start-line="50" selection-start-column="56" selection-end-line="50" selection-end-column="56" />
           <folding />
         </state>
       </provider>

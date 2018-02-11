@@ -29,9 +29,6 @@ public class AdminLogin extends HttpServlet {
                 sendingJSONObject.put("firstName", admin.getFirstName());
                 sendingJSONObject.put("lastName", admin.getLastName());
                 sendingJSONObject.put("email", admin.getEmail());
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(sendingJSONObject.toString());
             }
             else {
                 JSONObject sendingJSONObject = new JSONObject();
