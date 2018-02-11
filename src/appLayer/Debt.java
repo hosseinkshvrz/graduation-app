@@ -8,13 +8,18 @@ public class Debt {
     private String personnelID;
     private int stepInstanceID;
     private String status;
+    private String debtTime;
+    private String description;
+    private String paymentTime;
 
-    public Debt(String studentID, int amount, String personnelID, int stepInstanceID, String status) {
+    public Debt(String studentID, int amount, String personnelID, int stepInstanceID, String status, String debtTime, String description) {
         this.studentID = studentID;
         this.amount = amount;
         this.personnelID = personnelID;
         this.stepInstanceID = stepInstanceID;
         this.status = status;
+        this.debtTime = debtTime;
+        this.description = description;
     }
 
     public void setDebtID(int debtID) {
@@ -23,6 +28,10 @@ public class Debt {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setPaymentTime(String paymentTime) {
+        this.paymentTime = paymentTime;
     }
 
     public int getDebtID() {
@@ -47,5 +56,17 @@ public class Debt {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getDebtTime() {
+        return debtTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getPaymentTime() {
+        return paymentTime;
     }
 }

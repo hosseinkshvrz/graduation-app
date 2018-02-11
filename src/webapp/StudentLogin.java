@@ -33,6 +33,8 @@ public class StudentLogin extends HttpServlet {
                 sendingJSONObject.put("studentID", std.getStudentID());
                 sendingJSONObject.put("firstName", std.getFirstName());
                 sendingJSONObject.put("lastName", std.getLastName());
+                sendingJSONObject.put("processInstanceID", std.getStartedProcessInstanceID());
+                sendingJSONObject.put("stepInstanceID", std.getCurrentStepInstanceID());
                 sendingJSONObject.put("email", std.getEmail());
                 sendingJSONObject.put("birthDate",
                         (std.getYearOfBirth() + "-"

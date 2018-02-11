@@ -41,8 +41,6 @@ public class PostLogin extends HttpServlet {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

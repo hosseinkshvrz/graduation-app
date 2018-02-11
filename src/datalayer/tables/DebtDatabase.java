@@ -12,9 +12,9 @@ public class DebtDatabase {
 
 
     public void addNewDebt(Debt debt) {
-        String sql = "INSERT INTO " + tableName + " (studentID, amount, personnelID, stepInstanceID, status) VALUES "
+        String sql = "INSERT INTO " + tableName + " (studentID, amount, personnelID, stepInstanceID, status, time, description) VALUES "
                 + "(" + debt.getStudentID() + ", " + debt.getAmount() + ", " + debt.getPersonnelID()
-                + ", " + debt.getStepInstanceID() + ", " + debt.getStatus() + ");";
+                + ", " + debt.getStepInstanceID() + ", " + debt.getStatus() + ", " + debt.getDebtTime() + ", " + debt.getDescription() + ");";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         int debtID = de.executeAutoIncrementUpdateQuery(sql);
@@ -53,7 +53,11 @@ public class DebtDatabase {
             int amount = rs.getInt("amount");
             String studentID = rs.getString("studentID");
             String status = rs.getString("status");
-            debt = new Debt(studentID, amount, personnelID, stepInstanceID, status);
+            String time = rs.getString("time");
+            String description = rs.getString("description");
+            String paymentTime = rs.getString("payTime");
+            debt = new Debt(studentID, amount, personnelID, stepInstanceID, status, time, description);
+            debt.setPaymentTime(paymentTime);
             debt.setDebtID(debtID);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,8 +65,8 @@ public class DebtDatabase {
         return debt;
     }
 
-    public void changeStatus(int debtID) {
-        String sql = "UPDATE " + tableName + " SET status = 'paid' WHERE id = " + debtID;
+    public void changeStatus(int debtID, String time) {
+        String sql = "UPDATE " + tableName + " SET status = 'paid' AND payTime = " + time + " WHERE id = " + debtID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);

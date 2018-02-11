@@ -41,7 +41,7 @@ public class StudentQuestions extends HttpServlet {
                 sendingJSONObject.put("requestID", pr.getRequestID());
                 sendingJSONArray.put(sendingJSONObject);
             }
-
+            io.sendJSONArray(sendingJSONArray, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

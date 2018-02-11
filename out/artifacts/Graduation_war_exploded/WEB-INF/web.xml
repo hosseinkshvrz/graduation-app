@@ -47,7 +47,7 @@
 
     <servlet>
         <servlet-name>createProcess</servlet-name>
-        <servlet-class>webapp.CreateProcess</servlet-class>
+        <servlet-class>webapp.ProcessCreator</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -57,12 +57,162 @@
 
     <servlet>
         <servlet-name>getProcesses</servlet-name>
-        <servlet-class>webapp.ProcessesGetter</servlet-class>
+        <servlet-class>webapp.ProcessesInformation</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>getProcesses</servlet-name>
         <url-pattern>/processes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>processRequestRegister</servlet-name>
+        <servlet-class>webapp.ProcessRequestRegister</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>processRequestRegister</servlet-name>
+        <url-pattern>/register-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>requestDecision</servlet-name>
+        <servlet-class>webapp.RequestDecision</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>requestDecision</servlet-name>
+        <url-pattern>/decision</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>stepFinisher</servlet-name>
+        <servlet-class>webapp.StepFinisher</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>stepFinisher</servlet-name>
+        <url-pattern>/finish-step</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentRequestsGetter</servlet-name>
+        <servlet-class>webapp.ProcessRequests</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentRequestsGetter</servlet-name>
+        <url-pattern>/student-requests</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>transactionsGetter</servlet-name>
+        <servlet-class>webapp.TransactionsInformation</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>transactionsGetter</servlet-name>
+        <url-pattern>/transactions</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>payment</servlet-name>
+        <servlet-class>webapp.Payment</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>payment</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentFirstPage</servlet-name>
+        <servlet-class>webapp.StudentFirstPage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentFirstPage</servlet-name>
+        <url-pattern>/student-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postFirstPage</servlet-name>
+        <servlet-class>webapp.PostFirstPage</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postFirstPage</servlet-name>
+        <url-pattern>/post-page</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postRequest</servlet-name>
+        <servlet-class>webapp.PostRequestInsertion</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postRequest</servlet-name>
+        <url-pattern>/post-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentQuestions</servlet-name>
+        <servlet-class>webapp.StudentQuestions</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentQuestions</servlet-name>
+        <url-pattern>/student-question</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentAnswer</servlet-name>
+        <servlet-class>webapp.StudentAnswer</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentAnswer</servlet-name>
+        <url-pattern>/student-answer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>postStepStatus</servlet-name>
+        <servlet-class>webapp.PostStepStatus</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>postStepStatus</servlet-name>
+        <url-pattern>/step-status</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>submitDebt</servlet-name>
+        <servlet-class>webapp.DebtInsertion</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>submitDebt</servlet-name>
+        <url-pattern>/add-debt</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>studentDebts</servlet-name>
+        <servlet-class>webapp.StudentDebts</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>studentDebts</servlet-name>
+        <url-pattern>/student-debts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>processProcedure</servlet-name>
+        <servlet-class>webapp.ProcessProcedure</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>processProcedure</servlet-name>
+        <url-pattern>/procedure</url-pattern>
     </servlet-mapping>
 
 </web-app>

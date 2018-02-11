@@ -8,12 +8,16 @@ public class StepInstance implements IStep {
     private String personnelID;
     private String start;
     private String end;
+    private String studentID;
+    private String result;
 
-    public StepInstance(int stepID, int processInstanceID, String personnelID, String start) {
+    public StepInstance(int stepID, int processInstanceID, String personnelID, String start, String studentID, String result) {
         this.stepID = stepID;
         this.processInstanceID = processInstanceID;
         this.personnelID = personnelID;
         this.start = start;
+        this.studentID = studentID;
+        this.result = result;
     }
 
     public int getStepInstanceID() {
@@ -47,5 +51,13 @@ public class StepInstance implements IStep {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getResult() {
+        return result;
     }
 }

@@ -52,8 +52,8 @@ public class RequestDecision extends HttpServlet {
 
 
                 String startTime = Date.getCurrentTimeAndDate();
-
-                StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
+                String stepResult = "stall";
+                StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime, studentID, stepResult);
                 stepInstanceTable.addNewStepInstanceToDB(stepInstance);
 
                 processInstance.addStepInstance(stepInstance);

@@ -57,7 +57,7 @@
 
     <servlet>
         <servlet-name>getProcesses</servlet-name>
-        <servlet-class>webapp.ProcessesGetter</servlet-class>
+        <servlet-class>webapp.ProcessesInformation</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -97,7 +97,7 @@
 
     <servlet>
         <servlet-name>studentRequestsGetter</servlet-name>
-        <servlet-class>webapp.StudentRequestsGetter</servlet-class>
+        <servlet-class>webapp.ProcessRequests</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -107,7 +107,7 @@
 
     <servlet>
         <servlet-name>transactionsGetter</servlet-name>
-        <servlet-class>webapp.TransactionsGetter</servlet-class>
+        <servlet-class>webapp.TransactionsInformation</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -147,7 +147,7 @@
 
     <servlet>
         <servlet-name>postRequest</servlet-name>
-        <servlet-class>webapp.SubmitPostRequest</servlet-class>
+        <servlet-class>webapp.PostRequestInsertion</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -167,7 +167,7 @@
 
     <servlet>
         <servlet-name>studentAnswer</servlet-name>
-        <servlet-class>webapp.SubmitStudentAnswer</servlet-class>
+        <servlet-class>webapp.StudentAnswer</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -187,7 +187,7 @@
 
     <servlet>
         <servlet-name>submitDebt</servlet-name>
-        <servlet-class>webapp.SubmitDebt</servlet-class>
+        <servlet-class>webapp.DebtInsertion</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -203,6 +203,16 @@
     <servlet-mapping>
         <servlet-name>studentDebts</servlet-name>
         <url-pattern>/student-debts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>processProcedure</servlet-name>
+        <servlet-class>webapp.ProcessProcedure</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>processProcedure</servlet-name>
+        <url-pattern>/procedure</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -26,7 +26,8 @@ public class Payment extends HttpServlet {
         JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             int debtID = readingJSONObject.getInt("debtID");
-            debtTable.changeStatus(debtID);
+            String time = Date.getCurrentTimeAndDate();
+            debtTable.changeStatus(debtID, time);
             Debt debt = debtTable.getDebt(debtID);
             String studentID = debt.getStudentID();
             String departmentID = postTable.getUser(debt.getPersonnelID()).getDepartmentID();

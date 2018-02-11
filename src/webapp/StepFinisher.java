@@ -36,7 +36,14 @@ public class StepFinisher extends HttpServlet {
             String studentID = readingJSONObject.getString("studentID");
             int stepInstanceID = readingJSONObject.getInt("stepInstanceID");
             String result = readingJSONObject.getString("result");
-            stepInstanceTable.setEndTime(endTime, stepInstanceID);
+            String stepResult;
+            if (result.equals("accept")) {
+                stepResult = "yes";
+            }
+            else {
+                stepResult = "no";
+            }
+            stepInstanceTable.finishStep(endTime, stepResult, stepInstanceID);
             int processInstanceID = stepInstanceTable.getProcessInstanceID(stepInstanceID);
             ProcessInstance processInstance = processInstanceTable.getProcessInstance(processInstanceID);
             int currentStepID = stepInstanceTable.getStepID(stepInstanceID);
@@ -52,8 +59,8 @@ public class StepFinisher extends HttpServlet {
             String personnelID = postTable.getAvailablePostID(nextStep.getDepartmentID());
 
             String startTime = Date.getCurrentTimeAndDate();
-
-            StepInstance stepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime);
+            stepResult = "stall";
+            StepInstance stepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime, studentID, stepResult);
             stepInstanceTable.addNewStepInstanceToDB(stepInstance);
 
             processInstance.addStepInstance(stepInstance);

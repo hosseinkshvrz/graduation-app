@@ -18,6 +18,8 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
         parameters.put("pInstanceID", String.valueOf(stepInstance.getProcessInstanceID()));
         parameters.put("personnelID", String.valueOf(stepInstance.getPersonnelID()));
         parameters.put("start", stepInstance.getStart());
+        parameters.put("studentID", stepInstance.getStudentID());
+        parameters.put("result", stepInstance.getResult());
         super.addStepToDB(stepInstance, tableName, parameters);
     }
 
@@ -64,7 +66,9 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             int pInstanceID = rs.getInt("pInstanceID");
             String personnelID = rs.getString("personnelID");
             String startTime = rs.getString("start");
-            stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
+            String result = rs.getString("result");
+            String studentID = rs.getString("studentID");
+            stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime, studentID, result);
             stepInstance.setID(stepInstanceID);
             stepInstance.setEnd(rs.getString("end"));
             rs.close();
@@ -75,8 +79,8 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
         return stepInstance;
     }
 
-    public void setEndTime(String endTime, int stepInstanceID) {
-        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "' WHERE sInstanceID = " + stepInstanceID;
+    public void finishStep(String endTime, String result, int stepInstanceID) {
+        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "' AND result = " + result +" WHERE sInstanceID = " + stepInstanceID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);
@@ -95,8 +99,11 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
                 int stepID = rs.getInt("stepID");
                 int pInstanceID = rs.getInt("pInstanceID");
                 String start = rs.getString("start");
-                StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, start);
+                String result = rs.getString("result");
+                String studentID = rs.getString("studentID");
+                StepInstance stepInstance = new StepInstance(stepID, pInstanceID, personnelID, start, studentID, result);
                 stepInstance.setID(stepInstanceID);
+                stepInstance.setEnd(rs.getString("end"));
                 postStepInstances.add(stepInstance);
 
             }
@@ -117,7 +124,9 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             int stepInstanceID = rs.getInt("sInstanceID");
             int pInstanceID = rs.getInt("pInstanceID");
             String startTime = rs.getString("start");
-            stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime);
+            String result = rs.getString("result");
+            String studentID = rs.getString("studentID");
+            stepInstance = new StepInstance(stepID, pInstanceID, personnelID, startTime, studentID, result);
             stepInstance.setID(stepInstanceID);
             stepInstance.setEnd(rs.getString("end"));
             rs.close();
@@ -126,5 +135,20 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             e.printStackTrace();
         }
         return stepInstance;
+    }
+
+    public ArrayList<StepInstance> getStudentSteps(String studentID) {
+        ArrayList<StepInstance> studentSteps = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = " + studentID;
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        try {
+            while (rs.next()) {
+                studentSteps.add(getStepInstance(rs.getInt("sInstanceID")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return studentSteps;
     }
 }
