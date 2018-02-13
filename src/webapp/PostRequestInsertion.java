@@ -32,8 +32,9 @@ public class PostRequestInsertion extends HttpServlet {
             PostRequest postRequest = new PostRequest(question, personnelID, stepInstanceID, studentID, time);
             postRequestsTable.addNewRequest(postRequest);
             JSONObject sendingJSONObject = new JSONObject();
-            String responseMessage = "پرسش شما با موفقیت برای دانشجو ثبت شد. تا دریافت پاسخ دانشجو منتظر بمانید";
+            String responseMessage = "success";
             sendingJSONObject.put("responseMessage", responseMessage);
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

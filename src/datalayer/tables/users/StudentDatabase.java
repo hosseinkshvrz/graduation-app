@@ -11,7 +11,7 @@ public class StudentDatabase extends AbstractUserDatabase {
     private final String tableName = "students";
 
     public boolean isValidStudentLogin(String studentID, String password) {
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + studentID + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = '" + studentID + "' AND password = '" + password + "';";
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
@@ -26,7 +26,7 @@ public class StudentDatabase extends AbstractUserDatabase {
     }
 
     public StudentUser getUser(String userID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = \"" + userID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = '" + userID + "'";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -39,11 +39,17 @@ public class StudentDatabase extends AbstractUserDatabase {
             String pass = rs.getString("password");
             String mail = rs.getString("email");
             int processInstanceID = rs.getInt("pInstanceID");
+            if (rs.wasNull()) {
+                processInstanceID = -1;
+            }
             int stepInstanceID = rs.getInt("csInstanceID");
+            if (rs.wasNull()) {
+                stepInstanceID = -1;
+            }
             int day = Integer.parseInt(rs.getString("birthday").split("-")[2]);
             int month = Integer.parseInt(rs.getString("birthday").split("-")[1]);
             int year = Integer.parseInt(rs.getString("birthday").split("-")[0]);
-            student = new StudentUser(id, firstName, lastName, pass, mail, day, month, year);
+            student = new StudentUser(firstName, lastName, pass, mail, id, day, month, year);
             student.setStartedProcessInstanceID(processInstanceID);
             student.setCurrentStepInstanceID(stepInstanceID);
             rs.close();
@@ -116,10 +122,10 @@ public class StudentDatabase extends AbstractUserDatabase {
     }
 
     public void editStudent(StudentUser student) {
-        String sql = "UPDATE " + tableName + " SET firstname = " + student.getFirstName()
-                + ", lastname = " + student.getLastName() + ", password = " + student.getPassword()
-                + ", email = " + student.getPassword()
-                + ", birthday = '" + student.getYearOfBirth() + "-" + student.getMonthOfBirth() + "-" + student.getDayOfBirth() + "';"
+        String sql = "UPDATE " + tableName + " SET firstname = '" + student.getFirstName() + "'"
+                + ", lastname = '" + student.getLastName() + "', password = '" + student.getPassword() + "'"
+                + ", email = '" + student.getEmail() + "'"
+                + ", birthday = '" + student.getYearOfBirth() + "-" + student.getMonthOfBirth() + "-" + student.getDayOfBirth() + "'"
                 + " WHERE studentID = '" + student.getStudentID() +"';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();

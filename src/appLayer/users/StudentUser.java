@@ -65,4 +65,8 @@ public class StudentUser extends User {
     public int getCurrentStepInstanceID() {
         return currentStepInstanceID;
     }
+
+    public String getBirthDate() {
+        return this.getYearOfBirth() + "-" + this.getMonthOfBirth() + "-" + this.getDayOfBirth();
+    }
 }

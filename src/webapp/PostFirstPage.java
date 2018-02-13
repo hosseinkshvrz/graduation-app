@@ -32,22 +32,25 @@ public class PostFirstPage extends HttpServlet {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
         JSONArray sendingJSONArray = new JSONArray();
+        JSONObject sendingJSONObject = new JSONObject();
         try {
             String personnelID = readingJSONObject.getString("personnelID");
             ArrayList<StepInstance> postStepInstances = stepInstanceTable.getPostRelatedStepInstances(personnelID);
             for (StepInstance si :
                     postStepInstances) {
-                JSONObject sendingJSONObject = new JSONObject();
+                JSONObject tempJSONObject = new JSONObject();
                 int stepID = si.getStepID();
                 Step step = stepTable.getStep(stepID);
                 StudentUser student = studentTable.getStudentInStepInstance(si.getStepInstanceID());
-                sendingJSONObject.put("studentID", student.getStudentID());
-                sendingJSONObject.put("studentName", student.getFirstName() + " " + student.getLastName());
-                sendingJSONObject.put("stepName", step.getStepName());
-                sendingJSONObject.put("startTime", si.getStart());
-                sendingJSONArray.put(sendingJSONObject);
+                tempJSONObject.put("studentID", student.getStudentID());
+                tempJSONObject.put("studentName", student.getFirstName() + " " + student.getLastName());
+                tempJSONObject.put("stepName", step.getStepName());
+                tempJSONObject.put("startTime", si.getStart());
+                sendingJSONArray.put(tempJSONObject);
             }
-            io.sendJSONArray(sendingJSONArray, response);
+            sendingJSONObject.put("responseMessage", "success");
+            sendingJSONObject.put("students", sendingJSONArray);
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

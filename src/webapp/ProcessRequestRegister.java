@@ -20,10 +20,6 @@ public class ProcessRequestRegister extends HttpServlet {
     private ProcessRequestsDatabase processRequestsTable = new ProcessRequestsDatabase();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
 
@@ -34,7 +30,7 @@ public class ProcessRequestRegister extends HttpServlet {
             String responseMessage;
             boolean notDuplicateRequest = processRequestsTable.addRequest(studentID, process.getID(), "stall");
             if (notDuplicateRequest) {
-                responseMessage = "درخواست شما با موفقیت در سیستم ثبت شد. تا تایید مسئول مربوط منتظر بمانید";
+                responseMessage = "success";
             }
             else {
                 responseMessage = "شما در حال حاضر یک درخواست برای این فرآیند در سامانه ثبت کرده‌اید";
@@ -45,5 +41,9 @@ public class ProcessRequestRegister extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

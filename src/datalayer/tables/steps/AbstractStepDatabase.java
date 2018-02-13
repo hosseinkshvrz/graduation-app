@@ -21,7 +21,7 @@ public class AbstractStepDatabase {
         for (String key:
                 parameters.keySet()) {
             String value = parameters.get(key);
-            sql += (value + ", ");
+            sql += ("'" + value + "', ");
         }
         if (sql.charAt(sql.length()-2) == ',') {
             sql = sql.substring(0, sql.length()-2);

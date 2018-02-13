@@ -26,7 +26,7 @@ public class TransactionsDatabase {
     }
 
     public Transaction getTransaction(int id) {
-        String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + id + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE id = " + id;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

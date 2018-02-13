@@ -23,13 +23,12 @@ public abstract class AbstractProcessDatabase {
         for (String key:
                 parameters.keySet()) {
             String value = parameters.get(key);
-            sql += (value + ", ");
+            sql += ("'" + value + "', ");
         }
         if (sql.charAt(sql.length()-2) == ',') {
             sql = sql.substring(0, sql.length()-2);
         }
         sql += ");";
-        System.out.println(sql);
         int processInstanceID = de.executeAutoIncrementUpdateQuery(sql);
         proc.setID(processInstanceID);
         de.closeConnection();

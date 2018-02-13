@@ -13,8 +13,8 @@ public class PostRequestsDatabase {
 
     public void addNewRequest(PostRequest postRequest) {
         String sql = "INSERT INTO " + tableName + " (question, personnelID, stepInstanceID, studentID, questionTime) VALUES "
-                + "(" + postRequest.getQuestion() + ", " + postRequest.getPersonnelID() + ", " + postRequest.getStepInstanceID()
-                + ", " + postRequest.getStudentID() + ", " + postRequest.getQuestionTime() + ");";
+                + "('" + postRequest.getQuestion() + "', '" + postRequest.getPersonnelID() + "', " + postRequest.getStepInstanceID()
+                + ", '" + postRequest.getStudentID() + "', '" + postRequest.getQuestionTime() + "');";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         int requestID = de.executeAutoIncrementUpdateQuery(sql);
@@ -46,7 +46,7 @@ public class PostRequestsDatabase {
     }
 
     public ArrayList<PostRequest> getAllStudentRequests(String studentID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = " + studentID;
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = '" + studentID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -72,8 +72,8 @@ public class PostRequestsDatabase {
     }
 
     public PostRequest getPostRequest(String personnelID, String studentID, int stepInstanceID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = " + personnelID
-                + " AND studentID = " + studentID + " stepInstanceID = " + stepInstanceID;
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = '" + personnelID
+                + "' AND studentID = '" + studentID + "' stepInstanceID = " + stepInstanceID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

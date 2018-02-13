@@ -13,7 +13,7 @@ public class ProcessRequestsDatabase {
     public boolean addRequest(String studentID, int processID, String status) {
         boolean addIsDone;
         String sql = "INSERT INTO " + tableName + " (studentID, processID, status) VALUES ('"
-                + studentID + "', '" + processID  + "', '" + status + "')";
+                + studentID + "', " + processID  + ", '" + status + "')";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         addIsDone = de.executeUpdateQuery(sql);
@@ -53,8 +53,8 @@ public class ProcessRequestsDatabase {
         else {
             status = "no";
         }
-        String sql = "UPDATE " + tableName + " SET status = " + status + " WHERE studentID = " + studentID
-                + " AND processID = " + processID;
+        String sql = "UPDATE " + tableName + " SET status = '" + status + "' WHERE studentID = '" + studentID
+                + "' AND processID = " + processID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);

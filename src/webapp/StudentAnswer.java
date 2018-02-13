@@ -21,7 +21,7 @@ public class StudentAnswer extends HttpServlet {
             int requestID = readingJSONObject.getInt("requestID");
             String answer = readingJSONObject.getString("answer");
             postRequestsTable.setResponse(requestID, answer);
-            String responseMessage = "پاسخ شما با موفقیت ثبت شد. تا بررسی پاسخ شما توسط اداره مربوط منتظر بمانید";
+            String responseMessage = "success";
             JSONObject sendingJSONObject = new JSONObject();
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);

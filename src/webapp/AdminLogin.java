@@ -21,9 +21,9 @@ public class AdminLogin extends HttpServlet {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
         try {
+            JSONObject sendingJSONObject = new JSONObject();
             if (adminTable.isValidAdminLogin(readingJSONObject.getString("id"), readingJSONObject.getString("password"))) {
                 AdminUser admin = adminTable.getUser(readingJSONObject.getString("id"));
-                JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "success");
                 sendingJSONObject.put("id", admin.getId());
                 sendingJSONObject.put("firstName", admin.getFirstName());
@@ -31,10 +31,9 @@ public class AdminLogin extends HttpServlet {
                 sendingJSONObject.put("email", admin.getEmail());
             }
             else {
-                JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "failed");
-                io.sendJSONObject(sendingJSONObject, response);
             }
+            io.sendJSONObject(sendingJSONObject, response);
         }
         catch (SQLException e) {
             e.printStackTrace();

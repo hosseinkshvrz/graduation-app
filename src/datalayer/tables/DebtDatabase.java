@@ -23,7 +23,7 @@ public class DebtDatabase {
     }
 
     public ArrayList<Debt> getAllStudentDebts(String studentID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = " + studentID;
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = '" + studentID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -66,7 +66,7 @@ public class DebtDatabase {
     }
 
     public void changeStatus(int debtID, String time) {
-        String sql = "UPDATE " + tableName + " SET status = 'paid' AND payTime = " + time + " WHERE id = " + debtID;
+        String sql = "UPDATE " + tableName + " SET status = 'paid', payTime = '" + time + "' WHERE id = " + debtID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);

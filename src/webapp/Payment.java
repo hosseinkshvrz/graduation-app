@@ -35,7 +35,7 @@ public class Payment extends HttpServlet {
             int amount = debt.getAmount();
             Transaction transaction = new Transaction(studentID, departmentID, stepInstanceID, amount);
             transactionsTable.addNewTransaction(transaction);
-            String responseMessage = "پرداخت شما با موفقیت صورت گرفت. تا بررسی مجدد پرونده شما توسط اداره مربوط منتظر بمانید";
+            String responseMessage = "success";
             JSONObject sendingJSONObject = new JSONObject();
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);

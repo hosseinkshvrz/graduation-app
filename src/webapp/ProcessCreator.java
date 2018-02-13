@@ -29,10 +29,10 @@ public class ProcessCreator extends HttpServlet {
         JSONArray readingJSONArray = io.getJSONArray(request);
         try {
             //TODO get firstStepID and add to graph array list. then check the cycle of accept steps
-            ArrayList<Node> graph = new ArrayList<>();
-            for (int i = 1; i < readingJSONArray.length(); i++) {
-                int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
-            }
+//            ArrayList<Node> graph = new ArrayList<>();
+//            for (int i = 1; i < readingJSONArray.length(); i++) {
+//                int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
+//            }
 
             Process process;
             String processName = readingJSONArray.getJSONObject(0).getString("processName");

@@ -31,18 +31,26 @@ public class StudentLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
+        JSONObject sendingJSONObject = new JSONObject();
         try {
-            if (studentTable.isValidStudentLogin(readingJSONObject.getString("studentID"), readingJSONObject.getString("password"))) {
+            String studentID = readingJSONObject.getString("studentID");
+            String password = readingJSONObject.getString("password");
+            if (studentTable.isValidStudentLogin(studentID, password)) {
                 StudentUser std = studentTable.getUser(readingJSONObject.getString("studentID"));
-//                request.setAttribute("name", std.getFirstName() + " " + std.getLastName());
-//                request.getRequestDispatcher("/welcome.jsp").forward(request, response);
-                JSONObject sendingJSONObject = new JSONObject();
-                ProcessInstance processInstance = processInstanceTable.getProcessInstance(std.getStartedProcessInstanceID());
-                String processName = processTable.getProcessName(processInstance.getProcessID());
+                int stdProcessInstanceID = std.getStartedProcessInstanceID();
+                int result = 0;
+                String processName = "";
+                if (stdProcessInstanceID != -1) {
+                    ProcessInstance processInstance = processInstanceTable.getProcessInstance(stdProcessInstanceID);
+                    processName = processTable.getProcessName(processInstance.getProcessID());
+                    StudentStatusChecker studentStatusChecker = new StudentStatusChecker();
+                    result = studentStatusChecker.statusChecker(studentID);
+                }
                 sendingJSONObject.put("responseMessage", "student found");
                 sendingJSONObject.put("studentID", std.getStudentID());
                 sendingJSONObject.put("firstName", std.getFirstName());
                 sendingJSONObject.put("lastName", std.getLastName());
+                sendingJSONObject.put("status", result);
                 sendingJSONObject.put("processName", processName);
                 sendingJSONObject.put("email", std.getEmail());
                 sendingJSONObject.put("birthDate",
@@ -51,12 +59,9 @@ public class StudentLogin extends HttpServlet {
                                 + std.getDayOfBirth()));
             }
             else {
-//                request.setAttribute("errorMessage", "invalid student ID or password");
-//                request.getRequestDispatcher("/login.jsp").forward(request, response);
-                JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "student not found");
-                io.sendJSONObject(sendingJSONObject, response);
             }
+            io.sendJSONObject(sendingJSONObject, response);
         }
         catch (JSONException e) {
             e.printStackTrace();

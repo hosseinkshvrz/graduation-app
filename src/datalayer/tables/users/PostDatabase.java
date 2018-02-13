@@ -11,7 +11,7 @@ public class PostDatabase extends AbstractUserDatabase {
 
 
     public boolean isValidPostLogin(String personnelID, String password) {
-        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = \"" + personnelID + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = '" + personnelID + "' AND password = '" + password + "';";
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
@@ -24,7 +24,7 @@ public class PostDatabase extends AbstractUserDatabase {
     }
 
     public PostUser getUser(String userID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = \"" + userID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = '" + userID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

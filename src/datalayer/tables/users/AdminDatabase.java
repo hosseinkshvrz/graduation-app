@@ -10,7 +10,7 @@ public class AdminDatabase extends AbstractUserDatabase {
     private final String tableName = "admins";
 
     public boolean isValidAdminLogin(String id, String password) throws ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + id + "\" AND password = \"" + password + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE id = '" + id + "' AND password = '" + password + "'";
         System.out.println(sql);
         try {
             return checkUserExistenceWithDatabase(sql);
@@ -23,7 +23,7 @@ public class AdminDatabase extends AbstractUserDatabase {
     }
 
     public AdminUser getUser(String userID) throws SQLException {
-        String sql = "SELECT * FROM " + tableName + " WHERE id = \"" + userID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE id = '" + userID + "'";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

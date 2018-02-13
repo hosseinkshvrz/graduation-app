@@ -22,33 +22,36 @@ public class StudentDebts extends HttpServlet {
     private DebtDatabase debtTable = new DebtDatabase();
     private PostDatabase postTable = new PostDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             String studentID = readingJSONObject.getString("studentID");
             ArrayList<Debt> allDebts = debtTable.getAllStudentDebts(studentID);
             JSONArray sendingJSONArray = new JSONArray();
+            JSONObject sendingJSONObject = new JSONObject();
             for (Debt d :
                     allDebts) {
                 if (d.getStatus().equals("wait")) {
-                    JSONObject sendingJSONObject = new JSONObject();
+                    JSONObject tempJSONObject = new JSONObject();
                     PostUser post = postTable.getUser(d.getPersonnelID());
-                    sendingJSONObject.put("debt", d.getAmount());
-                    sendingJSONObject.put("departmentID", post.getDepartmentID());
-                    sendingJSONObject.put("debtID", d.getDebtID());
-                    sendingJSONObject.put("status", d.getStatus());
-                    sendingJSONObject.put("time", d.getDebtTime());
-                    sendingJSONObject.put("reason", d.getDescription());
-                    sendingJSONArray.put(sendingJSONObject);
+                    tempJSONObject.put("amount", d.getAmount());
+                    tempJSONObject.put("departmentID", post.getDepartmentID());
+                    tempJSONObject.put("debtID", d.getDebtID());
+                    tempJSONObject.put("status", d.getStatus());
+                    tempJSONObject.put("date", d.getDebtTime());
+                    tempJSONObject.put("reason", d.getDescription());
+                    sendingJSONArray.put(tempJSONObject);
                 }
             }
-            io.sendJSONArray(sendingJSONArray, response);
+            sendingJSONObject.put("responseMessage", "success");
+            sendingJSONObject.put("debts", sendingJSONArray);
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

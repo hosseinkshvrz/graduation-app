@@ -21,14 +21,14 @@ import java.util.ArrayList;
 public class TransactionsInformation extends HttpServlet {
     private StepDatabase stepTable = new StepDatabase();
     private StepInstanceDatabase stepInstanceTable = new StepInstanceDatabase();
-    private TransactionsDatabase TransactionTable = new TransactionsDatabase();
+    private TransactionsDatabase transactionTable = new TransactionsDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JSONArray sendingJsonArray = new JSONArray();
-        ArrayList<Transaction> allTransactions = TransactionTable.getTransactions();
+        ArrayList<Transaction> allTransactions = transactionTable.getTransactions();
         for (int i = 0; i < allTransactions.size(); i++) {
             JSONObject transactionJSONObject = new JSONObject();
             Transaction transaction = allTransactions.get(i);

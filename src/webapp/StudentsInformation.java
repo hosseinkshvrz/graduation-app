@@ -27,7 +27,6 @@ public class StudentsInformation extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        JSONArray sendingJSONArray = new JSONArray();
         ArrayList<StudentUser> students = new ArrayList<>();
         try {
             students = studentTable.getListOfAllStudents();
@@ -35,26 +34,30 @@ public class StudentsInformation extends HttpServlet {
             e.printStackTrace();
         }
         try {
+            JSONArray sendingJSONArray = new JSONArray();
+            JSONObject sendingJSONObject = new JSONObject();
             for (int i = 0; i < students.size(); i++) {
-                JSONObject sendingJSONObject = new JSONObject();
+                JSONObject tempJSONObject = new JSONObject();
                 String processName = processTable.getProcessName(students.get(i).getStartedProcessInstanceID());
                 String stepName = stepTable.getStep(students.get(i).getCurrentStepInstanceID()).getStepName();
-                sendingJSONObject.put("studentID", students.get(i).getStudentID());
-                sendingJSONObject.put("firstName", students.get(i).getFirstName());
-                sendingJSONObject.put("lastName", students.get(i).getLastName());
-                sendingJSONObject.put("email", students.get(i).getEmail());
-                sendingJSONObject.put("processName", processName);
-                sendingJSONObject.put("stepName", stepName);
-                sendingJSONObject.put("birthDate",
+                tempJSONObject.put("studentID", students.get(i).getStudentID());
+                tempJSONObject.put("firstName", students.get(i).getFirstName());
+                tempJSONObject.put("lastName", students.get(i).getLastName());
+                tempJSONObject.put("email", students.get(i).getEmail());
+                tempJSONObject.put("processName", processName);
+                tempJSONObject.put("stepName", stepName);
+                tempJSONObject.put("birthDate",
                         (students.get(i).getYearOfBirth() + "-"
                                 + students.get(i).getMonthOfBirth() + "-"
                                 + students.get(i).getDayOfBirth()));
-                sendingJSONArray.put(sendingJSONObject);
+                sendingJSONArray.put(tempJSONObject);
             }
+            sendingJSONObject.put("responseMessage", "success");
+            sendingJSONObject.put("students", sendingJSONArray);
+            InputOutputHandler io = new InputOutputHandler();
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        InputOutputHandler io = new InputOutputHandler();
-        io.sendJSONArray(sendingJSONArray, response);
     }
 }

@@ -15,7 +15,7 @@ public class ProcessDatabase extends AbstractProcessDatabase {
 
     public Process getProcess (String processName) {
         int numberOfColumns = super.getNumberOfTableColumns(tableName);
-        String sql = "SELECT * FROM " + tableName + " WHERE name = \"" + processName + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE name = '" + processName + "'";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

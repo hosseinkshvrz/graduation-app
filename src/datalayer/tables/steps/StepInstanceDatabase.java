@@ -1,7 +1,6 @@
 package datalayer.tables.steps;
 
 
-import appLayer.steps.Step;
 import appLayer.steps.StepInstance;
 import datalayer.DatabaseExecutor;
 
@@ -80,7 +79,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
     }
 
     public void finishStep(String endTime, String result, int stepInstanceID) {
-        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "' AND result = " + result +" WHERE sInstanceID = " + stepInstanceID;
+        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "' AND result = '" + result + "' WHERE sInstanceID = " + stepInstanceID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);
@@ -88,7 +87,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
     }
 
     public ArrayList<StepInstance> getPostRelatedStepInstances(String personnelID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = " + personnelID;
+        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = '" + personnelID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -114,7 +113,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
     }
 
     public StepInstance getStepInstance(int stepID, String personnelID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE stepID = '" + stepID + "' AND personnelID = " + personnelID;
+        String sql = "SELECT * FROM " + tableName + " WHERE stepID = " + stepID + " AND personnelID = '" + personnelID + "'";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -139,7 +138,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
 
     public ArrayList<StepInstance> getStudentSteps(String studentID) {
         ArrayList<StepInstance> studentSteps = new ArrayList<>();
-        String sql = "SELECT * FROM " + tableName + " WHERE studentID = " + studentID;
+        String sql = "SELECT * FROM " + tableName + " WHERE studentID = '" + studentID + "';";
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
         try {

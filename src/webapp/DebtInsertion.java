@@ -33,7 +33,7 @@ public class DebtInsertion extends HttpServlet {
             Debt debt = new Debt(studentID, amount, personnelID, stepInstanceID, status, time, description);
             debtTable.addNewDebt(debt);
             JSONObject sendingJSONObject = new JSONObject();
-            String responseMessage = "مبلغ موردنظر در پرونده دانشجو ثبت شد. تا دریافت مبلغ از سوی دانشجو منتظر بمانید";
+            String responseMessage = "success";
             sendingJSONObject.put("responseMessage", responseMessage);
         } catch (JSONException e) {
             e.printStackTrace();

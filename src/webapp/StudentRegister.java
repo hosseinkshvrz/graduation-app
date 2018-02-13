@@ -38,7 +38,8 @@ public class StudentRegister extends HttpServlet {
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[2]),
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[1]),
                                             Integer.parseInt(readingJSONObject.getString("birthDate").split("-")[0]));
-
+                student.setCurrentStepInstanceID(-1);
+                student.setStartedProcessInstanceID(-1);
                 boolean userAdded = studentTable.addNewStudentToDB(student);
                 if (userAdded) {
                     responseMessage = "ثبت نام با موفقیت انجام شد";

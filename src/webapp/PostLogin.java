@@ -1,6 +1,7 @@
 package webapp;
 
 import appLayer.users.PostUser;
+import datalayer.tables.ProcessRequestsDatabase;
 import datalayer.tables.users.PostDatabase;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,14 +17,15 @@ import java.sql.SQLException;
 
 @WebServlet(name = "PostLogin")
 public class PostLogin extends HttpServlet {
-    PostDatabase postTable = new PostDatabase();
+    private PostDatabase postTable = new PostDatabase();
+    private ProcessRequestsDatabase processRequestsTable = new ProcessRequestsDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
+        JSONObject sendingJSONObject = new JSONObject();
         try {
             if (postTable.isValidPostLogin(readingJSONObject.getString("personnelID"), readingJSONObject.getString("password"))) {
                 PostUser post = postTable.getUser(readingJSONObject.getString("personnelID"));
-                JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "success");
                 sendingJSONObject.put("personnelID", post.getPersonnelID());
                 sendingJSONObject.put("firstName", post.getFirstName());
@@ -32,10 +34,9 @@ public class PostLogin extends HttpServlet {
                 sendingJSONObject.put("departmentID", post.getDepartmentID());
             }
             else {
-                JSONObject sendingJSONObject = new JSONObject();
                 sendingJSONObject.put("responseMessage", "fail");
-                io.sendJSONObject(sendingJSONObject, response);
             }
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

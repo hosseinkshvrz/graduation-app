@@ -11,7 +11,7 @@ public class StepDatabase extends AbstractStepDatabase{
     private final String tableName = "steps";
 
     public Step getStep(int stepID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE stepID = \"" + stepID + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE stepID = " + stepID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -23,7 +23,7 @@ public class StepDatabase extends AbstractStepDatabase{
             int rejectStepID = rs.getInt("stepIDreject");
             int processID = rs.getInt("processID");
             String departmentID = rs.getString("departmentID");
-            int isFirstStep = rs.getInt("isFirstStep");
+            int isFirstStep = rs.getInt("firstStep");
             step = new Step(stepName, acceptStepID, rejectStepID, processID, departmentID, (isFirstStep == 1));
             step.setID(stepID);
             rs.close();
@@ -50,7 +50,7 @@ public class StepDatabase extends AbstractStepDatabase{
     }
 
     public Step getStep(String stepName) {
-        String sql = "SELECT * FROM " + tableName + " WHERE stepName = \"" + stepName + "\"";
+        String sql = "SELECT * FROM " + tableName + " WHERE stepName = '" + stepName + "'";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="icu4j-60.2">
+    <CLASSES>
+      <root url="jar://F:/Tomcat/apache-tomcat-8.5.24/lib/icu4j-60.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ideaLibSources/icu4j-60.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
