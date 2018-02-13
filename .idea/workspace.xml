@@ -7,69 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00bf6384-af2f-42e4-bae7-a9a9ec3549ea" name="Default" comment="create login page">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/Main.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Graduation/META-INF/MANIFEST.MF" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Graduation/Main.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/datalayer/tables/users/StudentDatabase.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/datalayer/tables/users/StudentDatabase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/AdminLogin.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/AdminLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/Date.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/Date.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/DebtInsertion.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/DebtInsertion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/Payment.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/Payment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostFirstPage.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostFirstPage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostLogin.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostRequestInsertion.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/PostRequestInsertion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/ProcessCreator.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/ProcessCreator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentFirstPage.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentFirstPage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentLogin.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentQuestions.class" afterPath="$PROJECT_DIR$/out/artifacts/Graduation_war_exploded/WEB-INF/classes/webapp/StudentQuestions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/datalayer/tables/users/StudentDatabase.class" afterPath="$PROJECT_DIR$/out/production/Graduation/datalayer/tables/users/StudentDatabase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/AdminLogin.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/AdminLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/Date.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/Date.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/DebtInsertion.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/DebtInsertion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/Payment.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/Payment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/PostFirstPage.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/PostFirstPage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/PostLogin.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/PostLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/PostRequestInsertion.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/PostRequestInsertion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/ProcessCreator.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/ProcessCreator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentFirstPage.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentFirstPage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentLogin.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentLogin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentQuestions.class" afterPath="$PROJECT_DIR$/out/production/Graduation/webapp/StudentQuestions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Graduation.iml" afterPath="$PROJECT_DIR$/Graduation.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/appLayer/users/StudentUser.java" afterPath="$PROJECT_DIR$/src/appLayer/users/StudentUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/DebtDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/PostRequestsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/ProcessRequestsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/ProcessRequestsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/TransactionsDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/processes/AbstractProcessDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/processes/AbstractProcessDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/processes/ProcessDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/processes/ProcessDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/AbstractStepDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/AbstractStepDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/StepDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/StepDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/steps/StepInstanceDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/users/AdminDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/users/AdminDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/users/PostDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" afterPath="$PROJECT_DIR$/src/datalayer/tables/users/StudentDatabase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/AdminLogin.java" afterPath="$PROJECT_DIR$/src/webapp/AdminLogin.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/Date.java" afterPath="$PROJECT_DIR$/src/webapp/Date.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/DebtInsertion.java" afterPath="$PROJECT_DIR$/src/webapp/DebtInsertion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/Payment.java" afterPath="$PROJECT_DIR$/src/webapp/Payment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/PostFirstPage.java" afterPath="$PROJECT_DIR$/src/webapp/PostFirstPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/PostLogin.java" afterPath="$PROJECT_DIR$/src/webapp/PostLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/PostRequestInsertion.java" afterPath="$PROJECT_DIR$/src/webapp/PostRequestInsertion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/ProcessCreator.java" afterPath="$PROJECT_DIR$/src/webapp/ProcessCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/ProcessProcedure.java" afterPath="$PROJECT_DIR$/src/webapp/ProcessProcedure.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/ProcessRequestRegister.java" afterPath="$PROJECT_DIR$/src/webapp/ProcessRequestRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentAnswer.java" afterPath="$PROJECT_DIR$/src/webapp/StudentAnswer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentDebts.java" afterPath="$PROJECT_DIR$/src/webapp/StudentDebts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentEdition.java" afterPath="$PROJECT_DIR$/src/webapp/StudentEdition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentFirstPage.java" afterPath="$PROJECT_DIR$/src/webapp/StudentFirstPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentLogin.java" afterPath="$PROJECT_DIR$/src/webapp/StudentLogin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentQuestions.java" afterPath="$PROJECT_DIR$/src/webapp/StudentQuestions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentRegister.java" afterPath="$PROJECT_DIR$/src/webapp/StudentRegister.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentTransactions.java" afterPath="$PROJECT_DIR$/src/webapp/StudentTransactions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/StudentsInformation.java" afterPath="$PROJECT_DIR$/src/webapp/StudentsInformation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/webapp/TransactionsInformation.java" afterPath="$PROJECT_DIR$/src/webapp/TransactionsInformation.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -98,8 +36,8 @@
       <file leaf-file-name="Date.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/webapp/Date.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -874,7 +812,7 @@
       <workItem from="1518253612599" duration="26510000" />
       <workItem from="1518330412372" duration="10608000" />
       <workItem from="1518346786614" duration="18806000" />
-      <workItem from="1518459214450" duration="18874000" />
+      <workItem from="1518459214450" duration="18974000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1516880845474</created>
@@ -901,7 +839,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="272203000" />
+    <option name="totallyTimeSpent" value="272303000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -913,7 +851,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1053" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -932,14 +870,14 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46614873" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" x="91" y="91" width="1738" height="853" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963374" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3573807" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3573807" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263041" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23903744" sideWeight="0.6526082" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23368984" sideWeight="0.34739178" order="7" side_tool="true" content_ui="tabs" />
@@ -1430,8 +1368,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/webapp/Date.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
