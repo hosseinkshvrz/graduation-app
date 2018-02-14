@@ -35,6 +35,7 @@ public class DebtInsertion extends HttpServlet {
             JSONObject sendingJSONObject = new JSONObject();
             String responseMessage = "success";
             sendingJSONObject.put("responseMessage", responseMessage);
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

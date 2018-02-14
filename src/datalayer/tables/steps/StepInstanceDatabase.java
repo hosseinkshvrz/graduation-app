@@ -85,7 +85,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
     }
 
     public void finishStep(String endTime, String result, int stepInstanceID) {
-        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "' AND result = '" + result + "' WHERE sInstanceID = " + stepInstanceID;
+        String sql = "UPDATE " + tableName + " SET end = '" + endTime + "', result = '" + result + "' WHERE sInstanceID = " + stepInstanceID;
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         de.executeUpdateQuery(sql);

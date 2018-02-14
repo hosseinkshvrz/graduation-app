@@ -43,6 +43,7 @@ public class ProcessesInformation extends HttpServlet {
                     stepJSONObject.put("afterAcceptStepName", stepTable.getStep(step.getAcceptStepID()).getStepName());
                     //Reject Step Name
                     stepJSONObject.put("afterRejectStepName", stepTable.getStep(step.getRejectStepID()).getStepName());
+                    stepJSONObject.put("isFirstStep", step.isFirstStep());
                     stepsJSONArray.put(stepJSONObject);
                 }
                 processJSONObject.put("steps", stepsJSONArray);

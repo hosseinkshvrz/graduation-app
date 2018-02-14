@@ -152,7 +152,7 @@
 
     <servlet-mapping>
         <servlet-name>postRequest</servlet-name>
-        <url-pattern>/post-request</url-pattern>
+        <url-pattern>/add-request</url-pattern>
     </servlet-mapping>
 
     <servlet>

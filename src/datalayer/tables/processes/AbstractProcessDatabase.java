@@ -38,62 +38,55 @@ public abstract class AbstractProcessDatabase {
         int numberOfColumns = getNumberOfTableColumns(tableName);
         String sql;
         DatabaseExecutor de = new DatabaseExecutor();
-        ResultSet rs = null;
-        try {
-             /*
-             ALTER TABLE processes
-             ADD COLUMN step3 INT NULL,
-             ADD INDEX (step3 ASC);
-             ALTER TABLE processes
-             ADD CONSTRAINT
-             FOREIGN KEY (step3)
-             REFERENCES steps (stepID)
-             ON DELETE CASCADE
-             ON UPDATE CASCADE;
-             */
+        /*
+        ALTER TABLE processes
+        ADD COLUMN step3 INT NULL,
+        ADD INDEX (step3 ASC);
+        ALTER TABLE processes
+        ADD CONSTRAINT
+        FOREIGN KEY (step3)
+        REFERENCES steps (stepID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE;
+        */
              /* add column to table */
-            int index = 0;
-            for (String key :
-                    parameters.keySet()) {
-                if (index >= numberOfColumns - 2) {
-                    sql = "ALTER TABLE " + tableName
-                            + "\nADD COLUMN " + key + " INT NULL,"
-                            + "\nADD INDEX (" + key + " ASC);";
-                    System.out.println(sql);
-                    de.executeUpdateQuery(sql);
-                    sql = "ALTER TABLE " + tableName
-                            + "\nADD CONSTRAINT FOREIGN KEY (" + key + ")"
-                            + "\nREFERENCES " + refrenceTable + " (" + refrencedColumn + ")"
-                            + "\nON DELETE CASCADE"
-                            + "\nON UPDATE CASCADE;";
-                    System.out.println(sql);
-                    de.executeUpdateQuery(sql);
-                }
-                index++;
+        int index = 0;
+        for (String key :
+                parameters.keySet()) {
+            if (index >= numberOfColumns - 2) {
+                sql = "ALTER TABLE " + tableName
+                        + "\nADD COLUMN " + key + " INT NULL,"
+                        + "\nADD INDEX (" + key + " ASC);";
+                System.out.println(sql);
+                de.executeUpdateQuery(sql);
+                sql = "ALTER TABLE " + tableName
+                        + "\nADD CONSTRAINT FOREIGN KEY (" + key + ")"
+                        + "\nREFERENCES " + refrenceTable + " (" + refrencedColumn + ")"
+                        + "\nON DELETE CASCADE"
+                        + "\nON UPDATE CASCADE;";
+                System.out.println(sql);
+                de.executeUpdateQuery(sql);
             }
-            sql = "UPDATE " + tableName + "\nSET ";
-            for (String key :
-                    parameters.keySet()) {
-                sql += (key + " = " + parameters.get(key) + ", ");
-            }
-            if (sql.charAt(sql.length()-2) == ',') {
-                sql = sql.substring(0, sql.length()-2);
-            }
-            if (proc instanceof Process) {
-                sql += "WHERE processID = " + proc.getID();
-            }
-            else {
-                sql += "WHERE pInstanceID = " + proc.getID();
-            }
-            System.out.println(sql);
-            //may be needs to check result was successful
-            de.executeUpdateQuery(sql);
-            rs.close();
-            de.closeConnection();
+            index++;
         }
-        catch (SQLException e) {
-            e.printStackTrace();
+        sql = "UPDATE " + tableName + "\nSET ";
+        for (String key :
+                parameters.keySet()) {
+            sql += (key + " = " + parameters.get(key) + ", ");
         }
+        if (sql.charAt(sql.length()-2) == ',') {
+            sql = sql.substring(0, sql.length()-2);
+        }
+        if (proc instanceof Process) {
+            sql += " WHERE processID = " + proc.getID();
+        }
+        else {
+            sql += " WHERE pInstanceID = " + proc.getID();
+        }
+        System.out.println(sql);
+        //may be needs to check result was successful
+        de.executeUpdateQuery(sql);
+        de.closeConnection();
     }
 
     public int getNumberOfTableColumns(String tableName) {

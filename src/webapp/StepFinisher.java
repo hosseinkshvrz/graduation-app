@@ -65,7 +65,7 @@ public class StepFinisher extends HttpServlet {
 
                 String startTime = Date.getCurrentTimeAndDate();
                 stepResult = "stall";
-                StepInstance newStepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime, studentID, stepResult);
+                StepInstance newStepInstance = new StepInstance(nextStepID, processInstanceID, personnelID, startTime, studentID, stepResult);
                 stepInstanceTable.addNewStepInstanceToDB(newStepInstance);
 
                 processInstance.addStepInstance(newStepInstance);
@@ -74,7 +74,7 @@ public class StepFinisher extends HttpServlet {
                 responseMessage = result + "Success";
             }
             else {
-                responseMessage = "این گام سوال پاسخ داده‌نشده یا بدهی پرداخت نشده دارد";
+                responseMessage = "این گام سوال پاسخ داده‌نشده یا بدهی پرداخت‌نشده دارد";
             }
             sendingJSONObject.put("responseMessage", responseMessage);
             io.sendJSONObject(sendingJSONObject, response);

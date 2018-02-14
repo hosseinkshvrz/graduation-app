@@ -24,7 +24,7 @@ public class ProcessInstanceDatabase extends AbstractProcessDatabase {
     public void addStepInstancesToProcessInstance(ProcessInstance processInstance) {
         HashMap<String, String> parameters = new HashMap<>();
         for (int i = 0; i < processInstance.getStepInstances().size(); i++) {
-            parameters.put("step" + (i+1), processInstance.getStepInstances().get(i).toString());
+            parameters.put("stepInstance" + (i+1), String.valueOf(processInstance.getStepInstances().get(i).getStepInstanceID()));
         }
         super.addAndFillColumns(processInstance, tableName, parameters, "step_instance", "sInstanceID");
     }

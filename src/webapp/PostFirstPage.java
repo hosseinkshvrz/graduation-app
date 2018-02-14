@@ -38,13 +38,15 @@ public class PostFirstPage extends HttpServlet {
                 int stepID = si.getStepID();
                 Step step = stepTable.getStep(stepID);
                 StudentUser student = studentTable.getStudentInStepInstance(si.getStepInstanceID());
-                tempJSONObject.put("studentID", student.getStudentID());
-                tempJSONObject.put("studentFirstName", student.getFirstName());
-                tempJSONObject.put("studentLastName", student.getLastName());
-                tempJSONObject.put("stepInstanceName", step.getStepName());
-                tempJSONObject.put("startDate", si.getStart());
-                tempJSONObject.put("status", "");
-                sendingJSONArray.put(tempJSONObject);
+                if (student != null) {
+                    tempJSONObject.put("studentID", student.getStudentID());
+                    tempJSONObject.put("studentFirstName", student.getFirstName());
+                    tempJSONObject.put("studentLastName", student.getLastName());
+                    tempJSONObject.put("stepInstanceName", step.getStepName());
+                    tempJSONObject.put("startDate", si.getStart());
+                    tempJSONObject.put("status", "");
+                    sendingJSONArray.put(tempJSONObject);
+                }
             }
             sendingJSONObject.put("responseMessage", "success");
             sendingJSONObject.put("stepInstances", sendingJSONArray);

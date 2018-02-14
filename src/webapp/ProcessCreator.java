@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -26,7 +27,7 @@ public class ProcessCreator extends HttpServlet {
     private StepDatabase stepTable = new StepDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
-        JSONArray readingJSONArray = io.getJSONArray(request);
+        JSONObject readingJSONObject = io.getJSONObject(request);
         try {
             //TODO get firstStepID and add to graph array list. then check the cycle of accept steps
 //            ArrayList<Node> graph = new ArrayList<>();
@@ -35,21 +36,41 @@ public class ProcessCreator extends HttpServlet {
 //            }
 
             Process process;
-            String processName = readingJSONArray.getJSONObject(0).getString("processName");
+            String processName = readingJSONObject.getString("processName");
             process = new Process(processName);
             processTable.addNewProcessToDB(process);
-            for (int i = 1; i < readingJSONArray.length(); i++) {
+            String temp = readingJSONObject.getString("steps");
+            JSONArray readingJSONArray = new JSONArray(temp);
+            HashMap<Integer, String> acceptSteps = new HashMap<>();
+            HashMap<Integer, String> rejectSteps = new HashMap<>();
+            for (int i = 0; i < readingJSONArray.length(); i++) {
                 String stepName = readingJSONArray.getJSONObject(i).getString("stepName");
-                int acceptStepID = readingJSONArray.getJSONObject(i).getInt("acceptStepID");
-                int rejectStepID = readingJSONArray.getJSONObject(i).getInt("rejectStepID");
+                String acceptStepName = readingJSONArray.getJSONObject(i).getString("afterAcceptStepName");
+                String rejectStepName = readingJSONArray.getJSONObject(i).getString("afterRejectStepName");
                 String departmentID = readingJSONArray.getJSONObject(i).getString("departmentID");
-                //isFirstStep must be sent as true or false
+
                 boolean isFirstStep = readingJSONArray.getJSONObject(i).getBoolean("isFirstStep");
-                Step step = new Step(stepName, acceptStepID, rejectStepID, process.getID(), departmentID, isFirstStep);
+                Step step = new Step(stepName, process.getID(), departmentID, isFirstStep);
                 stepTable.addNewStepToDB(step);
+                acceptSteps.put(step.getStepID(), acceptStepName);
+                rejectSteps.put(step.getStepID(), rejectStepName);
                 process.addStep(step);
                 if (isFirstStep) {
                     process.setFirstStep(step);
+                }
+            }
+            for (Integer key :
+                    acceptSteps.keySet()) {
+                if (!acceptSteps.get(key).equals("")) {
+                    Integer acceptStepID = stepTable.getStep(acceptSteps.get(key)).getStepID();
+                    stepTable.setAcceptStepID(key, acceptStepID);
+                }
+            }
+            for (Integer key :
+                    acceptSteps.keySet()) {
+                if (!rejectSteps.get(key).equals("")) {
+                    Integer rejectStepID = stepTable.getStep(rejectSteps.get(key)).getStepID();
+                    stepTable.setRejectStepID(key, rejectStepID);
                 }
             }
             processTable.addStepsToProcess(process);

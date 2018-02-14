@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ProcessInstance implements IProcess {
     private int processInstanceID;
     private int processID;
-    private ArrayList<StepInstance> stepInstances;
+    private ArrayList<StepInstance> stepInstances = new ArrayList<>();
 
     public ProcessInstance(int processID) {
         this.processID = processID;

@@ -13,8 +13,8 @@ public class DebtDatabase {
 
     public void addNewDebt(Debt debt) {
         String sql = "INSERT INTO " + tableName + " (studentID, amount, personnelID, stepInstanceID, status, time, description) VALUES "
-                + "(" + debt.getStudentID() + ", " + debt.getAmount() + ", " + debt.getPersonnelID()
-                + ", " + debt.getStepInstanceID() + ", " + debt.getStatus() + ", " + debt.getDebtTime() + ", " + debt.getDescription() + ");";
+                + "('" + debt.getStudentID() + "', " + debt.getAmount() + ", '" + debt.getPersonnelID()
+                + "', " + debt.getStepInstanceID() + ", '" + debt.getStatus() + "', '" + debt.getDebtTime() + "', '" + debt.getDescription() + "');";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         int debtID = de.executeAutoIncrementUpdateQuery(sql);
