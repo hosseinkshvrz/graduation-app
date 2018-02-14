@@ -72,4 +72,23 @@ public class DebtDatabase {
         de.executeUpdateQuery(sql);
         de.closeConnection();
     }
+
+    public ArrayList<Debt> getStepInstanceDebts(int stepInstanceID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE stepInstanceID = " + stepInstanceID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        ArrayList<Debt> stepInstanceDebts = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int debtID = rs.getInt("id");
+                stepInstanceDebts.add(getDebt(debtID));
+            }
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stepInstanceDebts;
+    }
 }

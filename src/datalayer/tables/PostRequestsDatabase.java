@@ -92,4 +92,23 @@ public class PostRequestsDatabase {
         }
         return postRequest;
     }
+
+    public ArrayList<PostRequest> getStepInstanceRequests(int stepInstanceID) {
+        String sql = "SELECT * FROM " + tableName + " WHERE stepInstanceID = " + stepInstanceID;
+        System.out.println(sql);
+        DatabaseExecutor de = new DatabaseExecutor();
+        ResultSet rs = de.executeGetQuery(sql);
+        ArrayList<PostRequest> stepInstanceQuestions = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                stepInstanceQuestions.add(getPostRequest(id));
+            }
+            rs.close();
+            de.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stepInstanceQuestions;
+    }
 }

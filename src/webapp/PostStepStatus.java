@@ -24,10 +24,6 @@ public class PostStepStatus extends HttpServlet {
     private PostRequestsDatabase postRequestsTable = new PostRequestsDatabase();
     private StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //personnelId
         //studentID
         //stepName
@@ -54,6 +50,10 @@ public class PostStepStatus extends HttpServlet {
         catch (JSONException e) {
             e.printStackTrace();
         }
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

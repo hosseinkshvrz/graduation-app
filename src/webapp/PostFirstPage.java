@@ -25,10 +25,6 @@ public class PostFirstPage extends HttpServlet {
     private StepDatabase stepTable = new StepDatabase();
     private StudentDatabase studentTable = new StudentDatabase();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputOutputHandler io = new InputOutputHandler();
         JSONObject readingJSONObject = io.getJSONObject(request);
         JSONArray sendingJSONArray = new JSONArray();
@@ -43,16 +39,22 @@ public class PostFirstPage extends HttpServlet {
                 Step step = stepTable.getStep(stepID);
                 StudentUser student = studentTable.getStudentInStepInstance(si.getStepInstanceID());
                 tempJSONObject.put("studentID", student.getStudentID());
-                tempJSONObject.put("studentName", student.getFirstName() + " " + student.getLastName());
-                tempJSONObject.put("stepName", step.getStepName());
-                tempJSONObject.put("startTime", si.getStart());
+                tempJSONObject.put("studentFirstName", student.getFirstName());
+                tempJSONObject.put("studentLastName", student.getLastName());
+                tempJSONObject.put("stepInstanceName", step.getStepName());
+                tempJSONObject.put("startDate", si.getStart());
+                tempJSONObject.put("status", "");
                 sendingJSONArray.put(tempJSONObject);
             }
             sendingJSONObject.put("responseMessage", "success");
-            sendingJSONObject.put("students", sendingJSONArray);
+            sendingJSONObject.put("stepInstances", sendingJSONArray);
             io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

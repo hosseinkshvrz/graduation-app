@@ -3,6 +3,7 @@ package webapp;
 import appLayer.processes.ProcessInstance;
 import appLayer.steps.Step;
 import appLayer.steps.StepInstance;
+import appLayer.users.StudentUser;
 import datalayer.tables.processes.ProcessInstanceDatabase;
 import datalayer.tables.steps.StepDatabase;
 import datalayer.tables.steps.StepInstanceDatabase;
@@ -34,7 +35,8 @@ public class StepFinisher extends HttpServlet {
         //json must consists studentID, stepInstanceID,
         try {
             String studentID = readingJSONObject.getString("studentID");
-            int stepInstanceID = readingJSONObject.getInt("stepInstanceID");
+            StudentUser student = studentTable.getUser(studentID);
+            int stepInstanceID = student.getCurrentStepInstanceID();
             String result = readingJSONObject.getString("result");
             String stepResult;
             if (result.equals("accept")) {
@@ -43,31 +45,39 @@ public class StepFinisher extends HttpServlet {
             else {
                 stepResult = "no";
             }
-            stepInstanceTable.finishStep(endTime, stepResult, stepInstanceID);
-            int processInstanceID = stepInstanceTable.getProcessInstanceID(stepInstanceID);
-            ProcessInstance processInstance = processInstanceTable.getProcessInstance(processInstanceID);
-            int currentStepID = stepInstanceTable.getStepID(stepInstanceID);
-            Step nextStep;
-            int nextStepID = -1;
-            if (result.equals("accept")) {
-                nextStepID = stepTable.getStep(currentStepID).getAcceptStepID();
+            String responseMessage = "";
+            JSONObject sendingJSONObject = new JSONObject();
+            if (stepInstanceTable.validFinish(stepInstanceID)) {
+                stepInstanceTable.finishStep(endTime, stepResult, stepInstanceID);
+                int processInstanceID = stepInstanceTable.getProcessInstanceID(stepInstanceID);
+                ProcessInstance processInstance = processInstanceTable.getProcessInstance(processInstanceID);
+                int currentStepID = stepInstanceTable.getStepID(stepInstanceID);
+                Step nextStep;
+                int nextStepID = -1;
+                if (result.equals("accept")) {
+                    nextStepID = stepTable.getStep(currentStepID).getAcceptStepID();
+                }
+                else if (result.equals("reject")) {
+                    nextStepID = stepTable.getStep(currentStepID).getRejectStepID();
+                }
+                nextStep = stepTable.getStep(nextStepID);
+                String personnelID = postTable.getAvailablePostID(nextStep.getDepartmentID());
+
+                String startTime = Date.getCurrentTimeAndDate();
+                stepResult = "stall";
+                StepInstance newStepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime, studentID, stepResult);
+                stepInstanceTable.addNewStepInstanceToDB(newStepInstance);
+
+                processInstance.addStepInstance(newStepInstance);
+                processInstanceTable.addStepInstancesToProcessInstance(processInstance);
+                studentTable.changeCurrentState(studentID, processInstance.getID(), newStepInstance.getStepInstanceID());
+                responseMessage = result + "Success";
             }
-            else if (result.equals("reject")) {
-                nextStepID = stepTable.getStep(currentStepID).getRejectStepID();
+            else {
+                responseMessage = "این گام سوال پاسخ داده‌نشده یا بدهی پرداخت نشده دارد";
             }
-            nextStep = stepTable.getStep(nextStepID);
-            String personnelID = postTable.getAvailablePostID(nextStep.getDepartmentID());
-
-            String startTime = Date.getCurrentTimeAndDate();
-            stepResult = "stall";
-            StepInstance stepInstance = new StepInstance(nextStep.getStepID(), processInstanceID, personnelID, startTime, studentID, stepResult);
-            stepInstanceTable.addNewStepInstanceToDB(stepInstance);
-
-            processInstance.addStepInstance(stepInstance);
-            processInstanceTable.addStepInstancesToProcessInstance(processInstance);
-
-            studentTable.changeCurrentState(studentID, processInstance.getID(), stepInstance.getStepInstanceID());
-
+            sendingJSONObject.put("responseMessage", responseMessage);
+            io.sendJSONObject(sendingJSONObject, response);
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,12 @@
 package datalayer.tables.steps;
 
 
+import appLayer.Debt;
+import appLayer.PostRequest;
 import appLayer.steps.StepInstance;
 import datalayer.DatabaseExecutor;
+import datalayer.tables.DebtDatabase;
+import datalayer.tables.PostRequestsDatabase;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +15,8 @@ import java.util.HashMap;
 
 public class StepInstanceDatabase extends AbstractStepDatabase {
     private final String tableName = "step_instance";
+    private final DebtDatabase debtTable = new DebtDatabase();
+    private final PostRequestsDatabase postRequestsTable = new PostRequestsDatabase();
     public void addNewStepInstanceToDB(StepInstance stepInstance) {
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("stepID", String.valueOf(stepInstance.getStepID()));
@@ -87,7 +93,7 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
     }
 
     public ArrayList<StepInstance> getPostRelatedStepInstances(String personnelID) {
-        String sql = "SELECT * FROM " + tableName + " WHERE personnelID = '" + personnelID + "';";
+        String sql = "SELECT * FROM " + tableName + " WHERE result = 'stall' AND personnelID = '" + personnelID + "';";
         System.out.println(sql);
         DatabaseExecutor de = new DatabaseExecutor();
         ResultSet rs = de.executeGetQuery(sql);
@@ -149,5 +155,26 @@ public class StepInstanceDatabase extends AbstractStepDatabase {
             e.printStackTrace();
         }
         return studentSteps;
+    }
+
+    public boolean validFinish(int stepInstanceID) {
+        ArrayList<Debt> debts = debtTable.getStepInstanceDebts(stepInstanceID);
+        ArrayList<PostRequest> questions = postRequestsTable.getStepInstanceRequests(stepInstanceID);
+        boolean validFinish = true;
+        for (Debt d :
+                debts) {
+            if (d.getStatus().equals("wait")) {
+                validFinish = false;
+                break;
+            }
+        }
+        for (PostRequest pr :
+                questions) {
+            if (pr.getResponse() == null) {
+                validFinish = false;
+                break;
+            }
+        }
+        return validFinish;
     }
 }

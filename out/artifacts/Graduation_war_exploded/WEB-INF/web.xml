@@ -235,4 +235,24 @@
         <url-pattern>/student-edit</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>stepInstanceDebts</servlet-name>
+        <servlet-class>webapp.StepInstanceDebts</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>stepInstanceDebts</servlet-name>
+        <url-pattern>/step-debts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>stepInstanceQuestions</servlet-name>
+        <servlet-class>webapp.StepInstanceQuestions</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>stepInstanceQuestions</servlet-name>
+        <url-pattern>/step-questions</url-pattern>
+    </servlet-mapping>
+
 </web-app>
